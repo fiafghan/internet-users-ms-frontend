@@ -1,10 +1,11 @@
 import { useState, type JSX } from "react";
-import { User, Mail, Phone, Hash, Laptop, Cpu } from "lucide-react";
+import { User, Mail, Phone, Hash, Laptop, Cpu, Briefcase } from "lucide-react";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedSubmitButton from "./components/AnimatedButton";
 import Spinner from "./components/Spinner";
 import { useNavigate } from "react-router-dom";
+import GradientSidebar from "./components/Sidebar";
 
 type FormState = {
   name: string;
@@ -123,28 +124,39 @@ export default function InternetUserAddFormWizard(): JSX.Element {
     }
   };
 
-  return (
-    <>
-      <AnimatePresence>
-        {loading && (
-          <motion.div
-            key="spinner-overlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.75 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm"
-            aria-label="Loading..."
-            role="alert"
-            aria-live="assertive"
-          >
-            <Spinner size={48} thickness={5} colorClass="border-white" ariaLabel="Loading form submission" />
-          </motion.div>
-        )}
-      </AnimatePresence>
+ return (
+  <>
+    <AnimatePresence>
+      {loading && (
+        <motion.div
+          key="spinner-overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.75 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm"
+          aria-label="Loading..."
+          role="alert"
+          aria-live="assertive"
+        >
+          <Spinner
+            size={48}
+            thickness={5}
+            colorClass="border-white"
+            ariaLabel="Loading form submission"
+          />
+        </motion.div>
+      )}
+    </AnimatePresence>
 
+    {/* 🔥 Wrap both sidebar and form in a flex container */}
+    <div className="flex min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-100">
+      {/* Sidebar */}
+      <GradientSidebar />
+
+      {/* Form content */}
       <motion.div
-        className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-100 flex flex-col items-center justify-center px-4 py-12"
+        className="flex-1 flex flex-col items-center justify-center px-4 py-12"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
@@ -166,7 +178,7 @@ export default function InternetUserAddFormWizard(): JSX.Element {
             </span>
           </motion.h2>
 
-          {/* Step content */}
+          {/* Step Content */}
           <AnimatePresence mode="wait">
             {currentStep === 0 && (
               <Step1 key="step1" form={form} onChange={handleChange} />
@@ -191,7 +203,7 @@ export default function InternetUserAddFormWizard(): JSX.Element {
                 Back
               </button>
             ) : (
-              <div /> // empty placeholder for layout
+              <div />
             )}
 
             {currentStep < stepTitles.length - 1 ? (
@@ -217,9 +229,10 @@ export default function InternetUserAddFormWizard(): JSX.Element {
           </div>
         </motion.div>
       </motion.div>
-    </>
-  );
-}
+    </div>
+  </>
+);
+
 
 // Step 1: Basic Info
 function Step1({ form, onChange }: { form: FormState; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void }): JSX.Element {
@@ -247,7 +260,7 @@ function Step2({ form, onChange }: { form: FormState; onChange: (e: React.Change
       exit={{ opacity: 0, x: -50 }}
       transition={{ duration: 0.4 }}
     >
-      <InputField label="Position" icon={<Hash className="w-5 h-5 text-gray-500" />} name="position" type="text" placeholder="Position" value={form.position} onChange={onChange} animation={{}} delay={0} />
+      <InputField label="Position" icon={<Briefcase className="w-5 h-5 text-gray-500" />} name="position" type="text" placeholder="Position" value={form.position} onChange={onChange} animation={{}} delay={0} />
       <InputField label="Grade" icon={<Hash className="w-5 h-5 text-gray-500" />} name="grade" type="text" placeholder="Grade level" value={form.grade} onChange={onChange} animation={{}} delay={0} />
       <InputField label="Directorate" icon={<User className="w-5 h-5 text-gray-500" />} name="directorate" type="text" placeholder="Directorate name" value={form.directorate} onChange={onChange} animation={{}} delay={0} />
       <InputField label="Deputy Ministry" icon={<User className="w-5 h-5 text-gray-500" />} name="deputyMinistry" type="text" placeholder="Deputy ministry name" value={form.deputyMinistry} onChange={onChange} animation={{}} delay={0} />
@@ -342,4 +355,5 @@ function InputField({
       </div>
     </motion.div>
   );
+}
 }
