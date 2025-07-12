@@ -1,9 +1,10 @@
 import { useState, type JSX } from "react";
-import { Mail, Lock} from "lucide-react";
+import { Mail, Lock } from "lucide-react";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedSubmitButton from "./components/AnimatedButton";
 import Spinner from "./components/Spinner";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm(): JSX.Element {
   const [form, setForm] = useState({
@@ -12,6 +13,7 @@ export default function LoginForm(): JSX.Element {
   });
 
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -74,7 +76,7 @@ export default function LoginForm(): JSX.Element {
 
       {/* Main form content */}
       <motion.div
-        className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-100 flex items-center justify-center px-4 py-12"
+        className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-100 flex flex-col items-center justify-center px-4 py-12"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
@@ -135,6 +137,23 @@ export default function LoginForm(): JSX.Element {
             )}
           </AnimatedSubmitButton>
         </motion.form>
+
+        {/* "Don't have an account?" Section */}
+        <motion.div
+          className="mt-6 text-center text-gray-700"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.9, duration: 0.5 }}
+        >
+          Don&apos;t have an account?{" "}
+          <button
+            type="button"
+            className="font-semibold text-indigo-600 hover:text-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded"
+            onClick={() => navigate("/register")}
+          >
+            Register
+          </button>
+        </motion.div>
       </motion.div>
     </>
   );
