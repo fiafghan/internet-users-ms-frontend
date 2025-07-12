@@ -1,13 +1,16 @@
-import { Sidebar, User, Settings, Cpu } from "lucide-react";
+import { Sidebar, User, Settings, Cpu, AlertOctagon, Users, Gavel } from "lucide-react";
 import { motion } from "framer-motion";
 import type { JSX } from "react";
 
 export default function GradientSidebar(): JSX.Element {
   const items = [
     { id: 1, label: "Dashboard", icon: <Sidebar className="w-5 h-5" /> },
-    { id: 2, label: "Users", icon: <User className="w-5 h-5" /> },
-    { id: 3, label: "Settings", icon: <Settings className="w-5 h-5" /> },
-    { id: 4, label: "Logs", icon: <Cpu className="w-5 h-5" /> },
+    { id: 2, label: "All Users", icon: <Users className="w-5 h-5" /> },
+    { id: 3, label: "Add User", icon: <User className="w-5 h-5" /> },
+    { id: 4, label: "All Violations", icon: <Gavel className="w-5 h-5" /> },
+    { id: 5, label: "Add Violation", icon: <AlertOctagon className="w-5 h-5" /> },
+    { id: 6, label: "Settings", icon: <Settings className="w-5 h-5" /> },
+    { id: 7, label: "Logs", icon: <Cpu className="w-5 h-5" /> },
   ];
 
   return (
@@ -23,7 +26,7 @@ export default function GradientSidebar(): JSX.Element {
             key={item.id}
             whileHover={{ scale: 1.05, opacity: 1 }}
             whileTap={{ scale: 0.98 }}
-            className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-indigo-700 transition text-sm font-medium"
+            className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-500 transition text-sm font-medium"
           >
             {item.icon}
             <span>{item.label}</span>
