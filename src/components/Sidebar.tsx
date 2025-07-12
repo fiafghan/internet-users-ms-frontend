@@ -1,10 +1,10 @@
-import { Sidebar, User, Settings, Cpu, AlertOctagon, Users, Gavel } from "lucide-react";
+import { User, Settings, Cpu, AlertOctagon, Users, Gavel, BarChart3 } from "lucide-react";
 import { motion } from "framer-motion";
 import type { JSX } from "react";
 
 export default function GradientSidebar(): JSX.Element {
   const items = [
-    { id: 1, label: "Dashboard", icon: <Sidebar className="w-5 h-5" /> },
+    { id: 1, label: "Dashboard", icon: <BarChart3 className="w-5 h-5" /> },
     { id: 2, label: "All Users", icon: <Users className="w-5 h-5" /> },
     { id: 3, label: "Add User", icon: <User className="w-5 h-5" /> },
     { id: 4, label: "All Violations", icon: <Gavel className="w-5 h-5" /> },
