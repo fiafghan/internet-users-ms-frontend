@@ -48,8 +48,20 @@
       "email": "manan@gmail.com",
       "password": "123"
     }
+  ],
+  "internet_users": [
+    {
+      "id": "f169",
+      "name": "fardin ibrahimi",
+      "username": "fardin-it",
+      "email": "ff@gmail.com",
+      "phone": "0793269259",
+      "grade": "4",
+      "directorate": "IT",
+      "deputyMinistry": "administrative",
+      "device_limit": "3",
+      "device_type": "mobile",
+      "mac_address": "11:11"
+    }
   ]
-
-  
 }
-

@@ -13,6 +13,7 @@ type FormState = {
   phone: string;
   grade: string;
   directorate: string;
+  position: string;
   deputyMinistry: string;
   device_limit: string;
   device_type: string;
@@ -35,6 +36,7 @@ export default function InternetUserAddFormWizard(): JSX.Element {
     grade: "",
     directorate: "",
     deputyMinistry: "",
+    position: "",
     device_limit: "",
     device_type: "",
     mac_address: "",
@@ -103,6 +105,7 @@ export default function InternetUserAddFormWizard(): JSX.Element {
         username: "",
         email: "",
         phone: "",
+        position: "",
         grade: "",
         directorate: "",
         deputyMinistry: "",
@@ -244,6 +247,7 @@ function Step2({ form, onChange }: { form: FormState; onChange: (e: React.Change
       exit={{ opacity: 0, x: -50 }}
       transition={{ duration: 0.4 }}
     >
+      <InputField label="Position" icon={<Hash className="w-5 h-5 text-gray-500" />} name="position" type="text" placeholder="Position" value={form.position} onChange={onChange} animation={{}} delay={0} />
       <InputField label="Grade" icon={<Hash className="w-5 h-5 text-gray-500" />} name="grade" type="text" placeholder="Grade level" value={form.grade} onChange={onChange} animation={{}} delay={0} />
       <InputField label="Directorate" icon={<User className="w-5 h-5 text-gray-500" />} name="directorate" type="text" placeholder="Directorate name" value={form.directorate} onChange={onChange} animation={{}} delay={0} />
       <InputField label="Deputy Ministry" icon={<User className="w-5 h-5 text-gray-500" />} name="deputyMinistry" type="text" placeholder="Deputy ministry name" value={form.deputyMinistry} onChange={onChange} animation={{}} delay={0} />
