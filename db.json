@@ -41,6 +41,12 @@
       "name": "ghafoor",
       "email": "gh@gh.com",
       "password": "123"
+    },
+    {
+      "id": "d06e",
+      "name": "manan",
+      "email": "manan@gmail.com",
+      "password": "123"
     }
   ]
 }
