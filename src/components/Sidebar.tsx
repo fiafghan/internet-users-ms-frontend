@@ -13,7 +13,8 @@ export default function GradientSidebar(): JSX.Element {
   return (
     <aside className="w-64 min-h-screen bg-gradient-to-r from-blue-900 via-indigo-800 to-blue-900 
     text-white flex flex-col">
-      <div className="">
+      <div className="flex items-center justify-center flex-col py-6 px-4">
+            <img src="moph.jpeg" className="rounded-full w-30 border-purple-900 border-1"></img>
         <h1 className="text-center mt-5 ">IUMS</h1>
       </div>
       <nav className="flex flex-col mt-8 gap-1 px-4">
