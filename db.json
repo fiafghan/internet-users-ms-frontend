@@ -1,4 +1,44 @@
 {
+  "deputy_ministries":[
+    {
+      "id":1,
+      "name":"administrative and financial"
+    },
+    {
+      "id":2,
+      "name":"health services providing"
+    },
+    {
+      "id":3,
+      "name":"drug and food"
+    },
+    {
+      "id":4,
+      "name":"plan and policy"
+    }
+
+  ],
+
+  "directorates":[
+    {
+      "id":1,
+      "name":"IT"
+    },
+    {
+      "id":2,
+      "name":"finance"
+    },
+    {
+      "id":3,
+      "name":"maternity health"
+    },
+    {
+      "id":4,
+      "name":"policy directorate"
+    }
+
+  ],
+
   "users": [
     {
       "id": "a772",
@@ -58,7 +98,7 @@
       "phone": "0793269259",
       "grade": "4",
       "directorate": "IT",
-      "deputyMinistry": "administrative",
+      "deputyMinistry": "administrative and financial",
       "position": "CEO",
       "device_limit": "3",
       "device_type": "mobile",
@@ -72,11 +112,235 @@
       "phone": "0798234567",
       "grade": "4",
       "directorate": "IT",
-      "deputyMinistry": "IT",
+      "deputyMinistry": "health services providing",
       "position": "software developer",
       "device_limit": "2",
       "device_type": "Computer",
       "mac_address": "ff:ff:ff:ff:ff"
-    }
+    },
+    {
+      "id": "e41f",
+      "name": "nn",
+      "username": "nn jan",
+      "email": "nn@gmail.com",
+      "phone": "0798234567",
+      "grade": "4",
+      "directorate": "finance",
+      "deputyMinistry": "health services providing",
+      "position": "software developer",
+      "device_limit": "2",
+      "device_type": "Computer",
+      "mac_address": "ff:ff:ff:ff:ff"
+    },
+    {
+    "id": "1a1a",
+    "name": "Ahmad Rahimi",
+    "username": "arahimi",
+    "email": "ahmad.rahimi@example.com",
+    "phone": "0700123456",
+    "grade": "3",
+    "directorate": "IT",
+    "deputyMinistry": "administrative and financial",
+    "position": "Network Engineer",
+    "device_limit": "3",
+    "device_type": "Laptop",
+    "mac_address": "aa:bb:cc:dd:ee:01"
+  },
+  {
+    "id": "2b2b",
+    "name": "Fatima Noori",
+    "username": "fatima.noori",
+    "email": "fatima@example.com",
+    "phone": "0700987654",
+    "grade": "4",
+    "directorate": "maternity health",
+    "deputyMinistry": "health services providing",
+    "position": "Gynecologist",
+    "device_limit": "2",
+    "device_type": "Tablet",
+    "mac_address": "aa:bb:cc:dd:ee:02"
+  },
+  {
+    "id": "3c3c",
+    "name": "Jawad Karim",
+    "username": "jkarim",
+    "email": "jawad.karim@example.com",
+    "phone": "0799001122",
+    "grade": "2",
+    "directorate": "finance",
+    "deputyMinistry": "drug and food",
+    "position": "Finance Officer",
+    "device_limit": "1",
+    "device_type": "Computer",
+    "mac_address": "aa:bb:cc:dd:ee:03"
+  },
+  {
+    "id": "4d4d",
+    "name": "Laila Akbari",
+    "username": "lakbari",
+    "email": "laila.akbari@example.com",
+    "phone": "0788888899",
+    "grade": "5",
+    "directorate": "policy directorate",
+    "deputyMinistry": "plan and policy",
+    "position": "Policy Analyst",
+    "device_limit": "3",
+    "device_type": "Laptop",
+    "mac_address": "aa:bb:cc:dd:ee:04"
+  },
+  {
+    "id": "5e5e",
+    "name": "Omid Farid",
+    "username": "ofarid",
+    "email": "omid.farid@example.com",
+    "phone": "0722002233",
+    "grade": "1",
+    "directorate": "IT",
+    "deputyMinistry": "administrative and financial",
+    "position": "Software Developer",
+    "device_limit": "2",
+    "device_type": "Computer",
+    "mac_address": "aa:bb:cc:dd:ee:05"
+  },
+  {
+    "id": "6f6f",
+    "name": "Zahra Hamidi",
+    "username": "zhamidi",
+    "email": "zahra.hamidi@example.com",
+    "phone": "0700111122",
+    "grade": "3",
+    "directorate": "finance",
+    "deputyMinistry": "administrative and financial",
+    "position": "Accountant",
+    "device_limit": "2",
+    "device_type": "Laptop",
+    "mac_address": "aa:bb:cc:dd:ee:06"
+  },
+  {
+    "id": "7g7g",
+    "name": "Samiullah Faizi",
+    "username": "sfaizi",
+    "email": "sami.faizi@example.com",
+    "phone": "0799777766",
+    "grade": "2",
+    "directorate": "IT",
+    "deputyMinistry": "drug and food",
+    "position": "System Admin",
+    "device_limit": "3",
+    "device_type": "Computer",
+    "mac_address": "aa:bb:cc:dd:ee:07"
+  },
+  {
+    "id": "8h8h",
+    "name": "Mina Qadiri",
+    "username": "mqadiri",
+    "email": "mina.qadiri@example.com",
+    "phone": "0788123456",
+    "grade": "5",
+    "directorate": "maternity health",
+    "deputyMinistry": "health services providing",
+    "position": "Midwife",
+    "device_limit": "1",
+    "device_type": "Tablet",
+    "mac_address": "aa:bb:cc:dd:ee:08"
+  },
+  {
+    "id": "9i9i",
+    "name": "Bilal Arman",
+    "username": "bilal.arman",
+    "email": "bilal.arman@example.com",
+    "phone": "0700555999",
+    "grade": "3",
+    "directorate": "policy directorate",
+    "deputyMinistry": "plan and policy",
+    "position": "Research Officer",
+    "device_limit": "2",
+    "device_type": "Laptop",
+    "mac_address": "aa:bb:cc:dd:ee:09"
+  },
+  {
+    "id": "10j0",
+    "name": "Yalda Wahidi",
+    "username": "ywahidi",
+    "email": "yalda.wahidi@example.com",
+    "phone": "0722333444",
+    "grade": "4",
+    "directorate": "finance",
+    "deputyMinistry": "drug and food",
+    "position": "Auditor",
+    "device_limit": "2",
+    "device_type": "Computer",
+    "mac_address": "aa:bb:cc:dd:ee:10"
+  },
+  {
+    "id": "11k1",
+    "name": "Naser Hakimi",
+    "username": "nhakimi",
+    "email": "naser.hakimi@example.com",
+    "phone": "0700222111",
+    "grade": "2",
+    "directorate": "policy directorate",
+    "deputyMinistry": "plan and policy",
+    "position": "Policy Writer",
+    "device_limit": "1",
+    "device_type": "Tablet",
+    "mac_address": "aa:bb:cc:dd:ee:11"
+  },
+  {
+    "id": "12l2",
+    "name": "Farzana Jalali",
+    "username": "fjalali",
+    "email": "farzana.jalali@example.com",
+    "phone": "0788777666",
+    "grade": "5",
+    "directorate": "IT",
+    "deputyMinistry": "administrative and financial",
+    "position": "Frontend Developer",
+    "device_limit": "2",
+    "device_type": "Laptop",
+    "mac_address": "aa:bb:cc:dd:ee:12"
+  },
+  {
+    "id": "13m3",
+    "name": "Omid Wahdat",
+    "username": "owahdat",
+    "email": "omid.wahdat@example.com",
+    "phone": "0700999888",
+    "grade": "3",
+    "directorate": "maternity health",
+    "deputyMinistry": "health services providing",
+    "position": "Health Inspector",
+    "device_limit": "3",
+    "device_type": "Computer",
+    "mac_address": "aa:bb:cc:dd:ee:13"
+  },
+  {
+    "id": "14n4",
+    "name": "Roya Danish",
+    "username": "rdanish",
+    "email": "roya.danish@example.com",
+    "phone": "0799333444",
+    "grade": "2",
+    "directorate": "finance",
+    "deputyMinistry": "administrative and financial",
+    "position": "Budget Officer",
+    "device_limit": "2",
+    "device_type": "Laptop",
+    "mac_address": "aa:bb:cc:dd:ee:14"
+  },
+  {
+    "id": "15o5",
+    "name": "Hamed Yousufi",
+    "username": "hyousufi",
+    "email": "hamed.yousufi@example.com",
+    "phone": "0722111000",
+    "grade": "1",
+    "directorate": "IT",
+    "deputyMinistry": "plan and policy",
+    "position": "Data Engineer",
+    "device_limit": "3",
+    "device_type": "Computer",
+    "mac_address": "aa:bb:cc:dd:ee:15"
+  }
   ]
 }
