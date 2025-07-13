@@ -117,12 +117,15 @@ export default function InternetUsersList(): JSX.Element {
         ) : users.length === 0 ? (
           <p className="text-center py-6 text-gray-500 font-medium">No users found.</p>
         ) : (
-          <div className="overflow-x-auto rounded-lg shadow-lg bg-white border border-gray-200 max-w-full">
-            <div className="grid grid-cols-[180px_140px_200px_120px_80px_140px_140px_180px_100px_100px_140px_120px] bg-gradient-to-r from-indigo-700 to-blue-700 text-white font-semibold text-sm select-none rounded-t-lg shadow-inner">
+          <div className="overflow-x-auto rounded-lg shadow-lg bg-white border 
+          border-gray-200 max-w-full">
+            <div className="grid grid-cols-[250px_250px_250px_250px_250px_250px_250px_250px_250px_250px_250px_250px] 
+            bg-gradient-to-r from-indigo-700 to-blue-700 text-white font-semibold text-sm 
+            select-none rounded-t-lg shadow-inner">
               {headers.map((header) => (
                 <div
                   key={header}
-                  className="px-3 py-2 border-r border-indigo-600 last:border-r-0 flex items-center"
+                  className="px-3 py-2 border-r  last:border-r-0 flex items-center bg-indigo-700"
                   style={{ textShadow: "0 1px 1px rgba(0,0,0,0.15)" }}
                 >
                   {header}
@@ -133,51 +136,61 @@ export default function InternetUsersList(): JSX.Element {
             {users.map((user, idx) => (
               <div
                 key={user.id}
-                className={`grid grid-cols-[180px_140px_200px_120px_80px_140px_140px_180px_100px_100px_140px_120px] border-b border-gray-200 transition-colors duration-200 ${
+                className={`grid grid-cols-[250px_250px_250px_250px_250px_250px_250px_250px_250px_250px_250px_250px] 
+                  border-b border-gray-200 transition-colors duration-200 ${
                   idx % 2 === 0 ? "bg-gray-50" : "bg-white"
                 } hover:bg-indigo-100 cursor-default`}
               >
-                <div className="px-3 py-2 flex items-center gap-2 font-medium text-indigo-700 whitespace-nowrap border-r border-gray-200">
+                <div className="px-3 py-2 flex items-center gap-2 font-medium text-indigo-700 whitespace-nowrap 
+                border-r border-gray-200">
                   <User className="w-4 h-4 shrink-0" />
                   <span>{user.name}</span>
                 </div>
 
                 <div className="px-3 py-2 text-gray-700 whitespace-nowrap border-r border-gray-200">{user.username}</div>
 
-                <div className="px-3 py-2 flex items-center gap-1 text-green-700 max-w-xs break-words border-r border-gray-200">
+                <div className="px-3 py-2 flex items-center gap-1 text-green-700 max-w-xs break-words 
+                border-r border-gray-200">
                   <Mail className="w-4 h-4 shrink-0" />
                   <span>{user.email}</span>
                 </div>
 
-                <div className="px-3 py-2 flex items-center gap-1 text-blue-700 whitespace-nowrap border-r border-gray-200">
+                <div className="px-3 py-2 flex items-center gap-1 text-blue-700 whitespace-nowrap 
+                border-r border-gray-200">
                   <Phone className="w-4 h-4 shrink-0" />
                   <span>{user.phone}</span>
                 </div>
 
-                <div className="px-3 py-2 flex items-center gap-1 text-purple-700 whitespace-nowrap border-r border-gray-200">
+                <div className="px-3 py-2 flex items-center gap-1 text-purple-700 whitespace-nowrap 
+                border-r border-gray-200">
                   <Hash className="w-4 h-4 shrink-0" />
                   <span>{user.grade}</span>
                 </div>
 
-                <div className="px-3 py-2 text-gray-700 whitespace-nowrap border-r border-gray-200">{user.directorate}</div>
+                <div className="px-3 py-2 text-gray-700 whitespace-nowrap 
+                border-r border-gray-200">{user.directorate}</div>
 
-                <div className="px-3 py-2 text-gray-700 whitespace-nowrap border-r border-gray-200">{user.deputyMinistry}</div>
+                <div className="px-3 py-2 text-gray-700 whitespace-nowrap 
+                border-r border-gray-200">{user.deputyMinistry}</div>
 
                 <div className="px-3 py-2 text-gray-700 max-w-xs break-words border-r border-gray-200">
                   {user.position || "-"}
                 </div>
 
-                <div className="px-3 py-2 flex items-center gap-1 text-pink-700 whitespace-nowrap border-r border-gray-200">
+                <div className="px-3 py-2 flex items-center gap-1 text-pink-700 whitespace-nowrap 
+                border-r border-gray-200">
                   <Hash className="w-4 h-4 shrink-0" />
                   <span>{user.device_limit}</span>
                 </div>
 
-                <div className="px-3 py-2 flex items-center gap-1 text-purple-700 whitespace-nowrap border-r border-gray-200">
+                <div className="px-3 py-2 flex items-center gap-1 text-purple-700 
+                ">
                   <Laptop className="w-4 h-4 shrink-0" />
                   <span>{user.device_type}</span>
                 </div>
 
-                <div className="px-3 py-2 flex items-center gap-1 text-red-700 whitespace-nowrap border-r border-gray-200">
+                <div className="px-3 py-2 flex items-center gap-1 text-red-700 whitespace-nowrap 
+                border-r border-gray-200">
                   <Cpu className="w-4 h-4 shrink-0" />
                   <span>{user.mac_address}</span>
                 </div>
