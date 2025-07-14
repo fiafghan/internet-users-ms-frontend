@@ -64,7 +64,8 @@ export default function RegisterForm(): JSX.Element {
             animate={{ opacity: 0.75 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm"
+            className="fixed inset-0 z-50 flex items-center justify-center 
+            bg-black bg-opacity-50 backdrop-blur-sm"
             aria-label="Loading..."
             role="alert"
             aria-live="assertive"
@@ -76,14 +77,16 @@ export default function RegisterForm(): JSX.Element {
 
       {/* Main form content */}
       <motion.div
-        className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-100 flex items-center justify-center px-4 py-12"
+        className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-100 
+        flex items-center justify-center px-4 py-12"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
       >
         <motion.form
           onSubmit={handleSubmit}
-          className="w-full max-w-md bg-white shadow-2xl border border-gray-200 rounded-3xl px-10 py-12 relative z-10"
+          className="w-full max-w-md bg-white shadow-2xl border border-gray-200 
+          rounded-3xl px-10 py-12 relative z-10"
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.6 }}
@@ -94,7 +97,8 @@ export default function RegisterForm(): JSX.Element {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.5 }}
           >
-            <span className="bg-gradient-to-r from-indigo-500 to-blue-600 text-transparent bg-clip-text">
+            <span className="bg-gradient-to-r from-blue-400 to-blue-300 
+            text-transparent bg-clip-text">
               Create Account
             </span>
           </motion.h2>

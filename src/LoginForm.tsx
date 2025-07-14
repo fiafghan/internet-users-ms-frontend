@@ -94,7 +94,7 @@ export default function LoginForm(): JSX.Element {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.5 }}
           >
-            <span className="bg-gradient-to-r from-indigo-500 to-blue-600 text-transparent bg-clip-text">
+            <span className="bg-gradient-to-r from-blue-400 to-blue-600 text-transparent bg-clip-text">
               Login to Your Account
             </span>
           </motion.h2>
@@ -148,7 +148,7 @@ export default function LoginForm(): JSX.Element {
           Don&apos;t have an account?{" "}
           <button
             type="button"
-            className="font-semibold text-indigo-600 hover:text-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded"
+            className="font-semibold text-blue-400 hover:text-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded"
             onClick={() => navigate("/register")}
           >
             Register
