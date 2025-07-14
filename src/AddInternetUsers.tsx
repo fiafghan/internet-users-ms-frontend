@@ -1,4 +1,4 @@
-import { useState, type JSX } from "react";
+import { useState, type JSX, useEffect } from "react";
 import { User, Mail, Phone, Hash, Laptop, Cpu, Briefcase } from "lucide-react";
 import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
@@ -46,8 +46,30 @@ export default function InternetUserAddForm(): JSX.Element {
   const [currentStep, setCurrentStep] = useState(0);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [directorateOptions, setDirectorateOptions] = useState<string[]>([]);
+  const [deputyMinistryOptions, setDeputyMinistryOptions] = useState<string[]>([]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+  const fetchOptions = async () => {
+    try {
+      const [dirRes, depMinRes] = await Promise.all([
+        axios.get("http://localhost:3000/directorates"),
+        axios.get("http://localhost:3000/deputy_ministries"),
+      ]);
+
+      // You may need to map if they are objects
+      setDirectorateOptions(dirRes.data.map((d: any) => d.name));
+      setDeputyMinistryOptions(depMinRes.data.map((d: any) => d.name));
+    } catch (error) {
+      console.error("❌ Error fetching select options", error);
+    }
+  };
+
+  fetchOptions();
+}, []);
+
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -57,7 +79,6 @@ export default function InternetUserAddForm(): JSX.Element {
         return (
           form.name.trim() !== "" &&
           form.username.trim() !== "" &&
-          form.email.trim() !== "" &&
           form.phone.trim() !== ""
         );
       case 1:
@@ -185,7 +206,10 @@ export default function InternetUserAddForm(): JSX.Element {
                     case 0:
                       return <Step1 form={form} onChange={handleChange} />;
                     case 1:
-                      return <Step2 form={form} onChange={handleChange} />;
+                      return <Step2 form={form} 
+                      directorateOptions={directorateOptions}
+                      deputyMinistryOptions={deputyMinistryOptions}
+                      onChange={handleChange} />;
                     case 2:
                       return <Step3 form={form} onChange={handleChange} />;
                     case 3:
@@ -249,13 +273,38 @@ function Step1({ form, onChange }: { form: FormState; onChange: (e: React.Change
   );
 }
 
-function Step2({ form, onChange }: { form: FormState; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void }): JSX.Element {
+function Step2({
+  form,
+  onChange,
+  directorateOptions,
+  deputyMinistryOptions,
+}: {
+  form: FormState;
+  onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  directorateOptions: string[];
+  deputyMinistryOptions: string[];
+}): JSX.Element {
+  
   return (
     <div>
       <InputField label="Position" icon={<Briefcase className="w-5 h-5 text-gray-500" />} name="position" type="text" placeholder="Position" value={form.position} onChange={onChange} />
       <InputField label="Grade" icon={<Hash className="w-5 h-5 text-gray-500" />} name="grade" type="text" placeholder="Grade level" value={form.grade} onChange={onChange} />
-      <InputField label="Directorate" icon={<User className="w-5 h-5 text-gray-500" />} name="directorate" type="text" placeholder="Directorate name" value={form.directorate} onChange={onChange} />
-      <InputField label="Deputy Ministry" icon={<User className="w-5 h-5 text-gray-500" />} name="deputyMinistry" type="text" placeholder="Deputy ministry name" value={form.deputyMinistry} onChange={onChange} />
+      <SelectField
+            label="Directorate"
+            icon={<User className="w-5 h-5 text-gray-500" />}
+            name="directorate"
+            value={form.directorate}
+            onChange={(e) => onChange(e as any)}
+            options={directorateOptions}
+          />
+        <SelectField
+          label="Deputy Ministry"
+          icon={<User className="w-5 h-5 text-gray-500" />}
+          name="deputyMinistry"
+          value={form.deputyMinistry}
+          onChange={(e) => onChange(e as any)}
+          options={deputyMinistryOptions}
+        />
     </div>
   );
 }
@@ -279,6 +328,49 @@ function Step4({ form }: { form: FormState }): JSX.Element {
           <span>{value || "-"}</span>
         </div>
       ))}
+    </div>
+  );
+}
+
+type SelectProps = {
+  label: string;
+  icon: JSX.Element;
+  name: string;
+  value: string;
+  options: string[];
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+};
+
+function SelectField({
+  label,
+  icon,
+  name,
+  value,
+  options,
+  onChange,
+}: SelectProps): JSX.Element {
+  return (
+    <div className="mb-6">
+      <label htmlFor={name} className="block mb-1 text-sm font-medium text-gray-700">
+        {label}
+      </label>
+      <div className="flex items-center gap-2 bg-gray-100 border border-gray-300 rounded-xl px-4 py-2 focus-within:ring-2 focus-within:ring-blue-400 focus-within:ring-offset-1 transition">
+        {icon}
+        <select
+          id={name}
+          name={name}
+          value={value}
+          onChange={onChange}
+          className="w-full bg-transparent text-gray-800 text-sm focus:outline-none"
+        >
+          <option value="">Select {label}</option>
+          {options.map((opt) => (
+            <option key={opt} value={opt}>
+              {opt}
+            </option>
+          ))}
+        </select>
+      </div>
     </div>
   );
 }

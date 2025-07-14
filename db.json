@@ -323,6 +323,20 @@
       "device_limit": "1",
       "device_type": "Computer",
       "mac_address": "ff:ff:ff:ff:Ff:ff"
+    },
+    {
+      "id": "29ab",
+      "name": "Jantak",
+      "username": "jantak-it",
+      "email": "jantak@gmail.com",
+      "phone": "+93790584383",
+      "grade": "3",
+      "directorate": "maternity health",
+      "deputyMinistry": "health services providing",
+      "position": "Doctor",
+      "device_limit": "2",
+      "device_type": "Mobile and computer",
+      "mac_address": "1:1:1:a:2"
     }
   ]
 }
