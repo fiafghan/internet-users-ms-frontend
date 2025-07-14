@@ -7,6 +7,15 @@ import {
 } from "lucide-react";
 import GradientSidebar from "./components/Sidebar";
 import {motion} from "framer-motion";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend
+} from "chart.js";
+import { Pie } from "react-chartjs-2";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 type InternetUser = {
   id: string;
@@ -139,7 +148,8 @@ export default function InternetUsersList(): JSX.Element {
         
       <main className="flex-1 ml-64 p-8 overflow-auto">
        {/* 🧊 Summary Cards */}
-       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-10">
+       <div className="grid grid-cols-1 sm:grid-cols-2 
+       md:grid-cols-3 gap-6 mb-10">
         {/* Total Users Card */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -147,25 +157,91 @@ export default function InternetUsersList(): JSX.Element {
           transition={{ duration: 1 }}
           className="bg-white shadow-md border border-gray-200 rounded-xl p-6"
         >
-          <h3 className="text-sm font-medium text-gray-600"><Users />Total Users</h3>
+          
+          <Users className="text-2xl"/>
+          <h3 className="text-4xl text-gray-600">Total Users</h3>
           <p className="text-3xl font-bold text-blue-500">{totalUsers}</p>
         </motion.div>
-
+          
         {/* Users Per Deputy Ministry */}
-        {Object.entries(deputyMinistryCounts).map(([depMinistry, count], index) => (
-          <motion.div
-            key={depMinistry}
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
-            className="bg-white shadow-md border border-gray-200 rounded-xl p-6"
-          >
-            <h3 className="text-sm font-medium text-gray-600">{depMinistry}</h3>
-            <p className="text-xl font-bold text-indigo-600">{count} user{count > 1 ? "s" : ""}</p>
-          </motion.div>
-        ))}
-      </div>
+        <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
+      <h2 className="text-lg font-bold text-gray-700 mb-4">Users Per Deputy Ministry</h2>
+      <div className="space-y-4">
+        {Object.entries(deputyMinistryCounts).map(([depMinistry, count], index) => {
+      const max = Math.max(...Object.values(deputyMinistryCounts)); // for proportional width
+      const widthPercent = (count / max) * 100;
 
+      return (
+        <motion.div
+          key={depMinistry}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 + index * 0.1, duration: 0.4 }}
+        >
+          <div className="text-sm text-gray-700 mb-1 font-medium">
+            {depMinistry} ({count} user{count > 1 ? "s" : ""})
+          </div>
+          <div className="bg-blue-100 rounded-lg h-6 overflow-hidden">
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: `${widthPercent}%` }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 + index * 0.1 }}
+              className="h-full bg-blue-300 text-white text-xs flex items-center px-3 font-semibold"
+            >
+              {count}
+            </motion.div>
+          </div>
+          
+        </motion.div>
+        
+      );
+    })}
+    
+  </div>
+  
+</div>
+
+            {/* Users Per Deputy Ministry - Pie Chart */}
+<div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
+  <h2 className="text-lg font-bold text-gray-700 mb-4">Users Distribution</h2>
+  <div className="w-full max-w-md mx-auto">
+    <Pie
+      data={{
+        labels: Object.keys(deputyMinistryCounts),
+        datasets: [
+          {
+            label: "Users",
+            data: Object.values(deputyMinistryCounts),
+            backgroundColor: [
+              "#60A5FA", // blue-400
+              "#3B82F6", // blue-500
+              "#1D4ED8", // blue-700
+              "#DBEAFE", // blue-100
+              "#BFDBFE", // blue-200
+              "#93C5FD"  // blue-300
+            ],
+            borderColor: "#ffffff",
+            borderWidth: 2,
+          }
+        ],
+      }}
+      options={{
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "bottom" as const,
+            labels: {
+              color: "#1F2937", // gray-800
+              font: { size: 12 },
+            },
+          },
+        },
+      }}
+    />
+  </div>
+</div>
+
+      </div>
 
         <div className="flex gap-4 mb-4">
           
