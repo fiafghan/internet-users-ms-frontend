@@ -3,6 +3,7 @@ import { Routes, Route} from "react-router-dom"
 import LoginForm from "./LoginForm"
 import InternetUserAddForm from "./AddInternetUsers"
 import AllUsers from "./AllUsers"
+import AddViolation from "./AddViolation"
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       <Route path="/login" element={<LoginForm />} />
       <Route path="/adduser" element={<InternetUserAddForm />} />
       <Route path="/allusers" element={<AllUsers />} />
+      <Route path="/addviolation" element={<AddViolation />} />
     </Routes>
     </>
   )

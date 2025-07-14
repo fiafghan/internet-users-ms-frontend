@@ -89,7 +89,7 @@
     {
       "id": "f169",
       "name": "billgates",
-      "username": "fardin-it",
+      "username": "farhad-it",
       "email": "ff@gmail.com",
       "phone": "0793269259",
       "grade": "4",
@@ -351,6 +351,25 @@
       "device_limit": "2",
       "device_type": "mobile and computer",
       "mac_address": "11:11:11:11:a1"
+    },
+    {
+      "id": "5bee",
+      "name": "obaid ahmadi",
+      "username": "obaid-it",
+      "email": "obaid@gmail.com",
+      "phone": "+93790456789",
+      "grade": "4",
+      "directorate": "IT",
+      "deputyMinistry": "administrative and financial",
+      "position": "Net sec engineer",
+      "device_limit": "2",
+      "device_type": "computer",
+      "mac_address": "11:11:11"
     }
+   
+  ],
+
+  "violations":[
+        
   ]
 }
