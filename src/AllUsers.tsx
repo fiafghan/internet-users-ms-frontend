@@ -316,7 +316,7 @@ export default function InternetUsersList(): JSX.Element {
               })}
             </select>
           </div>
-                 <div className="relative w-full sm:w-[700px] mt-5">
+                 <div className="relative w-full sm:w-[900px] mt-5">
                   <input
                     id="searchInput"
                     type="text"
