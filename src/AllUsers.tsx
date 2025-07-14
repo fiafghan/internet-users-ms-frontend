@@ -2,9 +2,11 @@ import { useEffect, useState, type JSX, type SetStateAction } from "react";
 import axios from "axios";
 import {
   User, Eye, Edit, Trash,
-  Search
+  Search,
+  Users
 } from "lucide-react";
 import GradientSidebar from "./components/Sidebar";
+import {motion} from "framer-motion";
 
 type InternetUser = {
   id: string;
@@ -39,6 +41,15 @@ export default function InternetUsersList(): JSX.Element {
   const [selectedDeputyMinistry, setSelectedDeputyMinistry] = useState<string>("");
   const [selectedDirectorate, setSelectedDirectorate] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
+
+  const totalUsers = users.length;
+
+  const deputyMinistryCounts: Record<string, number> = users.reduce((acc, user) => {
+    const deputy = user.deputyMinistry || "Unknown";
+    acc[deputy] = (acc[deputy] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
+
 
   useEffect(() => {
     async function fetchUsers() {
@@ -125,10 +136,39 @@ export default function InternetUsersList(): JSX.Element {
       border-gray-200 bg-white shadow-sm z-20">
         <GradientSidebar />
       </div>
-
-      <main className="flex-1 ml-64 p-8 overflow-auto">
         
+      <main className="flex-1 ml-64 p-8 overflow-auto">
+       {/* 🧊 Summary Cards */}
+       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-10">
+        {/* Total Users Card */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="bg-white shadow-md border border-gray-200 rounded-xl p-6"
+        >
+          <h3 className="text-sm font-medium text-gray-600"><Users />Total Users</h3>
+          <p className="text-3xl font-bold text-blue-500">{totalUsers}</p>
+        </motion.div>
+
+        {/* Users Per Deputy Ministry */}
+        {Object.entries(deputyMinistryCounts).map(([depMinistry, count], index) => (
+          <motion.div
+            key={depMinistry}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
+            className="bg-white shadow-md border border-gray-200 rounded-xl p-6"
+          >
+            <h3 className="text-sm font-medium text-gray-600">{depMinistry}</h3>
+            <p className="text-xl font-bold text-indigo-600">{count} user{count > 1 ? "s" : ""}</p>
+          </motion.div>
+        ))}
+      </div>
+
+
         <div className="flex gap-4 mb-4">
+          
           <div>
              <label htmlFor="deputyMinistryFilter" className="block text-sm font-medium 
             text-gray-700">

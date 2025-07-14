@@ -49,6 +49,7 @@ export default function InternetUserAddForm(): JSX.Element {
   const [directorateOptions, setDirectorateOptions] = useState<string[]>([]);
   const [deputyMinistryOptions, setDeputyMinistryOptions] = useState<string[]>([]);
 
+
   useEffect(() => {
   const fetchOptions = async () => {
     try {
