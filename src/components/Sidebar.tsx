@@ -7,13 +7,12 @@ import type { JSX } from "react";
 export default function GradientSidebar(): JSX.Element {
 
   const items = [
-    { id: 1, label: "Dashboard", icon: <BarChart3 className="w-5 h-5" /> },
-    { id: 2, label: "All Users", icon: <Users className="w-5 h-5" /> },
-    { id: 3, label: "Add User", icon: <User className="w-5 h-5" /> },
-    { id: 4, label: "All Violations", icon: <Gavel className="w-5 h-5" /> },
-    { id: 5, label: "Add Violation", icon: <AlertOctagon className="w-5 h-5" /> },
-    { id: 6, label: "Settings", icon: <Settings className="w-5 h-5" /> },
-    { id: 7, label: "Logout", icon: <LogOut className="w-5 h-5" /> },
+    { id: 1, label: "All Users", icon: <Users className="w-5 h-5" /> },
+    { id: 2, label: "Add User", icon: <User className="w-5 h-5" /> },
+    { id: 3, label: "All Violations", icon: <Gavel className="w-5 h-5" /> },
+    { id: 4, label: "Add Violation", icon: <AlertOctagon className="w-5 h-5" /> },
+    { id: 5, label: "Settings", icon: <Settings className="w-5 h-5" /> },
+    { id: 6, label: "Logout", icon: <LogOut className="w-5 h-5" /> },
   ];
 
   return (
