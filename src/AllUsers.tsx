@@ -13,7 +13,7 @@ import {
   Tooltip,
   Legend
 } from "chart.js";
-import { Pie } from "react-chartjs-2";
+import { Doughnut, Pie } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -152,19 +152,46 @@ export default function InternetUsersList(): JSX.Element {
        md:grid-cols-3 gap-6 mb-10">
         {/* Total Users Card */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="bg-white shadow-md border border-gray-200 rounded-xl p-6"
-        >
-          
-          <Users className="text-2xl"/>
-          <h3 className="text-4xl text-gray-600">Total Users</h3>
-          <p className="text-3xl font-bold text-blue-500">{totalUsers}</p>
-        </motion.div>
+  initial={{ opacity: 0, y: -20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 1 }}
+  className="bg-white shadow-md border border-gray-200 rounded-xl p-6"
+>
+  <h3 className="text-lg font-semibold text-gray-700 mb-4 flex items-center gap-2">
+    <Users className="w-5 h-5 text-blue-400" />
+    Total Users
+  </h3>
+
+  <div className="w-48 mx-auto">
+    <Doughnut
+      data={{
+        labels: ["Users"],
+        datasets: [
+          {
+            data: [totalUsers, Math.max(100 - totalUsers, 0)], // fills rest as empty
+            backgroundColor: ["#60A5FA", "#E5E7EB"], // blue-400 and gray-200
+            borderWidth: 0,
+          },
+        ],
+      }}
+      options={{
+        cutout: "70%",
+        plugins: {
+          legend: { display: false },
+          tooltip: { enabled: false },
+        },
+      }}
+    />
+    <div className="absolute top-[50%] transform -translate-x-1/2 -translate-y-[50%] text-center">
+      <p className="text-3xl font-bold text-blue-500 ml-50">{totalUsers}</p>
+      <p className="text-xs text-gray-500 ml-50">Users</p>
+    </div>
+  </div>
+</motion.div>
+
           
         {/* Users Per Deputy Ministry */}
-        <div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
+        <div className="bg-white rounded-md shadow-md border border-gray-200 p-6">
       <h2 className="text-lg font-bold text-gray-700 mb-4">Users Per Deputy Ministry</h2>
       <div className="space-y-4">
         {Object.entries(deputyMinistryCounts).map(([depMinistry, count], index) => {
@@ -202,7 +229,7 @@ export default function InternetUsersList(): JSX.Element {
 </div>
 
             {/* Users Per Deputy Ministry - Pie Chart */}
-<div className="bg-white rounded-xl shadow-md border border-gray-200 p-6">
+<div className="bg-white rounded-md shadow-md border border-gray-200 p-6">
   <h2 className="text-lg font-bold text-gray-700 mb-4">Users Distribution</h2>
   <div className="w-full max-w-md mx-auto">
     <Pie
