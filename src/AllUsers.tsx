@@ -37,6 +37,7 @@ export default function InternetUsersList(): JSX.Element {
   const [directorateOptions, setDirectorateOptions] = useState<{ id: number; name: string }[]>([]);
   const [selectedDeputyMinistry, setSelectedDeputyMinistry] = useState<string>("");
   const [selectedDirectorate, setSelectedDirectorate] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {
     async function fetchUsers() {
@@ -117,13 +118,15 @@ export default function InternetUsersList(): JSX.Element {
   };
 
   return (
-    <div className="min-h-screen flex bg-white shadow-md shadow-indigo-700">
+    <div className="min-h-screen flex bg-white 
+    shadow-md shadow-indigo-700">
       <div className="fixed top-0 left-0 bottom-0 w-64 border-r 
       border-gray-200 bg-white shadow-sm z-20">
         <GradientSidebar />
       </div>
 
       <main className="flex-1 ml-64 p-8 overflow-auto">
+        
         <div className="flex gap-4 mb-4">
           <div>
              <label htmlFor="deputyMinistryFilter" className="block text-sm font-medium 
@@ -169,6 +172,14 @@ export default function InternetUsersList(): JSX.Element {
               })}
             </select>
           </div>
+                  <input 
+                  id = "searchInput"
+                  type = "text"
+                  value = {searchTerm}
+                  onChange = {(e) => setSearchTerm(e.target.value)}
+                  className="border-2 border-blue-400 h-7 mt-7"
+                  placeholder="Search..."
+                  />
         </div>
 
         {loading ? (
@@ -199,7 +210,11 @@ export default function InternetUsersList(): JSX.Element {
             {users
               .filter((user) => 
                 (selectedDeputyMinistry === "" || user.deputyMinistry === selectedDeputyMinistry) &&
-                (selectedDirectorate === "" || user.directorate === selectedDirectorate)
+                (selectedDirectorate === "" || user.directorate === selectedDirectorate) &&
+                (user.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                    user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    user.phone.toLowerCase().includes(searchTerm.toLowerCase())
+              )
               ).map((user, idx) => (
               <div
                 key={user.id}
@@ -268,23 +283,23 @@ export default function InternetUsersList(): JSX.Element {
         )}
       </main>
       {/* View Modal */}
-{isViewOpen && selectedUser && (
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div className="bg-white rounded-xl p-6 w-full max-w-lg shadow-lg">
-      <h2 className="text-2xl font-bold text-blue-400 mb-4">View User</h2>
-      <ul className="space-y-1 text-gray-800">
-        {Object.entries(selectedUser).map(([key, value]) => (
-          <li key={key}>
-            <strong className="capitalize">{key.replace("_", " ")}:</strong>{" "}
-            {value || "-"}
-          </li>
-        ))}
-      </ul>
-      <div className="mt-6 text-right">
-        <button
-          onClick={() => setIsViewOpen(false)}
-          className="px-4 py-2 bg-blue-400 hover:bg-blue-700 text-white rounded"
-        >
+        {isViewOpen && selectedUser && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-xl p-6 w-full max-w-lg shadow-lg">
+              <h2 className="text-2xl font-bold text-blue-400 mb-4">View User</h2>
+              <ul className="space-y-1 text-gray-800">
+                {Object.entries(selectedUser).map(([key, value]) => (
+                  <li key={key}>
+                    <strong className="capitalize">{key.replace("_", " ")}:</strong>{" "}
+                    {value || "-"}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-6 text-right">
+                <button
+                  onClick={() => setIsViewOpen(false)}
+                  className="px-4 py-2 bg-blue-400 hover:bg-blue-700 text-white rounded"
+                >
           Close
         </button>
       </div>
