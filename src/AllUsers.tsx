@@ -1,7 +1,8 @@
 import { useEffect, useState, type JSX, type SetStateAction } from "react";
 import axios from "axios";
 import {
-  User, Eye, Edit, Trash
+  User, Eye, Edit, Trash,
+  Search
 } from "lucide-react";
 import GradientSidebar from "./components/Sidebar";
 
@@ -172,14 +173,22 @@ export default function InternetUsersList(): JSX.Element {
               })}
             </select>
           </div>
-                  <input 
-                  id = "searchInput"
-                  type = "text"
-                  value = {searchTerm}
-                  onChange = {(e) => setSearchTerm(e.target.value)}
-                  className="border-2 border-blue-400 h-7 mt-7"
-                  placeholder="Search..."
+                 <div className="relative w-full sm:w-[700px] mt-5">
+                  <input
+                    id="searchInput"
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Search users..."
+                    className="w-full px-4 py-2 pl-10 rounded-lg shadow-md border border-blue-400 
+                    focus:ring-2 focus:ring-blue-400 focus:outline-none text-sm 
+                    placeholder:text-blue-300 text-gray-700 
+                    bg-white shadow-md shadow-blue-400"
+                    autoComplete="on"
+                    autoCorrect="on"
                   />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-400 w-4 h-4" />
+                </div>
         </div>
 
         {loading ? (
@@ -301,29 +310,29 @@ export default function InternetUsersList(): JSX.Element {
                   className="px-4 py-2 bg-blue-400 hover:bg-blue-700 text-white rounded"
                 >
           Close
-        </button>
-      </div>
-    </div>
-  </div>
-)}
-
-{/* Edit Modal */}
-{isEditOpen && selectedUser && (
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div className="bg-white rounded-xl p-6 w-full max-w-lg shadow-lg">
-      <h2 className="text-2xl font-bold text-blue-400 mb-4">Edit User</h2>
-      <div className="grid grid-cols-2 gap-4">
-        {Object.keys(editForm).map((key) => (
-          <div key={key}>
-            <label className="block text-sm text-gray-600 capitalize">{key.replace("_", " ")}</label>
-            <input
-              type="text"
-              name={key}
-              value={(editForm as any)[key] || ""}
-              onChange={handleEditChange}
-              className="w-full px-3 py-2 border rounded mt-1 text-sm"
-            />
+              </button>
+            </div>
           </div>
+        </div>
+      )}
+
+    {/* Edit Modal */}
+    {isEditOpen && selectedUser && (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="bg-white rounded-xl p-6 w-full max-w-lg shadow-lg">
+          <h2 className="text-2xl font-bold text-blue-400 mb-4">Edit User</h2>
+          <div className="grid grid-cols-2 gap-4">
+            {Object.keys(editForm).map((key) => (
+              <div key={key}>
+                <label className="block text-sm text-gray-600 capitalize">{key.replace("_", " ")}</label>
+                <input
+                  type="text"
+                  name={key}
+                  value={(editForm as any)[key] || ""}
+                  onChange={handleEditChange}
+                  className="w-full px-3 py-2 border rounded mt-1 text-sm"
+                />
+              </div>
         ))}
       </div>
       <div className="mt-6 flex justify-end gap-2">

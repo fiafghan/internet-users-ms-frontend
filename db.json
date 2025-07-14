@@ -309,6 +309,20 @@
       "device_limit": "3",
       "device_type": "Computer",
       "mac_address": "aa:bb:cc:dd:ee:15"
+    },
+    {
+      "id": "fb7f",
+      "name": "mia marpool",
+      "username": "mia-123",
+      "email": "mia@gmail.com",
+      "phone": "+93793233456",
+      "grade": "4",
+      "directorate": "IT",
+      "deputyMinistry": "administrative and financial",
+      "position": "IT officer",
+      "device_limit": "1",
+      "device_type": "Computer",
+      "mac_address": "ff:ff:ff:ff:Ff:ff"
     }
   ]
 }

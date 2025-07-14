@@ -28,7 +28,7 @@ const stepTitles = [
   "Review & Submit",
 ];
 
-export default function InternetUserAddFormWizard(): JSX.Element {
+export default function InternetUserAddForm(): JSX.Element {
   const [form, setForm] = useState<FormState>({
     name: "",
     username: "",
@@ -51,7 +51,6 @@ export default function InternetUserAddFormWizard(): JSX.Element {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Basic validation: check required fields of current step are filled
   function validateStep(step: number): boolean {
     switch (step) {
       case 0:
@@ -115,7 +114,7 @@ export default function InternetUserAddFormWizard(): JSX.Element {
         mac_address: "",
       });
       setCurrentStep(0);
-      navigate("/"); // redirect after success
+      navigate("/");
     } catch (error) {
       console.error("Error adding user:", error);
       alert("❌ Something went wrong while adding user.");
@@ -124,183 +123,163 @@ export default function InternetUserAddFormWizard(): JSX.Element {
     }
   };
 
- return (
-  <>
-    <AnimatePresence>
-      {loading && (
-        <motion.div
-          key="spinner-overlay"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.75 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm"
-          aria-label="Loading..."
-          role="alert"
-          aria-live="assertive"
-        >
-          <Spinner
-            size={48}
-            thickness={5}
-            colorClass="border-white"
-            ariaLabel="Loading form submission"
-          />
-        </motion.div>
-      )}
-    </AnimatePresence>
-
-    {/* 🔥 Wrap both sidebar and form in a flex container */}
-    <div className="flex min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-100">
-      {/* Sidebar */}
-      <GradientSidebar />
-
-      {/* Form content */}
-      <motion.div
-        className="flex-1 flex flex-col items-center justify-center px-4 py-12"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-      >
-        <motion.div
-          className="w-full max-w-lg bg-white shadow-2xl border border-gray-200 rounded-3xl px-10 py-12 relative z-10"
-          initial={{ scale: 0.95, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-        >
-          <motion.h2
-            className="text-3xl font-extrabold text-center text-gray-800 mb-6 tracking-tight"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
+  return (
+    <>
+      <AnimatePresence>
+        {loading && (
+          <motion.div
+            key="spinner-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.75 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm"
+            aria-label="Loading..."
+            role="alert"
+            aria-live="assertive"
           >
-            <span className="bg-gradient-to-r from-indigo-500 to-blue-600 text-transparent bg-clip-text">
-              {stepTitles[currentStep]}
-            </span>
-          </motion.h2>
+            <Spinner
+              size={48}
+              thickness={5}
+              colorClass="border-white"
+              ariaLabel="Loading form submission"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-          {/* Step Content */}
-          <AnimatePresence mode="wait">
-            {currentStep === 0 && (
-              <Step1 key="step1" form={form} onChange={handleChange} />
-            )}
-            {currentStep === 1 && (
-              <Step2 key="step2" form={form} onChange={handleChange} />
-            )}
-            {currentStep === 2 && (
-              <Step3 key="step3" form={form} onChange={handleChange} />
-            )}
-            {currentStep === 3 && <Step4 key="step4" form={form} />}
-          </AnimatePresence>
+      <div className="flex min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-100">
+        <GradientSidebar />
+        <motion.div
+          className="flex-1 flex flex-col items-center justify-center px-4 py-12"
+          initial={false}
+        >
+          <motion.div
+            className="w-full max-w-lg bg-white shadow-2xl border border-gray-200 rounded-3xl px-10 py-12 relative z-10"
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+          >
+            <motion.h2
+              className="text-3xl font-extrabold text-center text-gray-800 mb-6 tracking-tight"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+            >
+              <span className="bg-gradient-to-r from-blue-400 to-blue-300 text-transparent bg-clip-text">
+                {stepTitles[currentStep]}
+              </span>
+            </motion.h2>
 
-          {/* Navigation Buttons */}
-          <div className="mt-8 flex justify-between">
-            {currentStep > 0 ? (
-              <button
-                type="button"
-                onClick={prevStep}
-                className="px-6 py-2 rounded-xl border border-gray-300 text-gray-700 hover:bg-gray-100 transition"
+            {/* 🔥 This is the FIXED part */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentStep}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.4 }}
               >
-                Back
-              </button>
-            ) : (
-              <div />
-            )}
+                {(() => {
+                  switch (currentStep) {
+                    case 0:
+                      return <Step1 form={form} onChange={handleChange} />;
+                    case 1:
+                      return <Step2 form={form} onChange={handleChange} />;
+                    case 2:
+                      return <Step3 form={form} onChange={handleChange} />;
+                    case 3:
+                      return <Step4 form={form} />;
+                    default:
+                      return null;
+                  }
+                })()}
+              </motion.div>
+            </AnimatePresence>
 
-            {currentStep < stepTitles.length - 1 ? (
-              <button
-                type="button"
-                onClick={nextStep}
-                className="px-6 py-2 rounded-xl bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition"
-              >
-                Next
-              </button>
-            ) : (
-              <AnimatedSubmitButton onClick={handleSubmit} disabled={loading}>
-                {loading ? (
-                  <div className="flex items-center justify-center gap-2">
-                    <Spinner />
-                    <span>Submitting...</span>
-                  </div>
-                ) : (
-                  "Submit"
-                )}
-              </AnimatedSubmitButton>
-            )}
-          </div>
+            <div className="mt-8 flex justify-between">
+              {currentStep > 0 ? (
+                <button
+                  type="button"
+                  onClick={prevStep}
+                  className="px-6 py-2 rounded-xl border border-gray-300 text-gray-700 hover:bg-gray-100 transition"
+                >
+                  Back
+                </button>
+              ) : (
+                <div />
+              )}
+              {currentStep < stepTitles.length - 1 ? (
+                <button
+                  type="button"
+                  onClick={nextStep}
+                  className="px-6 py-2 rounded-xl bg-blue-400 text-white font-semibold hover:bg-indigo-700 transition"
+                >
+                  Next
+                </button>
+              ) : (
+                <AnimatedSubmitButton onClick={handleSubmit} disabled={loading}>
+                  {loading ? (
+                    <div className="flex items-center justify-center gap-2">
+                      <Spinner />
+                      <span>Submitting...</span>
+                    </div>
+                  ) : (
+                    "Submit"
+                  )}
+                </AnimatedSubmitButton>
+              )}
+            </div>
+          </motion.div>
         </motion.div>
-      </motion.div>
-    </div>
-  </>
-);
+      </div>
+    </>
+  );
+}
 
-
-// Step 1: Basic Info
+// Input Components
 function Step1({ form, onChange }: { form: FormState; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void }): JSX.Element {
   return (
-    <motion.div
-      initial={{ opacity: 0, x: 50 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -50 }}
-      transition={{ duration: 0.4 }}
-    >
-      <InputField label="Full Name" icon={<User className="w-5 h-5 text-gray-500" />} name="name" type="text" placeholder="John Doe" value={form.name} onChange={onChange} animation={{}} delay={0} />
-      <InputField label="Username" icon={<User className="w-5 h-5 text-gray-500" />} name="username" type="text" placeholder="johndoe123" value={form.username} onChange={onChange} animation={{}} delay={0} />
-      <InputField label="Email" icon={<Mail className="w-5 h-5 text-gray-500" />} name="email" type="email" placeholder="you@example.com" value={form.email} onChange={onChange} animation={{}} delay={0} />
-      <InputField label="Phone" icon={<Phone className="w-5 h-5 text-gray-500" />} name="phone" type="tel" placeholder="+1234567890" value={form.phone} onChange={onChange} animation={{}} delay={0} />
-    </motion.div>
+    <div>
+      <InputField label="Full Name" icon={<User className="w-5 h-5 text-gray-500" />} name="name" type="text" placeholder="John Doe" value={form.name} onChange={onChange} />
+      <InputField label="Username" icon={<User className="w-5 h-5 text-gray-500" />} name="username" type="text" placeholder="johndoe123" value={form.username} onChange={onChange} />
+      <InputField label="Email" icon={<Mail className="w-5 h-5 text-gray-500" />} name="email" type="email" placeholder="you@example.com" value={form.email} onChange={onChange} />
+      <InputField label="Phone" icon={<Phone className="w-5 h-5 text-gray-500" />} name="phone" type="tel" placeholder="+1234567890" value={form.phone} onChange={onChange} />
+    </div>
   );
 }
 
-// Step 2: Job Info
 function Step2({ form, onChange }: { form: FormState; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void }): JSX.Element {
   return (
-    <motion.div
-      initial={{ opacity: 0, x: 50 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -50 }}
-      transition={{ duration: 0.4 }}
-    >
-      <InputField label="Position" icon={<Briefcase className="w-5 h-5 text-gray-500" />} name="position" type="text" placeholder="Position" value={form.position} onChange={onChange} animation={{}} delay={0} />
-      <InputField label="Grade" icon={<Hash className="w-5 h-5 text-gray-500" />} name="grade" type="text" placeholder="Grade level" value={form.grade} onChange={onChange} animation={{}} delay={0} />
-      <InputField label="Directorate" icon={<User className="w-5 h-5 text-gray-500" />} name="directorate" type="text" placeholder="Directorate name" value={form.directorate} onChange={onChange} animation={{}} delay={0} />
-      <InputField label="Deputy Ministry" icon={<User className="w-5 h-5 text-gray-500" />} name="deputyMinistry" type="text" placeholder="Deputy ministry name" value={form.deputyMinistry} onChange={onChange} animation={{}} delay={0} />
-    </motion.div>
+    <div>
+      <InputField label="Position" icon={<Briefcase className="w-5 h-5 text-gray-500" />} name="position" type="text" placeholder="Position" value={form.position} onChange={onChange} />
+      <InputField label="Grade" icon={<Hash className="w-5 h-5 text-gray-500" />} name="grade" type="text" placeholder="Grade level" value={form.grade} onChange={onChange} />
+      <InputField label="Directorate" icon={<User className="w-5 h-5 text-gray-500" />} name="directorate" type="text" placeholder="Directorate name" value={form.directorate} onChange={onChange} />
+      <InputField label="Deputy Ministry" icon={<User className="w-5 h-5 text-gray-500" />} name="deputyMinistry" type="text" placeholder="Deputy ministry name" value={form.deputyMinistry} onChange={onChange} />
+    </div>
   );
 }
 
-// Step 3: Device Info
 function Step3({ form, onChange }: { form: FormState; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void }): JSX.Element {
   return (
-    <motion.div
-      initial={{ opacity: 0, x: 50 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -50 }}
-      transition={{ duration: 0.4 }}
-    >
-      <InputField label="Device Limit" icon={<Hash className="w-5 h-5 text-gray-500" />} name="device_limit" type="number" placeholder="Number of devices allowed" value={form.device_limit} onChange={onChange} animation={{}} delay={0} />
-      <InputField label="Device Type" icon={<Laptop className="w-5 h-5 text-gray-500" />} name="device_type" type="text" placeholder="Type of device" value={form.device_type} onChange={onChange} animation={{}} delay={0} />
-      <InputField label="MAC Address" icon={<Cpu className="w-5 h-5 text-gray-500" />} name="mac_address" type="text" placeholder="00:00:00:00:00:00" value={form.mac_address} onChange={onChange} animation={{}} delay={0} />
-    </motion.div>
+    <div>
+      <InputField label="Device Limit" icon={<Hash className="w-5 h-5 text-gray-500" />} name="device_limit" type="number" placeholder="Number of devices allowed" value={form.device_limit} onChange={onChange} />
+      <InputField label="Device Type" icon={<Laptop className="w-5 h-5 text-gray-500" />} name="device_type" type="text" placeholder="Type of device" value={form.device_type} onChange={onChange} />
+      <InputField label="MAC Address" icon={<Cpu className="w-5 h-5 text-gray-500" />} name="mac_address" type="text" placeholder="00:00:00:00:00:00" value={form.mac_address} onChange={onChange} />
+    </div>
   );
 }
 
-// Step 4: Review & Submit
 function Step4({ form }: { form: FormState }): JSX.Element {
   return (
-    <motion.div
-      className="space-y-4 text-gray-800"
-      initial={{ opacity: 0, x: 50 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: -50 }}
-      transition={{ duration: 0.4 }}
-    >
+    <div>
       {Object.entries(form).map(([key, value]) => (
         <div key={key} className="flex justify-between border-b border-gray-300 pb-1">
           <span className="capitalize font-semibold">{key.replace(/([A-Z])/g, " $1")}</span>
           <span>{value || "-"}</span>
         </div>
       ))}
-    </motion.div>
+    </div>
   );
 }
 
@@ -312,8 +291,6 @@ type InputProps = {
   placeholder: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  animation: { [key: string]: any };
-  delay: number;
 };
 
 function InputField({
@@ -324,20 +301,10 @@ function InputField({
   placeholder,
   value,
   onChange,
-  animation,
-  delay,
 }: InputProps): JSX.Element {
   return (
-    <motion.div
-      className="mb-6"
-      initial={animation}
-      animate={{ x: 0, y: 0, opacity: 1 }}
-      transition={{ delay, duration: 0.5, ease: "easeOut" }}
-    >
-      <label
-        htmlFor={name}
-        className="block mb-1 text-sm font-medium text-gray-700"
-      >
+    <div className="mb-6">
+      <label htmlFor={name} className="block mb-1 text-sm font-medium text-gray-700">
         {label}
       </label>
       <div className="flex items-center gap-2 bg-gray-100 border border-gray-300 rounded-xl px-4 py-2 focus-within:ring-2 focus-within:ring-blue-400 focus-within:ring-offset-1 transition">
@@ -351,9 +318,9 @@ function InputField({
           placeholder={placeholder}
           required
           className="w-full bg-transparent text-gray-800 text-sm placeholder-gray-400 focus:outline-none"
+          autoComplete="off"
         />
       </div>
-    </motion.div>
+    </div>
   );
-}
 }
