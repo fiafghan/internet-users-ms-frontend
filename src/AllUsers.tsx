@@ -30,11 +30,14 @@ type InternetUser = {
   device_limit: string;
   device_type: string;
   mac_address: string;
+  status?:"active" | "deactive";
+  violations?:"0" | "1" | "2";
+  comment?:string;
 };
 
 const headers = [
   "Name", "Username", "Phone","Position", "Grade",
-  "Directorate", "Deputy Ministry", "Actions"
+  "Directorate", "Deputy Ministry","Status", "Violations", "Comment", "Actions"
 ];
 
 export default function InternetUsersList(): JSX.Element {
@@ -99,7 +102,12 @@ export default function InternetUsersList(): JSX.Element {
 
   const handleEdit = (user: InternetUser) => {
     setSelectedUser(user);
-    setEditForm(user);
+    setEditForm({
+          ...user,
+          status: user.status || "active",
+          violations: user.violations || "0",
+          comment: user.comment || "No comment"
+        });
     setIsEditOpen(true);
   };
 
@@ -344,7 +352,7 @@ export default function InternetUsersList(): JSX.Element {
           <div className="overflow-x-auto rounded-sm 
           shadow-lg bg-white border 
           border-gray-200 max-w-full">
-            <div className="grid grid-cols-[200px_150px_150px_150px_80px_150px_200px_200px] 
+            <div className="grid grid-cols-[200px_150px_150px_150px_80px_150px_200px_200px_200px_200px_200px] 
             bg-blue-400 text-white font-semibold text-sm 
             select-none rounded-t-lg shadow-inner">
               {headers.map((header) => (
@@ -370,7 +378,7 @@ export default function InternetUsersList(): JSX.Element {
               ).map((user, idx) => (
               <div
                 key={user.id}
-                className={`grid grid-cols-[200px_150px_150px_150px_80px_150px_200px_200px] 
+                className={`grid grid-cols-[200px_150px_150px_150px_80px_150px_200px_200px_200px_200px_200px] 
                   border-b border-gray-200 transition-colors duration-200 ${
                   idx % 2 === 0 ? "bg-gray-100" : "bg-white"
                 } hover:bg-blue-100 cursor-default`}
@@ -404,6 +412,18 @@ export default function InternetUsersList(): JSX.Element {
 
                 <div className="px-3 py-2 text-gray-700 whitespace-nowrap 
                 border-r border-gray-200 text-[8px]">{user.deputyMinistry}</div>
+
+                <div className="px-3 py-2 text-gray-700 border-r border-gray-200 text-[10px]">
+                {user.status || "-"}
+              </div>
+
+              <div className="px-3 py-2 text-gray-700 border-r border-gray-200 text-[10px]">
+              {user.violations || "0"}
+            </div>
+
+            <div className="px-3 py-2 text-gray-700 border-r border-gray-200 text-[10px] truncate max-w-[120px]">
+              {user.comment || "-"}
+            </div>
 
                 {/* Actions */}
                 <div className="px-3 py-2 flex items-center justify-center gap-2 bg-blue-300">
@@ -466,6 +486,7 @@ export default function InternetUsersList(): JSX.Element {
           <h2 className="text-2xl font-bold text-blue-400 mb-4">Edit User</h2>
           <div className="grid grid-cols-2 gap-4">
             {Object.keys(editForm).map((key) => (
+
               <div key={key}>
                 <label className="block text-sm text-gray-600 capitalize">{key.replace("_", " ")}</label>
                 <input
@@ -477,6 +498,48 @@ export default function InternetUsersList(): JSX.Element {
                 />
               </div>
         ))}
+
+                      {/* Status Dropdown */}
+              <div>
+                <label className="block text-sm text-gray-600">Status</label>
+                <select
+                  name="status"
+                  value={editForm.status || "active"}
+                  onChange={handleEditChange}
+                  className="w-full px-3 py-2 border rounded mt-1 text-sm"
+                >
+                  <option value="active">Active</option>
+                  <option value="deactive">Deactive</option>
+                </select>
+              </div>
+
+              {/* Violations Dropdown */}
+              <div>
+                <label className="block text-sm text-gray-600">Violations</label>
+                <select
+                  name="violations"
+                  value={editForm.violations || "0"}
+                  onChange={handleEditChange}
+                  className="w-full px-3 py-2 border rounded mt-1 text-sm"
+                >
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                </select>
+              </div>
+
+              {/* Comment Textarea */}
+              <div className="col-span-2">
+                <label className="block text-sm text-gray-600">Comment</label>
+                <textarea
+                  name="comment"
+                  value={editForm.comment || ""}
+                  onChange={handleEditChange}
+                  className="w-full px-3 py-2 border rounded mt-1 text-sm"
+                  rows={3}
+                  placeholder="Add any notes here..."
+                />
+              </div>
       </div>
       <div className="mt-6 flex justify-end gap-2">
         <button
