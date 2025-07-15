@@ -24,6 +24,7 @@ type FormState = {
   comment: string;
 };
 
+
 const stepTitles = [
   "Basic Info",
   "Job Info",

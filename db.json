@@ -117,8 +117,42 @@
       "device_type": "mobile",
       "mac_address": "",
       "status": "Active",
-      "violations": "1",
+      "violations": "0",
       "comment": "No Comment"
+    },
+    {
+      "id": "8ffb",
+      "name": "Fardin Ibrahimi",
+      "username": "fardin-it",
+      "email": "fiafghan@gmail.com",
+      "phone": "+93799769626",
+      "grade": "4",
+      "directorate": "IT",
+      "deputyMinistry": "administrative and financial",
+      "position": "Software developer",
+      "device_limit": "2",
+      "device_type": "mobile and computer",
+      "mac_address": "",
+      "status": "Active",
+      "violations": "0",
+      "comment": "No Comment"
+    },
+    {
+      "id": "1ddf",
+      "name": "Sayed Naweed Sayedy",
+      "username": "naweed-it",
+      "email": "naweed@gmail.com",
+      "phone": "+93799345678",
+      "grade": "4",
+      "directorate": "IT",
+      "deputyMinistry": "administrative and financial",
+      "position": "Software Developer",
+      "device_limit": "4",
+      "device_type": "Mobile and computer",
+      "mac_address": "",
+      "status": "deactive",
+      "violations": "2",
+      "comment": "Used Torrent"
     }
   ]
 }

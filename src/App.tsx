@@ -10,10 +10,10 @@ function App() {
   return (
     <>
       <Routes>
+      <Route path="/" element={<AllUsers />} />
       <Route path="/register" element={<RegisterForm />} />
       <Route path="/login" element={<LoginForm />} />
       <Route path="/adduser" element={<InternetUserAddForm />} />
-      <Route path="/allusers" element={<AllUsers />} />
       <Route path="/addviolation" element={<AddViolation />} />
     </Routes>
     </>
