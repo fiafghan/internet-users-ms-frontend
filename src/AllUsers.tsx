@@ -481,11 +481,13 @@ export default function InternetUsersList(): JSX.Element {
 
     {/* Edit Modal */}
 {isEditOpen && selectedUser && (
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div className="bg-white rounded-2xl shadow-2xl w-full max-w-5xl overflow-hidden border border-gray-200 flex flex-col lg:flex-row">
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center py-10 overflow-y-auto z-50">
+    <div className="bg-white rounded-2xl shadow-2xl w-full max-w-5xl overflow-hidden border 
+    border-gray-200 flex flex-col lg:flex-row">
       
       {/* Left Side - Info Preview (optional) */}
-      <div className="lg:w-1/2 w-full bg-gradient-to-br from-blue-100 to-blue-200 p-8 flex flex-col justify-center">
+      <div className="lg:w-1/2 w-full bg-gradient-to-br from-blue-100 to-blue-200 
+      p-8 flex flex-col justify-center">
         <h2 className="text-3xl font-bold text-blue-800 mb-2">Edit User</h2>
         <p className="text-sm text-blue-700 mb-4">Make changes to this user's profile.</p>
         <ul className="space-y-2 text-sm text-blue-900">
@@ -503,13 +505,15 @@ export default function InternetUsersList(): JSX.Element {
           {Object.keys(editForm).map((key) =>
             key !== "status" && key !== "violations" && key !== "comment" ? (
               <div key={key}>
-                <label className="block text-sm font-medium text-gray-700 capitalize">{key.replace("_", " ")}</label>
+                <label className="block text-sm font-medium 
+                text-gray-700 capitalize scale-80">{key.replace("_", " ")}</label>
                 <input
                   type="text"
                   name={key}
                   value={(editForm as any)[key] || ""}
                   onChange={handleEditChange}
-                  className="mt-1 w-full px-4 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                  className="w-full px-4 py-1 text-sm border border-gray-300 rounded-md 
+                  focus:outline-none focus:ring-2 focus:ring-blue-400 transition scale-80"
                 />
               </div>
             ) : null
@@ -517,12 +521,13 @@ export default function InternetUsersList(): JSX.Element {
 
           {/* Status */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Status</label>
+            <label className="block text-sm font-medium text-gray-700 scale-80">Status</label>
             <select
               name="status"
               value={editForm.status || "active"}
               onChange={handleEditChange}
-              className="mt-1 w-full px-4 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+              className="mt-1 w-full px-4 py-2 text-sm border border-gray-300 rounded-md 
+              focus:outline-none focus:ring-2 focus:ring-blue-400 transition scale-80"
             >
               <option value="active">Active</option>
               <option value="deactive">Deactive</option>
@@ -531,12 +536,13 @@ export default function InternetUsersList(): JSX.Element {
 
           {/* Violations */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">Violations</label>
+            <label className="block text-sm font-medium text-gray-700 scale-80">Violations</label>
             <select
               name="violations"
               value={editForm.violations || "0"}
               onChange={handleEditChange}
-              className="mt-1 w-full px-4 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+              className="mt-1 w-full px-4 py-2 text-sm border border-gray-300 rounded-md 
+              focus:outline-none focus:ring-2 focus:ring-blue-400 transition scale-80"
             >
               <option value="0">0</option>
               <option value="1">1</option>
@@ -546,12 +552,13 @@ export default function InternetUsersList(): JSX.Element {
 
           {/* Comment */}
           <div className="sm:col-span-2">
-            <label className="block text-sm font-medium text-gray-700">Comment</label>
+            <label className="block text-sm font-medium text-gray-700 scale-80">Comment</label>
             <textarea
               name="comment"
               value={editForm.comment || ""}
               onChange={handleEditChange}
-              className="mt-1 w-full px-4 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+              className="mt-1 w-full px-4 py-2 text-sm border border-gray-300 rounded-md 
+              focus:outline-none focus:ring-2 focus:ring-blue-400 transition scale-80"
               rows={3}
               placeholder="Write a comment..."
             />
