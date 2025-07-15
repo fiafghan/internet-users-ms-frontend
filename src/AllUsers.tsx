@@ -352,7 +352,7 @@ export default function InternetUsersList(): JSX.Element {
           <div className="overflow-x-auto rounded-sm 
           shadow-lg bg-white border 
           border-gray-200 max-w-full">
-            <div className="grid grid-cols-[200px_150px_150px_150px_80px_150px_200px_200px_200px_200px_200px] 
+            <div className="grid grid-cols-[200px_150px_150px_150px_150px_150px_200px_200px_200px_200px_200px] 
             bg-blue-400 text-white font-semibold text-sm 
             select-none rounded-t-lg shadow-inner">
               {headers.map((header) => (
@@ -382,7 +382,7 @@ export default function InternetUsersList(): JSX.Element {
     return (
       <div
         key={user.id}
-        className={`grid grid-cols-[200px_150px_150px_150px_80px_150px_200px_200px_200px_200px_200px] 
+        className={`grid grid-cols-[200px_150px_150px_150px_150px_150px_200px_200px_200px_200px_200px] 
           border-b border-gray-200 transition-colors duration-200 ${
           isRedCard
             ? "bg-red-100"
