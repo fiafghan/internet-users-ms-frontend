@@ -365,11 +365,24 @@
       "device_limit": "2",
       "device_type": "computer",
       "mac_address": "11:11:11"
+    },
+    {
+      "id": "2d76",
+      "name": "khala",
+      "username": "khala jan",
+      "email": "khala@gmail.com",
+      "phone": "+93790574282",
+      "grade": "7",
+      "directorate": "IT",
+      "deputyMinistry": "administrative and financial",
+      "position": "cleaner",
+      "device_limit": "2",
+      "device_type": "computer",
+      "mac_address": "ff:ff:Ff",
+      "status": "Active",
+      "violations": "0",
+      "comment": "No Comment"
     }
-   
   ],
-
-  "violations":[
-        
-  ]
+  "violations": []
 }
