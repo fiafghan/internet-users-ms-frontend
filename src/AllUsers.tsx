@@ -14,6 +14,8 @@ import {
   Legend
 } from "chart.js";
 import { Doughnut, Pie } from "react-chartjs-2";
+import { Combobox } from "@headlessui/react";
+
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -54,6 +56,17 @@ export default function InternetUsersList(): JSX.Element {
   const [selectedDirectorate, setSelectedDirectorate] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [employmentTypes, setEmploymentTypes] = useState<{ id: number; type: string }[]>([]);
+  const [selectedDirectorateEdit, setSelectedDirectorateEdit] = useState<{ id: number; name: string } | null>(null);
+  const [queryDirectorate, setQueryDirectorate] = useState("");
+
+
+  const filteredDirectorates =
+          queryDirectorate === ""
+          ? directorateOptions
+          : directorateOptions.filter((dir) => 
+                  dir.name.toLowerCase().includes(queryDirectorate.toLowerCase())
+        );
+
 
   const totalUsers = users.length;
 
@@ -111,7 +124,12 @@ export default function InternetUsersList(): JSX.Element {
           violations: user.violations || "0",
           comment: user.comment || "No comment"
         });
-    setIsEditOpen(true);
+
+        // Preselect directorate object
+          const matchingDirectorate = directorateOptions.find((d) => d.name === user.directorate);
+          setSelectedDirectorateEdit(matchingDirectorate || null);
+            setIsEditOpen(true);
+
   };
 
   const handleEditChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -517,7 +535,8 @@ export default function InternetUsersList(): JSX.Element {
       <div className="lg:w-1/2 w-full p-8 bg-white overflow-y-auto max-h-[90vh]">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {Object.keys(editForm).map((key) =>
-            key !== "status" && key !== "violations" && key !== "comment" && key !== "employment_type" ? (
+            key !== "status" && key !== "violations" && key !== "comment" && key !== "employment_type"
+                && key !== "directorate" ? (
               <div key={key}>
                 <label className="block text-sm font-medium text-gray-700 capitalize">{key.replace("_", " ")}</label>
                 <input
@@ -530,6 +549,48 @@ export default function InternetUsersList(): JSX.Element {
               </div>
             ) : null
           )}
+
+          {/* directorate type */}
+
+                      <div className="">
+              <label className="block text-sm font-medium text-gray-700">Directorate</label>
+              <Combobox
+                value={selectedDirectorateEdit}
+                onChange={(value) => {
+                  setSelectedDirectorateEdit(value);
+                  setEditForm((prev) => ({ ...prev, directorate: value?.name || "" }));
+                }}
+              >
+                <div className="relative mt-1">
+                  <Combobox.Input
+                    className="w-full border border-gray-300 rounded-md py-2 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    displayValue={(dir: { name: string }) => dir?.name || ""}
+                    onChange={(e) => setQueryDirectorate(e.target.value)}
+                    placeholder="🔍 Search..."
+                  />
+                  <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg border border-gray-200 z-50">
+                    {filteredDirectorates.length === 0 ? (
+                      <div className="px-4 py-2 text-gray-500">No results found.</div>
+                    ) : (
+                      filteredDirectorates.map((dir) => (
+                        <Combobox.Option
+                          key={dir.id}
+                          value={dir}
+                          className={({ active }) =>
+                            `cursor-pointer select-none px-4 py-2 ${
+                              active ? "bg-blue-500 text-white" : "text-gray-800"
+                            }`
+                          }
+                        >
+                          {dir.name}
+                        </Combobox.Option>
+                      ))
+                    )}
+                  </Combobox.Options>
+                </div>
+              </Combobox>
+            </div>
+
 
           {/* Employment Type */}
               <div>
