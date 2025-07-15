@@ -86,8 +86,7 @@ export default function InternetUserAddForm(): JSX.Element {
       case 0:
         return (
           form.name.trim() !== "" &&
-          form.username.trim() !== "" &&
-          form.phone.trim() !== ""
+          form.username.trim() !== "" 
         );
       case 1:
         return (
@@ -98,8 +97,7 @@ export default function InternetUserAddForm(): JSX.Element {
       case 2:
         return (
           form.device_limit.trim() !== "" &&
-          form.device_type.trim() !== "" &&
-          form.mac_address.trim() !== ""
+          form.device_type.trim() !== ""
         );
 
       case 3:

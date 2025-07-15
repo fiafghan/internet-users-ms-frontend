@@ -29,7 +29,7 @@ type InternetUser = {
   deputyMinistry: string;
   device_limit: string;
   device_type: string;
-  mac_address: string;
+  mac_address?: string;
   status?:"active" | "deactive";
   violations?:"0" | "1" | "2";
   comment?:string;

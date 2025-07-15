@@ -99,9 +99,26 @@
       "device_limit": "2",
       "device_type": "computer",
       "mac_address": "ff:ff:Ff",
-      "status": "Active",
+      "status": "deactive",
       "violations": "2",
-      "comment": "used vpn"
+      "comment": "this account is blocked for ever. due to watching porn movies!"
+    },
+    {
+      "id": "0034",
+      "name": "Abdul Manan Salamzada",
+      "username": "manan-it",
+      "email": "mana@gmail.com",
+      "phone": "+93789234567",
+      "grade": "7",
+      "directorate": "IT",
+      "deputyMinistry": "administrative and financial",
+      "position": "IT ASSISTANT",
+      "device_limit": "3",
+      "device_type": "mobile",
+      "mac_address": "",
+      "status": "Active",
+      "violations": "1",
+      "comment": "No Comment"
     }
   ]
 }
