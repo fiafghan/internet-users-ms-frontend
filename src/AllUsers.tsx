@@ -53,6 +53,7 @@ export default function InternetUsersList(): JSX.Element {
   const [selectedDeputyMinistry, setSelectedDeputyMinistry] = useState<string>("");
   const [selectedDirectorate, setSelectedDirectorate] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [employmentTypes, setEmploymentTypes] = useState<{ id: number; type: string }[]>([]);
 
   const totalUsers = users.length;
 
@@ -81,13 +82,15 @@ export default function InternetUsersList(): JSX.Element {
 
     async function fetchFilters() {
       try {
-        const [depRes, dirRes] = await Promise.all([
+        const [depRes, dirRes, empTypeRes] = await Promise.all([
           axios.get("http://localhost:3000/deputy_ministries"),
           axios.get("http://localhost:3000/directorates"),
+          axios.get("http://localhost:3000/employment_type"),
         ]);
 
         setDeputyMinistryOptions(depRes.data); // Already array of { id, name }
         setDirectorateOptions(dirRes.data);
+        setEmploymentTypes(empTypeRes.data);
       } catch (err) {
         console.log("error fetching data!", err);
       }
@@ -514,7 +517,7 @@ export default function InternetUsersList(): JSX.Element {
       <div className="lg:w-1/2 w-full p-8 bg-white overflow-y-auto max-h-[90vh]">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {Object.keys(editForm).map((key) =>
-            key !== "status" && key !== "violations" && key !== "comment" ? (
+            key !== "status" && key !== "violations" && key !== "comment" && key !== "employment_type" ? (
               <div key={key}>
                 <label className="block text-sm font-medium text-gray-700 capitalize">{key.replace("_", " ")}</label>
                 <input
@@ -527,6 +530,25 @@ export default function InternetUsersList(): JSX.Element {
               </div>
             ) : null
           )}
+
+          {/* Employment Type */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Employment Type</label>
+                <select
+                  name="employment_type"
+                  value={editForm.employment_type || ""}
+                  onChange={handleEditChange}
+                  className="w-full px-4 py-2 text-sm border border-gray-300 rounded-md focus:outline-none 
+                  focus:ring-2 focus:ring-blue-400"
+                >
+                  <option value="">Select Employment Type</option>
+                  {employmentTypes.map((type) => (
+                    <option key={type.id} value={type.type}>
+                      {type.type}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
           {/* Status */}
           <div>
