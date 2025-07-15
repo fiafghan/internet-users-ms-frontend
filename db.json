@@ -100,7 +100,7 @@
       "device_type": "computer",
       "mac_address": "ff:ff:Ff",
       "status": "Active",
-      "violations": "1",
+      "violations": "2",
       "comment": "used vpn"
     }
   ]

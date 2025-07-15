@@ -375,82 +375,95 @@ export default function InternetUsersList(): JSX.Element {
                     user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
                     user.phone.toLowerCase().includes(searchTerm.toLowerCase())
               )
-              ).map((user, idx) => (
-              <div
-                key={user.id}
-                className={`grid grid-cols-[200px_150px_150px_150px_80px_150px_200px_200px_200px_200px_200px] 
-                  border-b border-gray-200 transition-colors duration-200 ${
-                  idx % 2 === 0 ? "bg-gray-100" : "bg-white"
-                } hover:bg-blue-100 cursor-default`}
-              >
-                <div className="px-3 py-2 flex items-center gap-2 font-medium 
-                text-gray-700 whitespace-nowrap 
-                border-r border-gray-200">
-                  <User className="w-4 h-4 shrink-0" />
-                  <span className="text-[10px]">{user.name}</span>
-                </div>
+              ).map((user, idx) => {
+    const isRedCard = user.violations === "2";
+    const isYellowCard = user.violations === "1";
 
-                <div className="px-3 py-2 text-gray-700 whitespace-nowrap border-r 
-                border-gray-200 text-[10px]">{user.username}</div>
+    return (
+      <div
+        key={user.id}
+        className={`grid grid-cols-[200px_150px_150px_150px_80px_150px_200px_200px_200px_200px_200px] 
+          border-b border-gray-200 transition-colors duration-200 ${
+          isRedCard
+            ? "bg-red-100"
+            : idx % 2 === 0
+            ? "bg-gray-100"
+            : "bg-white"
+        } hover:bg-blue-100 cursor-default`}
+      >
+        <div className="px-3 py-2 flex items-center gap-2 font-medium 
+          text-gray-700 whitespace-nowrap border-r border-gray-200">
+          <User className="w-4 h-4 shrink-0" />
+          <span className="text-[10px]">
+            {user.name}
+            {isYellowCard && <span className="ml-1">🟨</span>}
+            {isRedCard && <span className="ml-1">🟥</span>}
+          </span>
+        </div>
 
-                <div className="px-3 py-2 flex items-center gap-1 text-gray-700 whitespace-nowrap 
-                border-r border-gray-200">
-                  <span className="text-[10px]">{user.phone}</span>
-                </div>
+        <div className="px-3 py-2 text-gray-700 whitespace-nowrap border-r border-gray-200 text-[10px]">
+          {user.username}
+        </div>
 
-                <div className="px-3 py-2 text-gray-700 max-w-xs break-words border-r border-gray-200 text-[8px]">
-                  {user.position || "-"}
-                </div>
+        <div className="px-3 py-2 flex items-center gap-1 text-gray-700 whitespace-nowrap border-r border-gray-200">
+          <span className="text-[10px]">{user.phone}</span>
+        </div>
 
-                <div className="px-3 py-2 flex items-center gap-1 text-gray-700 whitespace-nowrap 
-                border-r border-gray-200">
-                  <span className="text-[10px]">{user.grade}</span>
-                </div>
+        <div className="px-3 py-2 text-gray-700 max-w-xs break-words border-r border-gray-200 text-[8px]">
+          {user.position || "-"}
+        </div>
 
-                <div className="px-3 py-2 text-gray-700 whitespace-nowrap 
-                border-r border-gray-200 text-[8px]">{user.directorate}</div>
+        <div className="px-3 py-2 flex items-center gap-1 text-gray-700 whitespace-nowrap border-r border-gray-200">
+          <span className="text-[10px]">{user.grade}</span>
+        </div>
 
-                <div className="px-3 py-2 text-gray-700 whitespace-nowrap 
-                border-r border-gray-200 text-[8px]">{user.deputyMinistry}</div>
+        <div className="px-3 py-2 text-gray-700 whitespace-nowrap border-r border-gray-200 text-[8px]">
+          {user.directorate}
+        </div>
 
-                <div className="px-3 py-2 text-gray-700 border-r border-gray-200 text-[10px]">
-                {user.status || "-"}
-              </div>
+        <div className="px-3 py-2 text-gray-700 whitespace-nowrap border-r border-gray-200 text-[8px]">
+          {user.deputyMinistry}
+        </div>
 
-              <div className="px-3 py-2 text-gray-700 border-r border-gray-200 text-[10px]">
-              {user.violations || "0"}
-            </div>
+        <div className="px-3 py-2 text-gray-700 border-r border-gray-200 text-[10px]">
+          {user.status || "-"}
+        </div>
 
-            <div className="px-3 py-2 text-gray-700 border-r border-gray-200 text-[10px] truncate max-w-[120px]">
-              {user.comment || "-"}
-            </div>
+        <div className="px-3 py-2 text-gray-700 border-r border-gray-200 text-[10px]">
+          {user.violations || "0"}
+        </div>
 
-                {/* Actions */}
-                <div className="px-3 py-2 flex items-center justify-center gap-2 bg-blue-300">
-                  <button
-                    onClick={() => handleView(user)}
-                    className="text-white hover:text-blue-100 transition-colors"
-                    title="View"
-                  >
-                    <Eye className="w-5 h-5" />
-                  </button>
-                  <button
-                    onClick={() => handleEdit(user)}
-                    className="text-white hover:text-blue-100 transition-colors"
-                    title="Edit"
-                  >
-                    <Edit className="w-5 h-5" />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(user.id)}
-                    className="text-white hover:text-blue-100 transition-colors"
-                    title="Delete"
-                  >
-                    <Trash className="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
-            ))}
+        <div className="px-3 py-2 text-gray-700 border-r border-gray-200 text-[10px] truncate max-w-[120px]">
+          {user.comment || "-"}
+        </div>
+
+        {/* Actions */}
+        <div className="px-3 py-2 flex items-center justify-center gap-2 bg-blue-300">
+          <button
+            onClick={() => handleView(user)}
+            className="text-white hover:text-blue-100 transition-colors"
+            title="View"
+          >
+            <Eye className="w-5 h-5" />
+          </button>
+          <button
+            onClick={() => handleEdit(user)}
+            className="text-white hover:text-blue-100 transition-colors"
+            title="Edit"
+          >
+            <Edit className="w-5 h-5" />
+          </button>
+          <button
+            onClick={() => handleDelete(user.id)}
+            className="text-white hover:text-blue-100 transition-colors"
+            title="Delete"
+          >
+            <Trash className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+    );
+  })}
           </div>
         )}
       </main>
