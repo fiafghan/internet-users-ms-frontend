@@ -111,7 +111,7 @@ export default function InternetUsersList(): JSX.Element {
     setIsEditOpen(true);
   };
 
-  const handleEditChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEditChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setEditForm((prev) => ({ ...prev, [name]: value }));
   };
@@ -160,11 +160,11 @@ export default function InternetUsersList(): JSX.Element {
        md:grid-cols-3 gap-6 mb-10">
         {/* Total Users Card */}
         <motion.div
-  initial={{ opacity: 0, y: -20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 1 }}
-  className="bg-white shadow-md border border-gray-200 rounded-xl p-6"
->
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          className="bg-white shadow-md border border-gray-200 rounded-xl p-6"
+        >
   <h3 className="text-lg font-semibold text-gray-700 mb-4 flex items-center gap-2">
     <Users className="w-5 h-5 text-blue-400" />
     Total Users
@@ -480,84 +480,104 @@ export default function InternetUsersList(): JSX.Element {
       )}
 
     {/* Edit Modal */}
-    {isEditOpen && selectedUser && (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div className="bg-white rounded-xl p-6 w-full max-w-lg shadow-lg">
-          <h2 className="text-2xl font-bold text-blue-400 mb-4">Edit User</h2>
-          <div className="grid grid-cols-2 gap-4">
-            {Object.keys(editForm).map((key) => (
+{isEditOpen && selectedUser && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="bg-white rounded-2xl shadow-2xl w-full max-w-5xl overflow-hidden border border-gray-200 flex flex-col lg:flex-row">
+      
+      {/* Left Side - Info Preview (optional) */}
+      <div className="lg:w-1/2 w-full bg-gradient-to-br from-blue-100 to-blue-200 p-8 flex flex-col justify-center">
+        <h2 className="text-3xl font-bold text-blue-800 mb-2">Edit User</h2>
+        <p className="text-sm text-blue-700 mb-4">Make changes to this user's profile.</p>
+        <ul className="space-y-2 text-sm text-blue-900">
+          {Object.entries(selectedUser).map(([key, value]) => (
+            <li key={key}>
+              <strong className="capitalize">{key.replace("_", " ")}:</strong> {value || "-"}
+            </li>
+          ))}
+        </ul>
+      </div>
 
+      {/* Right Side - Form */}
+      <div className="lg:w-1/2 w-full p-8 bg-white">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          {Object.keys(editForm).map((key) =>
+            key !== "status" && key !== "violations" && key !== "comment" ? (
               <div key={key}>
-                <label className="block text-sm text-gray-600 capitalize">{key.replace("_", " ")}</label>
+                <label className="block text-sm font-medium text-gray-700 capitalize">{key.replace("_", " ")}</label>
                 <input
                   type="text"
                   name={key}
                   value={(editForm as any)[key] || ""}
                   onChange={handleEditChange}
-                  className="w-full px-3 py-2 border rounded mt-1 text-sm"
+                  className="mt-1 w-full px-4 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
                 />
               </div>
-        ))}
+            ) : null
+          )}
 
-                      {/* Status Dropdown */}
-              <div>
-                <label className="block text-sm text-gray-600">Status</label>
-                <select
-                  name="status"
-                  value={editForm.status || "active"}
-                  onChange={handleEditChange}
-                  className="w-full px-3 py-2 border rounded mt-1 text-sm"
-                >
-                  <option value="active">Active</option>
-                  <option value="deactive">Deactive</option>
-                </select>
-              </div>
+          {/* Status */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Status</label>
+            <select
+              name="status"
+              value={editForm.status || "active"}
+              onChange={handleEditChange}
+              className="mt-1 w-full px-4 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+            >
+              <option value="active">Active</option>
+              <option value="deactive">Deactive</option>
+            </select>
+          </div>
 
-              {/* Violations Dropdown */}
-              <div>
-                <label className="block text-sm text-gray-600">Violations</label>
-                <select
-                  name="violations"
-                  value={editForm.violations || "0"}
-                  onChange={handleEditChange}
-                  className="w-full px-3 py-2 border rounded mt-1 text-sm"
-                >
-                  <option value="0">0</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                </select>
-              </div>
+          {/* Violations */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Violations</label>
+            <select
+              name="violations"
+              value={editForm.violations || "0"}
+              onChange={handleEditChange}
+              className="mt-1 w-full px-4 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+            >
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+            </select>
+          </div>
 
-              {/* Comment Textarea */}
-              <div className="col-span-2">
-                <label className="block text-sm text-gray-600">Comment</label>
-                <textarea
-                  name="comment"
-                  value={editForm.comment || ""}
-                  onChange={handleEditChange}
-                  className="w-full px-3 py-2 border rounded mt-1 text-sm"
-                  rows={3}
-                  placeholder="Add any notes here..."
-                />
-              </div>
-      </div>
-      <div className="mt-6 flex justify-end gap-2">
-        <button
-          onClick={() => setIsEditOpen(false)}
-          className="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded"
-        >
-          Cancel
-        </button>
-        <button
-          onClick={handleUpdate}
-          className="px-4 py-2 bg-blue-400 hover:bg-blue-700 text-white rounded"
-        >
-          Save Changes
-        </button>
+          {/* Comment */}
+          <div className="sm:col-span-2">
+            <label className="block text-sm font-medium text-gray-700">Comment</label>
+            <textarea
+              name="comment"
+              value={editForm.comment || ""}
+              onChange={handleEditChange}
+              className="mt-1 w-full px-4 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+              rows={3}
+              placeholder="Write a comment..."
+            />
+          </div>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="mt-8 flex justify-end gap-4 border-t pt-4 border-gray-200">
+          <button
+            onClick={() => setIsEditOpen(false)}
+            className="px-5 py-2 rounded-md text-sm bg-white border border-gray-300 hover:bg-gray-100 transition"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleUpdate}
+            className="px-5 py-2 rounded-md text-sm text-white bg-blue-500 hover:bg-blue-600 shadow transition"
+          >
+            Save Changes
+          </button>
+        </div>
       </div>
     </div>
   </div>
 )}
+
     </div>
   );
 }
