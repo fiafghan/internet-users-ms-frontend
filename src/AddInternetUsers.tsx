@@ -12,7 +12,7 @@ type FormState = {
   username: string;
   email: string;
   phone: string;
-  grade: string;
+  employment_type:string
   directorate: string;
   position: string;
   deputyMinistry: string;
@@ -39,7 +39,7 @@ export default function InternetUserAddForm(): JSX.Element {
     username: "",
     email: "",
     phone: "",
-    grade: "",
+    employment_type: "",
     directorate: "",
     deputyMinistry: "",
     position: "",
@@ -56,19 +56,23 @@ export default function InternetUserAddForm(): JSX.Element {
   const navigate = useNavigate();
   const [directorateOptions, setDirectorateOptions] = useState<string[]>([]);
   const [deputyMinistryOptions, setDeputyMinistryOptions] = useState<string[]>([]);
+  const [employmentTypeOptions, setEmploymentTypeOptions] = useState<string[]>([]);
+
 
 
   useEffect(() => {
   const fetchOptions = async () => {
     try {
-      const [dirRes, depMinRes] = await Promise.all([
+      const [dirRes, depMinRes, empTypeRes] = await Promise.all([
         axios.get("http://localhost:3000/directorates"),
         axios.get("http://localhost:3000/deputy_ministries"),
+        axios.get("http://localhost:3000/employment_type"),
       ]);
 
       // You may need to map if they are objects
       setDirectorateOptions(dirRes.data.map((d: any) => d.name));
       setDeputyMinistryOptions(depMinRes.data.map((d: any) => d.name));
+      setEmploymentTypeOptions(empTypeRes.data.map((d: any) => d.type));
     } catch (error) {
       console.error("❌ Error fetching select options", error);
     }
@@ -91,7 +95,7 @@ export default function InternetUserAddForm(): JSX.Element {
         );
       case 1:
         return (
-          form.grade.trim() !== "" &&
+          form.employment_type.trim() !== "" &&
           form.directorate.trim() !== "" &&
           form.deputyMinistry.trim() !== ""
         );
@@ -141,7 +145,7 @@ export default function InternetUserAddForm(): JSX.Element {
         email: "",
         phone: "",
         position: "",
-        grade: "",
+        employment_type: "",
         directorate: "",
         deputyMinistry: "",
         device_limit: "",
@@ -226,6 +230,7 @@ export default function InternetUserAddForm(): JSX.Element {
                       return <Step2 form={form} 
                       directorateOptions={directorateOptions}
                       deputyMinistryOptions={deputyMinistryOptions}
+                      employmentTypeOptions={employmentTypeOptions}
                       onChange={handleChange} />;
                     case 2:
                       return <Step3 form={form} onChange={handleChange} />;
@@ -301,19 +306,27 @@ function Step2({
   onChange,
   directorateOptions,
   deputyMinistryOptions,
+  employmentTypeOptions,
 }: {
   form: FormState;
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
   directorateOptions: string[];
   deputyMinistryOptions: string[];
+  employmentTypeOptions: string[];
 }): JSX.Element {
   
   return (
     <div>
       <InputField label="Position" icon={<Briefcase className="w-5 h-5 text-gray-500" />} 
       name="position" type="text" placeholder="Position" value={form.position} onChange={onChange} />
-      <InputField label="Grade" icon={<Hash className="w-5 h-5 text-gray-500" />} 
-      name="grade" type="text" placeholder="Grade level" value={form.grade} onChange={onChange} />
+      <SelectField
+        label="Employment Type"
+        icon={<Hash className="w-5 h-5 text-gray-500" />}
+        name="employment_type"
+        value={form.employment_type}
+        onChange={onChange}
+        options={employmentTypeOptions}
+      />
       <SelectField
             label="Directorate"
             icon={<User className="w-5 h-5 text-gray-500" />}

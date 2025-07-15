@@ -92,7 +92,7 @@
       "username": "Jabar-Crazy",
       "email": "jabar@gmail.com",
       "phone": "+93790574282",
-      "grade": "7",
+      "employment_type": "NTA",
       "directorate": "IT",
       "deputyMinistry": "administrative and financial",
       "position": "IT Officer",
@@ -101,58 +101,38 @@
       "mac_address": "ff:ff:Ff",
       "status": "deactive",
       "violations": "2",
-      "comment": "this account is blocked for ever. due to watching porn movies!"
+      "comment": "Watched porn movies!"
     },
     {
-      "id": "0034",
-      "name": "Abdul Manan Salamzada",
-      "username": "manan-it",
-      "email": "mana@gmail.com",
-      "phone": "+93789234567",
-      "grade": "7",
+      "id": "bfa9",
+      "name": "nesar ahmad",
+      "username": "nesar-it",
+      "email": "nesar@gmail.com",
+      "phone": "+93793269249",
+      "employment_type": "NTA",
       "directorate": "IT",
       "deputyMinistry": "administrative and financial",
-      "position": "IT ASSISTANT",
-      "device_limit": "3",
-      "device_type": "mobile",
-      "mac_address": "",
-      "status": "Active",
-      "violations": "0",
-      "comment": "No Comment"
-    },
-    {
-      "id": "8ffb",
-      "name": "Fardin Ibrahimi",
-      "username": "fardin-it",
-      "email": "fiafghan@gmail.com",
-      "phone": "+93799769626",
-      "grade": "4",
-      "directorate": "IT",
-      "deputyMinistry": "administrative and financial",
-      "position": "Software developer",
+      "position": "back developer",
       "device_limit": "2",
-      "device_type": "mobile and computer",
-      "mac_address": "",
-      "status": "Active",
-      "violations": "0",
-      "comment": "No Comment"
-    },
-    {
-      "id": "1ddf",
-      "name": "Sayed Naweed Sayedy",
-      "username": "naweed-it",
-      "email": "naweed@gmail.com",
-      "phone": "+93799345678",
-      "grade": "4",
-      "directorate": "IT",
-      "deputyMinistry": "administrative and financial",
-      "position": "Software Developer",
-      "device_limit": "4",
-      "device_type": "Mobile and computer",
+      "device_type": "mobile and comfuter",
       "mac_address": "",
       "status": "deactive",
       "violations": "2",
-      "comment": "Used Torrent"
+      "comment": "nesar ahmad watched mia khlifa on ..."
+    }
+  ],
+  "employment_type": [
+    {
+      "id": 1,
+      "type": "Permanent"
+    },
+    {
+      "id": 2,
+      "type": "Part-Timer"
+    },
+    {
+      "id": 3,
+      "type": "NTA"
     }
   ]
 }

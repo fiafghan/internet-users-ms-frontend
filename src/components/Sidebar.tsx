@@ -10,7 +10,7 @@ export default function GradientSidebar(): JSX.Element {
     { id: 1, label: "All Users", icon: <Users className="w-5 h-5" />, path: "/" },
     { id: 2, label: "Add User", icon: <User className="w-5 h-5" />, path: "/adduser" },
     { id: 3, label: "All Violations", icon: <Gavel className="w-5 h-5" />, path: "/violations" },
-    { id: 4, label: "Add Violation", icon: <AlertOctagon className="w-5 h-5" />, path: "/addviolation" },
+    { id: 4, label: "Violation Form", icon: <AlertOctagon className="w-5 h-5" />, path: "/addviolation" },
     { id: 5, label: "Settings", icon: <Settings className="w-5 h-5" />, path: "/settings" },
     { id: 6, label: "Logout", icon: <LogOut className="w-5 h-5" />, path: "/logout" },
   ];

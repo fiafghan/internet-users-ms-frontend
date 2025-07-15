@@ -24,7 +24,7 @@ type InternetUser = {
   email: string;
   phone: string;
   position?: string;
-  grade: string;
+  employment_type: string;
   directorate: string;
   deputyMinistry: string;
   device_limit: string;
@@ -36,7 +36,7 @@ type InternetUser = {
 };
 
 const headers = [
-  "Name", "Username", "Phone","Position", "Grade",
+  "Name", "Username", "Phone","Position", "Employment Type",
   "Directorate", "Deputy Ministry","Status", "Violations", "Comment", "Actions"
 ];
 
@@ -414,7 +414,7 @@ export default function InternetUsersList(): JSX.Element {
         </div>
 
         <div className="px-3 py-2 flex items-center gap-1 text-gray-700 whitespace-nowrap border-r border-gray-200">
-          <span className="text-[10px]">{user.grade}</span>
+          <span className="text-[10px]">{user.employment_type}</span>
         </div>
 
         <div className="px-3 py-2 text-gray-700 whitespace-nowrap border-r border-gray-200 text-[8px]">
@@ -535,7 +535,8 @@ export default function InternetUsersList(): JSX.Element {
               name="status"
               value={editForm.status || "active"}
               onChange={handleEditChange}
-              className="w-full px-4 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 text-sm border border-gray-300 rounded-md focus:outline-none 
+              focus:ring-2 focus:ring-blue-400"
             >
               <option value="active">Active</option>
               <option value="deactive">Deactive</option>
@@ -549,7 +550,8 @@ export default function InternetUsersList(): JSX.Element {
               name="violations"
               value={editForm.violations || "0"}
               onChange={handleEditChange}
-              className="w-full px-4 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 text-sm border border-gray-300 rounded-md focus:outline-none 
+              focus:ring-2 focus:ring-blue-400"
             >
               <option value="0">0</option>
               <option value="1">1</option>
