@@ -72,12 +72,18 @@ export default function AddViolation() {
 
   return (
     <div className="min-h-screen flex bg-white">
+      
       <div className="fixed top-0 left-0 bottom-0 w-64 border-r border-gray-200 \
       bg- z-20">
         <GradientSidebar />
       </div>
-      <main className="flex-1 px-6 py-10 bg-gray-50">
-          <h1 className="text-center text-xl font-bold text-blue-600 mb-6">
+      <main className="flex-1 px-6 py-10 bg-white">
+      <div className="flex items-center justify-between mb-6">
+        <img src="/moph.jpeg" alt="Logo Left" className="w-30 ml-80" />
+        <img src="/emirate.png" alt="Logo Right" className="w-30 mr-10" />
+      </div>
+
+          <h1 className="text-center text-xl font-bold text-black mb-6">
             فورم تخطی استفاده کنندگان انترنت وزارت صحت عامه
           </h1>
   <form onSubmit={handleSubmit} dir="rtl" className="w-200px">
