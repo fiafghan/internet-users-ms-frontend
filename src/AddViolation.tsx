@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Search, AlertTriangle } from "lucide-react";
 import GradientSidebar from "./components/Sidebar";
 
 interface InternetUser {
@@ -74,36 +73,27 @@ export default function AddViolation() {
   return (
     <div className="min-h-screen flex bg-white">
       <div className="fixed top-0 left-0 bottom-0 w-64 border-r border-gray-200 \
-      bg-white shadow-sm z-20">
+      bg- z-20">
         <GradientSidebar />
       </div>
-      <main className="flex-1">
-        <div className="max-w-xl mx-auto bg-white rounded-md shadow-md p-6">
-          <h1 className="text-xl font-semibold text-blue-400 mb-4 flex items-center gap-2">
-            <AlertTriangle className="w-5 h-5" /> Add Violation
+      <main className="flex-1 px-6 py-10 bg-gray-50">
+          <h1 className="text-center text-xl font-bold text-blue-600 mb-6">
+            فورم تخطی استفاده کنندگان انترنت وزارت صحت عامه
           </h1>
-<form
-  onSubmit={handleSubmit}
-  dir="rtl"
-  className="flex flex-1 gap-4 bg-white p-6 border rounded-none shadow-md w-300"
->
-  {/* Username Combo Box */}
-  <div className="col-span-2 relative">
-    <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1">
-      نام کاربری
-    </label>
+  <form onSubmit={handleSubmit} dir="rtl" className="w-200px">
+  {/* Search input */}
+  <div className="mb-4 max-w-md relative">
+    <label htmlFor="username" className="block mb-1 text-sm font-medium text-gray-700">نام یوزر:</label>
     <input
       id="username"
       type="text"
-      placeholder="جستجو بر اساس نام کاربری..."
+      placeholder="جستجو یوزر..."
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
-      className="w-full px-3 py-2 pl-10 border border-blue-300 rounded shadow-sm 
-      focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-700 w-50"
+      className="w-full px-3 py-2 border border-blue-300 rounded bg-white text-sm"
     />
-    <Search className="absolute left-3 top-[3.3rem] transform -translate-y-1/2 text-blue-400 w-4 h-4" />
     {searchTerm && (
-      <ul className="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded shadow max-h-40 overflow-y-auto">
+      <ul className="absolute top-full mt-1 right-0 left-0 bg-white border border-gray-300 rounded shadow max-h-48 overflow-y-auto z-50">
         {filteredUsers.map((user) => (
           <li
             key={user.id}
@@ -122,102 +112,71 @@ export default function AddViolation() {
   </div>
 
   {selectedUser && (
-    <>
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1 w-50">نام</label>
-        <input
-          type="text"
-          value={selectedUser.name}
-          readOnly
-          className="w-full px-3 py-2 border border-gray-300 rounded bg-gray-50"
-        />
-      </div>
+    <table className=" border border-gray-300 rounded-md 
+    text-sm bg-white table-auto table-layout-fixed border-collapse">
+      <thead className="bg-gray-100">
+        <tr>
+          <th className="px-3 py-2 border border-gray-300 text-center">نام</th>
+          <th className="px-3 py-2 border border-gray-300 text-center">وظیفه</th>
+          <th className="px-3 py-2 border border-gray-300 text-center">معینیت</th>
+          <th className="px-3 py-2 border border-gray-300 text-center">ریاست</th>
+          <th className="px-3 py-2 border border-gray-300 text-center">تعداد تخلفات</th>
+          <th className="px-3 py-2 border border-gray-300 text-center">توضیحات تخلف</th>
+          <th className="px-3 py-2 border border-gray-300 text-center">امضای کارمند</th>
+          <th className="px-3 py-2 border border-gray-300 text-center">امضای ریاست</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          {/* Now for the first 3 (header fields), just values centered */}
+          <td className="px-3 py-2 border border-gray-300 text-center 
+          whitespace-normal break-words text-center max-w-[20ch]">{selectedUser.name}</td>
+          <td className="px-3 py-2 border border-gray-300 text-center 
+          whitespace-normal break-words text-center max-w-[20ch]">{selectedUser.position}</td>
+          <td className="px-3 py-2 border border-gray-300 text-center 
+          whitespace-normal break-words text-center max-w-[20ch]">{selectedUser.deputyMinistry}</td>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">وظیفه</label>
-        <input
-          type="text"
-          value={selectedUser.position}
-          readOnly
-          className="w-full px-3 py-2 border border-gray-300 rounded bg-gray-50"
-        />
-      </div>
+          {/* The rest label + readonly input side by side in one cell each */}
+          <td className="px-3 py-2 border border-gray-300
+          whitespace-normal break-words text-center max-w-[20ch]">
+            {selectedUser.directorate}
+          </td>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">معینیت</label>
-        <input
-          type="text"
-          value={selectedUser.deputyMinistry}
-          readOnly
-          className="w-full px-3 py-2 border border-gray-300 rounded bg-gray-50"
-        />
-      </div>
+          <td className="px-3 py-2 border border-gray-300
+          whitespace-normal break-words max-w-xs text-center max-w-[20ch]">
+            {selectedUser.violations}
+          </td>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">ریاست</label>
-        <input
-          type="text"
-          value={selectedUser.directorate}
-          readOnly
-          className="w-full px-3 py-2 border border-gray-300 rounded bg-gray-50"
-        />
-      </div>
+          <td className="px-3 py-2 border border-gray-300
+          whitespace-normal break-words max-w-[20ch] text-center">
+            {selectedUser.comment}
+          </td>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">تعداد تخلفات</label>
-        <input
-              type="text"
-              value={selectedUser.violations}
-              readOnly
-              className="w-full px-3 py-2 border border-gray-300 rounded bg-gray-50"
-            />
-      </div>
+          <td className="px-3 py-2 border border-gray-300">
+            
+          </td>
 
-      <div className="col-span-2">
-          <label className="block text-sm font-medium text-gray-700 mb-1">نوع تخلف</label>
-          <input
-            type="text"
-            value={selectedUser.comment}
-            readOnly
-            className="w-full px-3 py-2 border border-gray-300 rounded bg-gray-50"
-          />
-        </div>
+          <td className="px-3 py-2 border border-gray-300">
+            
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  )}
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">امضای کارمند</label>
-        <input
-          type="text"
-          value=""
-          readOnly
-          className="w-full px-3 py-2 border border-gray-300 rounded bg-gray-50"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">امضای ریاست</label>
-         <input
-          type="text"
-          value=""
-          readOnly
-          className="w-full px-3 py-2 border border-gray-300 rounded bg-gray-50"
-        />
-      </div>
-
-      <div className="col-span-2">
-        <button
-          type="submit"
-          className="w-full py-2 px-4 bg-blue-500 hover:bg-blue-400 text-white font-semibold rounded shadow-md transition-all"
-        >
-          ثبت تخلف
-        </button>
-      </div>
-    </>
+  {selectedUser && (
+    <div className="flex justify-end mt-6">
+      <button
+        type="submit"
+        className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-500 transition-all"
+      >
+        ثبت تخلف
+      </button>
+    </div>
   )}
 </form>
 
 
-
-        </div>
       </main>
     </div>
   );
