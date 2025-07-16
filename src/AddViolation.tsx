@@ -8,11 +8,12 @@ interface InternetUser {
   username: string;
   name: string;
   position: string;
-  deputy_ministry: string;
+  deputyMinistry: string;
   directorate: string;
   user_signature: string;
   directorate_signature: string;  
   violations: string;
+  comment: string;
 }
 
 export default function AddViolation() {
@@ -20,7 +21,6 @@ export default function AddViolation() {
   const [filteredUsers, setFilteredUsers] = useState<InternetUser[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedUser, setSelectedUser] = useState<InternetUser | null>(null);
-  const [comment, setComment] = useState("");
 
   useEffect(() => {
     async function fetchUsers() {
@@ -50,11 +50,11 @@ export default function AddViolation() {
         username: selectedUser.username,
         name: selectedUser.name,
         position: selectedUser.position,
-        deputy_ministry: selectedUser.deputy_ministry,
+        deputy_ministry: selectedUser.deputyMinistry,
         directorate: selectedUser.directorate,
         user_signature: selectedUser.user_signature,
         directorate_signature: selectedUser.directorate_signature,
-        comment,
+        comment: selectedUser.comment,
         violation_count: parseInt(selectedUser.violations)
       };
 
@@ -64,7 +64,6 @@ export default function AddViolation() {
 
           // Clear form
           setSearchTerm("");
-          setComment("");
           setSelectedUser(null);
         } catch (error) {
           console.error("Failed to submit violation", error);
@@ -148,7 +147,7 @@ export default function AddViolation() {
         <label className="block text-sm font-medium text-gray-700 mb-1">معینیت</label>
         <input
           type="text"
-          value={selectedUser.deputy_ministry}
+          value={selectedUser.deputyMinistry}
           readOnly
           className="w-full px-3 py-2 border border-gray-300 rounded bg-gray-50"
         />
@@ -175,15 +174,14 @@ export default function AddViolation() {
       </div>
 
       <div className="col-span-2">
-        <label className="block text-sm font-medium text-gray-700 mb-1">توضیحات</label>
-        <textarea
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-          rows={3}
-          className="w-full px-3 py-2 border border-blue-300 rounded shadow-sm focus:outline-none 
-          focus:ring-2 focus:ring-blue-400"
-        ></textarea>
-      </div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">نوع تخلف</label>
+          <input
+            type="text"
+            value={selectedUser.comment}
+            readOnly
+            className="w-full px-3 py-2 border border-gray-300 rounded bg-gray-50"
+          />
+        </div>
 
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">امضای کارمند</label>
