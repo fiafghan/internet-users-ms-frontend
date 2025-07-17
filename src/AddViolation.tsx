@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import GradientSidebar from "./components/Sidebar";
+import printJS from 'print-js';
+
 
 interface InternetUser {
   id: string;
@@ -20,6 +22,7 @@ export default function AddViolation() {
   const [filteredUsers, setFilteredUsers] = useState<InternetUser[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedUser, setSelectedUser] = useState<InternetUser | null>(null);
+  const printRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     async function fetchUsers() {
@@ -69,6 +72,7 @@ export default function AddViolation() {
   };
 
   return (
+          <div id="printable-content" ref={printRef}>
     <div className="min-h-screen flex bg-white">
       <div className="fixed top-0 left-0 bottom-0 w-64 border-r border-gray-200 bg-white z-20">
         <GradientSidebar />
@@ -97,7 +101,6 @@ export default function AddViolation() {
         style={{ fontFamily: 'BNazanin, sans-serif' }}>
           فورم تخطی استفاده کنندگان انترنت وزارت صحت عامه
         </h1>
-
         {/* Form */}
         <form onSubmit={handleSubmit} dir="rtl" className="w-full " style={{ fontFamily: 'BNazanin, sans-serif' }}>
           {/* Search Box */}
@@ -168,15 +171,57 @@ export default function AddViolation() {
           {selectedUser && (
             <div className="flex justify-end mt-6">
               <button
-                type="submit"
+                onClick={() => printJS({
+  printable: 'printable-content',
+  type: 'html',
+  targetStyles: ['*'],
+  style: `
+    @page {
+      size: A4 landscape;
+      margin: 1cm;
+    }
+
+    body {
+      direction: rtl;
+      font-family: 'BNazanin', sans-serif;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact;
+    }
+
+    form, table, div, section {
+      margin: 0 !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+    }
+
+    input, textarea, select {
+      border: 1px solid #000 !important;
+      padding: 4px !important;
+      margin: 2px !important;
+      font-size: 12px !important;
+    }
+
+    label {
+      display: inline-block;
+      font-size: 12px !important;
+      margin-bottom: 4px;
+      font-weight: bold;
+    }
+
+    .no-print {
+      display: none !important;
+    }
+  `
+                })}
                 className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-500 transition-all"
               >
                 چاپ
               </button>
+
             </div>
           )}
         </form>
-
         {/* Footer Notes */}
         <div className="mt-0 space-y-4 text-right text-sm sm:text-base" dir="rtl">
           <p className="text-gray-700 text-center" style={{ fontFamily: 'BNazanin, sans-serif' }}>
@@ -190,6 +235,7 @@ export default function AddViolation() {
             </p>
         </div>
       </main>
+    </div>
     </div>
   );
 }

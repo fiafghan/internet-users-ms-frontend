@@ -8,3 +8,10 @@
   font-style: normal;
 }
 
+@media print {
+  @page {
+    size: landscape;
+  }
+}
+
+
