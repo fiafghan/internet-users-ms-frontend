@@ -76,8 +76,14 @@ export default function AddViolation() {
 
       <main className="flex-1 px-4 sm:px-6 py-10 bg-white ml-64">
         {/* Logos Row */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-1">
           <img src="/moph.jpeg" alt="Logo Left" className="w-30" />
+                  <h1 className="text-center font-bold" style={{ fontFamily: 'BNazanin, sans-serif' }}>
+                    وزارت صحت عامه
+                  </h1>
+                  <h1 className="text-center font-bold" style={{ fontFamily: 'BNazanin, sans-serif' }}>
+                    امارت اسلامی افغانستان
+                  </h1>
           <img src="/emirate.png" alt="Logo Right" className="w-30" />
         </div>
                   <h1 className="text-center" style={{ fontFamily: 'BNazanin, sans-serif' }}>
