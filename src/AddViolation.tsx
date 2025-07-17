@@ -77,17 +77,23 @@ export default function AddViolation() {
       <main className="flex-1 px-4 sm:px-6 py-10 bg-white ml-64">
         {/* Logos Row */}
         <div className="flex items-center justify-between mb-6">
-          <img src="/moph.jpeg" alt="Logo Left" className="h-16 w-auto" />
-          <img src="/emirate.png" alt="Logo Right" className="h-16 w-auto" />
+          <img src="/moph.jpeg" alt="Logo Left" className="w-30" />
+          <img src="/emirate.png" alt="Logo Right" className="w-30" />
         </div>
-
+                  <h1 className="text-center" style={{ fontFamily: 'BNazanin, sans-serif' }}>
+                    معینیت امور مالی و اداری
+                  </h1>
+                  <h1 className="text-center mb-5" style={{ fontFamily: 'BNazanin, sans-serif' }}>
+                    ریاست تکنالوژی معلوماتی
+                  </h1>
         {/* Title */}
-        <h1 className="text-center text-xl font-bold text-black mb-6">
+        <h1 className="text-center text-xl font-bold text-black mb-3 font-mono" 
+        style={{ fontFamily: 'BNazanin, sans-serif' }}>
           فورم تخطی استفاده کنندگان انترنت وزارت صحت عامه
         </h1>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} dir="rtl" className="w-full">
+        <form onSubmit={handleSubmit} dir="rtl" className="w-full " style={{ fontFamily: 'BNazanin, sans-serif' }}>
           {/* Search Box */}
           <div className="mb-4 max-w-lg relative">
             <label htmlFor="username" className="block mb-1 text-sm font-medium text-gray-700">
@@ -159,19 +165,23 @@ export default function AddViolation() {
                 type="submit"
                 className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-500 transition-all"
               >
-                ثبت تخلف
+                چاپ
               </button>
             </div>
           )}
         </form>
 
         {/* Footer Notes */}
-        <div className="mt-10 space-y-4 text-right text-sm sm:text-base" dir="rtl">
-          <p className="text-gray-700">
+        <div className="mt-0 space-y-4 text-right text-sm sm:text-base" dir="rtl">
+          <p className="text-gray-700 text-center" style={{ fontFamily: 'BNazanin, sans-serif' }}>
             کاربران انترنت در وزارت صحت عامه در صورتیکه دو مرتبه از انترنت استفاده نادرست نمایند یوزر شان برای همیشه مسدود می‌گردد!
           </p>
-          <p className="text-gray-700">برای همیشه مسدود می‌گردد</p>
-          <p className="text-gray-700 text-center">امضا رییس تکنالوژی معلوماتی</p>
+          <p className="text-gray-700 text-center font-bold" style={{ fontFamily: 'BNazanin, sans-serif' }}>
+            برای همیشه مسدود می‌گردد
+            </p>
+          <p className="text-gray-700 text-center font-bold" style={{ fontFamily: 'BNazanin, sans-serif' }}>
+            امضا رییس تکنالوژی معلوماتی
+            </p>
         </div>
       </main>
     </div>

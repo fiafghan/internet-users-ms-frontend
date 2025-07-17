@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: 'BNazanin';
+  src: url('/fonts/BNazanin.woff2') format('woff2'),
+       url('/fonts/BNazanin.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
