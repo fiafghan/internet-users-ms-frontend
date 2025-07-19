@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import GradientSidebar from "./components/Sidebar";
-import printJS from 'print-js';
+import { useReactToPrint } from "react-to-print";
 
 
 interface InternetUser {
@@ -24,6 +24,7 @@ export default function AddViolation() {
   const [selectedUser, setSelectedUser] = useState<InternetUser | null>(null);
   const printRef = useRef<HTMLDivElement>(null);
 
+
   useEffect(() => {
     async function fetchUsers() {
       try {
@@ -44,41 +45,23 @@ export default function AddViolation() {
     setFilteredUsers(filtered);
   }, [searchTerm, users]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!selectedUser) return alert("Please select a user");
+  
+    const handlePrint = useReactToPrint({
+          contentRef: printRef,
+          documentTitle: 'Internet User Report',
+        });
 
-    const violationData = {
-      username: selectedUser.username,
-      name: selectedUser.name,
-      position: selectedUser.position,
-      deputy_ministry: selectedUser.deputyMinistry,
-      directorate: selectedUser.directorate,
-      user_signature: selectedUser.user_signature,
-      directorate_signature: selectedUser.directorate_signature,
-      comment: selectedUser.comment,
-      violation_count: parseInt(selectedUser.violations),
-    };
 
-    try {
-      await axios.post("http://localhost:3000/violations", violationData);
-      alert("Violation submitted successfully!");
-      setSearchTerm("");
-      setSelectedUser(null);
-    } catch (error) {
-      console.error("Failed to submit violation", error);
-      alert("Failed to submit violation. Please try again.");
-    }
-  };
+
 
   return (
-          <div id="printable-content" ref={printRef}>
     <div className="min-h-screen flex bg-white">
-      <div className="fixed top-0 left-0 bottom-0 w-64 border-r border-gray-200 bg-white z-20">
+      <div className="fixed top-0 left-0 bottom-0 w-64 border-r 
+            border-gray-200 bg-white z-20" id = "no-print">
         <GradientSidebar />
       </div>
-
       <main className="flex-1 px-4 sm:px-6 py-10 bg-white ml-64">
+        <div   id = "printable-content" ref = {printRef} >
         {/* Logos Row */}
         <div className="flex items-center justify-between mb-1">
           <img src="/moph.jpeg" alt="Logo Left" className="w-30" />
@@ -102,7 +85,7 @@ export default function AddViolation() {
           فورم تخطی استفاده کنندگان انترنت وزارت صحت عامه
         </h1>
         {/* Form */}
-        <form onSubmit={handleSubmit} dir="rtl" className="w-full " style={{ fontFamily: 'BNazanin, sans-serif' }}>
+        <form dir="rtl" className="w-full " style={{ fontFamily: 'BNazanin, sans-serif' }}>
           {/* Search Box */}
           <div className="mb-4 max-w-lg relative">
             <label htmlFor="username" className="block mb-1 text-sm font-medium text-gray-700">
@@ -117,7 +100,8 @@ export default function AddViolation() {
               className="w-full px-3 py-2 border border-blue-300 rounded bg-white text-sm"
             />
             {searchTerm && (
-              <ul className="absolute top-full mt-1 right-0 left-0 bg-white border border-gray-300 rounded shadow max-h-48 overflow-y-auto z-50">
+              <ul className="absolute top-full mt-1 right-0 left-0 bg-white border 
+              border-gray-300 rounded shadow max-h-48 overflow-y-auto z-50">
                 {filteredUsers.map((user) => (
                   <li
                     key={user.id}
@@ -138,7 +122,8 @@ export default function AddViolation() {
           {/* Table */}
           {selectedUser && (
             <div className="overflow-x-auto">
-              <table className="w-full border border-gray-300 rounded-md text-sm bg-white table-auto border-collapse">
+              <table className="w-full border border-gray-300 rounded-md text-sm 
+              bg-white table-auto border-collapse">
                 <thead className="bg-gray-100">
                   <tr>
                     <th className="px-3 py-2 border border-gray-300 text-center">نام</th>
@@ -153,14 +138,22 @@ export default function AddViolation() {
                 </thead>
                 <tbody>
                   <tr>
-                    <td className="px-3 py-2 border border-gray-300 text-center break-all max-w-[10ch]">{selectedUser.name}</td>
-                    <td className="px-3 py-2 border border-gray-300 text-center break-all max-w-[10ch]">{selectedUser.position}</td>
-                    <td className="px-3 py-2 border border-gray-300 text-center break-all max-w-[10ch]">{selectedUser.deputyMinistry}</td>
-                    <td className="px-3 py-2 border border-gray-300 text-center break-all max-w-[10ch]">{selectedUser.directorate}</td>
-                    <td className="px-3 py-2 border border-gray-300 text-center break-all max-w-[10ch]">{selectedUser.violations}</td>
-                    <td className="px-3 py-2 border border-gray-300 text-center break-all max-w-[10ch]">{selectedUser.comment}</td>
-                    <td className="px-3 py-2 border border-gray-300 text-center break-all max-w-[10ch]"></td>
-                    <td className="px-3 py-2 border border-gray-300 text-center break-all max-w-[10ch]"></td>
+                    <td className="px-3 py-2 border border-gray-300 text-center break-all 
+                    max-w-[10ch]">{selectedUser.name}</td>
+                    <td className="px-3 py-2 border border-gray-300 text-center break-all 
+                    max-w-[10ch]">{selectedUser.position}</td>
+                    <td className="px-3 py-2 border border-gray-300 text-center break-all 
+                    max-w-[10ch]">{selectedUser.deputyMinistry}</td>
+                    <td className="px-3 py-2 border border-gray-300 text-center break-all 
+                    max-w-[10ch]">{selectedUser.directorate}</td>
+                    <td className="px-3 py-2 border border-gray-300 text-center break-all 
+                    max-w-[10ch]">{selectedUser.violations}</td>
+                    <td className="px-3 py-2 border border-gray-300 text-center break-all 
+                    max-w-[10ch]">{selectedUser.comment}</td>
+                    <td className="px-3 py-2 border border-gray-300 text-center break-all 
+                    max-w-[10ch]"></td>
+                    <td className="px-3 py-2 border border-gray-300 text-center break-all 
+                    max-w-[10ch]"></td>
                   </tr>
                 </tbody>
               </table>
@@ -170,55 +163,14 @@ export default function AddViolation() {
           {/* Submit Button */}
           {selectedUser && (
             <div className="flex justify-end mt-6">
-              <button
-                onClick={() => printJS({
-  printable: 'printable-content',
-  type: 'html',
-  targetStyles: ['*'],
-  style: `
-    @page {
-      size: A4 landscape;
-      margin: 1cm;
-    }
-
-    body {
-      direction: rtl;
-      font-family: 'BNazanin', sans-serif;
-      margin: 0;
-      padding: 0;
-      -webkit-print-color-adjust: exact;
-    }
-
-    form, table, div, section {
-      margin: 0 !important;
-      padding: 0 !important;
-      box-shadow: none !important;
-    }
-
-    input, textarea, select {
-      border: 1px solid #000 !important;
-      padding: 4px !important;
-      margin: 2px !important;
-      font-size: 12px !important;
-    }
-
-    label {
-      display: inline-block;
-      font-size: 12px !important;
-      margin-bottom: 4px;
-      font-weight: bold;
-    }
-
-    .no-print {
-      display: none !important;
-    }
-  `
-                })}
-                className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-500 transition-all"
-              >
-                چاپ
-              </button>
-
+             <button
+              type="button"
+              onClick={handlePrint}
+              className="px-6 py-2 bg-blue-600 text-white rounded 
+              hover:bg-blue-500 transition-all print:hidden"
+            >
+              چاپ
+            </button>
             </div>
           )}
         </form>
@@ -234,8 +186,10 @@ export default function AddViolation() {
             امضا رییس تکنالوژی معلوماتی
             </p>
         </div>
+        </div>
       </main>
-    </div>
-    </div>
+</div>
+
   );
+
 }
