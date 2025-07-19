@@ -87,7 +87,11 @@ export default function AddViolation() {
         {/* Form */}
         <form dir="rtl" className="w-full">
           {/* Search Box */}
-          <div className="mb-5 max-w-lg relative mx-auto flex h-7">
+          <div className="mb-5 max-w-lg relative flex h-7">
+            <label htmlFor="username" className="block mb-1 text-lg font-medium text-gray-700"
+             style={{ fontFamily: 'BNazanin, sans-serif' }}>
+              یوزر:
+            </label>
             <input
               id="username"
               type="text"
