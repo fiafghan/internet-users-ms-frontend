@@ -88,12 +88,12 @@
   "internet_users": [
     {
       "id": "2d76",
-      "name": "Jabar Crazy",
-      "username": "Jabar-Crazy",
+      "name": "Jabar Ghafori",
+      "username": "Jabar-IT",
       "email": "jabar@gmail.com",
       "phone": "+93790574282",
       "employment_type": "Part-Timer",
-      "directorate": "maternity health",
+      "directorate": "IT",
       "deputyMinistry": "administrative and financial",
       "position": "IT Officer",
       "device_limit": "2",
@@ -101,24 +101,24 @@
       "mac_address": "ff:ff:Ff",
       "status": "active",
       "violations": "1",
-      "comment": "Watched porn movies!"
+      "comment": "He was using VPN!!!"
     },
     {
       "id": "bfa9",
-      "name": "nesar ahmad awab ahmadi jamali",
+      "name": "nesar",
       "username": "nesar-it",
-      "email": "nesarahmadawab2030@gmail.com",
+      "email": "nesar@gmail.com",
       "phone": "+93793269249",
       "employment_type": "Permanent",
-      "directorate": "Information Technology and new technologies stuff",
-      "deputyMinistry": "administrative and financial and clerical stuff",
+      "directorate": "Information Technology",
+      "deputyMinistry": "administrative and financial",
       "position": "back developer",
       "device_limit": "2",
       "device_type": "mobile and comfuter",
       "mac_address": "",
       "status": "deactive",
       "violations": "2",
-      "comment": "nesar ahmad watched mia khlifa on porn hub and then watched fsdklfsdfklsdfsdjfsdfsdfsdkjfsdkjfsdkjfsdjk ..."
+      "comment": "He used torrent twice despite warning!"
     }
   ],
   "employment_type": [
