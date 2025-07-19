@@ -6,12 +6,17 @@ import type { JSX } from "react";
 export default function GradientSidebar(): JSX.Element {
   const navigate = useNavigate();
 
+  const logout = () => {
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
+
   const items = [
     { id: 1, label: "All Users", icon: <Users className="w-5 h-5" />, path: "/" },
     { id: 2, label: "Add User", icon: <User className="w-5 h-5" />, path: "/adduser" },
     { id: 4, label: "Violation Form", icon: <AlertOctagon className="w-5 h-5" />, path: "/addviolation" },
     { id: 5, label: "Settings", icon: <Settings className="w-5 h-5" />, path: "/settings" },
-    { id: 6, label: "Logout", icon: <LogOut className="w-5 h-5" />, path: "/logout" },
+    // We’ll handle logout differently below — no path
   ];
 
   return (
@@ -36,6 +41,19 @@ export default function GradientSidebar(): JSX.Element {
             <span>{item.label}</span>
           </motion.button>
         ))}
+
+        {/* 🔒 Logout button with custom logic */}
+        <motion.button
+          whileHover={{ scale: 1.04, opacity: 0.9 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={logout}
+          className="flex items-center gap-3 px-4 py-3 rounded-sm hover:bg-white 
+            hover:text-blue-400 hover:shadow-sm hover:shadow-white 
+            transition text-sm font-medium mt-4"
+        >
+          <LogOut className="w-5 h-5" />
+          <span>Logout</span>
+        </motion.button>
       </nav>
     </aside>
   );

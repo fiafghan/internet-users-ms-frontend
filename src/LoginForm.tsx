@@ -21,6 +21,8 @@ export default function LoginForm(): JSX.Element {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    localStorage.setItem("loggedInUser", JSON.stringify(form));
+    navigate('/');
 
     setLoading(true);
 

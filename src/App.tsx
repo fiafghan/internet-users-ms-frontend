@@ -4,17 +4,27 @@ import LoginForm from "./LoginForm"
 import InternetUserAddForm from "./AddInternetUsers"
 import AllUsers from "./AllUsers"
 import AddViolation from "./AddViolation"
+import PrivateRoute from "./PrivateRoute"
 
 function App() {
 
   return (
     <>
       <Routes>
-      <Route path="/" element={<AllUsers />} />
-      <Route path="/register" element={<RegisterForm />} />
+      <Route path="/register" element={
+        <RegisterForm />
+        } />
       <Route path="/login" element={<LoginForm />} />
       <Route path="/adduser" element={<InternetUserAddForm />} />
       <Route path="/addviolation" element={<AddViolation />} />
+      <Route
+        path="/"
+        element={
+          <PrivateRoute>
+            <AllUsers />
+          </PrivateRoute>
+        }
+      />
     </Routes>
     </>
   )
