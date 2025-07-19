@@ -7,7 +7,7 @@ export default function GradientSidebar(): JSX.Element {
   const navigate = useNavigate();
 
   const logout = () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem("loggedInUser");
     navigate("/login");
   };
 

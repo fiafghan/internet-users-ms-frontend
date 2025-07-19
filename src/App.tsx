@@ -11,12 +11,10 @@ function App() {
   return (
     <>
       <Routes>
-      <Route path="/register" element={
-        <RegisterForm />
-        } />
+      <Route path="/register" element={<RegisterForm />} />
       <Route path="/login" element={<LoginForm />} />
-      <Route path="/adduser" element={<InternetUserAddForm />} />
-      <Route path="/addviolation" element={<AddViolation />} />
+      <Route path="/adduser" element={<PrivateRoute><InternetUserAddForm /></PrivateRoute>} />
+      <Route path="/addviolation" element={<PrivateRoute><AddViolation /></PrivateRoute>} />
       <Route
         path="/"
         element={
