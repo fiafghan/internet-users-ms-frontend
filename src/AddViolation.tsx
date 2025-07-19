@@ -85,10 +85,11 @@ export default function AddViolation() {
           فورم تخطی استفاده کنندگان انترنت وزارت صحت عامه
         </h1>
         {/* Form */}
-        <form dir="rtl" className="w-full" style={{ fontFamily: 'BNazanin, sans-serif' }}>
+        <form dir="rtl" className="w-full">
           {/* Search Box */}
           <div className="mb-4 max-w-lg relative">
-            <label htmlFor="username" className="block mb-1 text-sm font-medium text-gray-700">
+            <label htmlFor="username" className="block mb-1 text-sm font-medium text-gray-700"
+             style={{ fontFamily: 'BNazanin, sans-serif' }}>
               نام یوزر:
             </label>
             <input
@@ -110,8 +111,7 @@ export default function AddViolation() {
                       setSearchTerm(user.username);
                       setFilteredUsers([]);
                     }}
-                    className="px-3 py-2 hover:bg-blue-100 cursor-pointer text-sm"
-                  >
+                    className="px-3 py-2 hover:bg-blue-100 cursor-pointer text-sm">
                     {user.id} / {user.username}
                   </li>
                 ))}
@@ -123,7 +123,7 @@ export default function AddViolation() {
           {selectedUser && (
             <div className="overflow-x-auto">
               <table className="w-full border border-gray-300 rounded-md text-sm 
-              bg-white table-auto border-collapse">
+              bg-white table-auto border-collapse" style={{ fontFamily: 'BNazanin, sans-serif' }}>
                 <thead className="bg-gray-100">
                   <tr>
                     <th className="px-3 py-2 border 
@@ -169,7 +169,7 @@ export default function AddViolation() {
               onClick={handlePrint}
               className="px-6 py-2 bg-blue-600 text-white rounded 
               hover:bg-blue-500 transition-all print:hidden"
-            >
+             style={{ fontFamily: 'BNazanin, sans-serif' }}>
               چاپ
             </button>
             </div>
