@@ -21,9 +21,6 @@ export default function LoginForm(): JSX.Element {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    localStorage.setItem("loggedInUser", JSON.stringify(form));
-    navigate('/');
-
     setLoading(true);
 
     try {
@@ -37,8 +34,10 @@ export default function LoginForm(): JSX.Element {
       );
 
       if (user) {
+        localStorage.setItem("loggedInUser", JSON.stringify(user)); // ✅ Save full user object
         alert(`✅ Login successful! Welcome back, ${user.name}.`);
         setForm({ email: "", password: "" });
+        navigate('/');
       } else {
         alert("❌ Login failed: Incorrect email or password.");
       }

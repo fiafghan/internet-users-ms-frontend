@@ -5,6 +5,7 @@ import InternetUserAddForm from "./AddInternetUsers"
 import AllUsers from "./AllUsers"
 import AddViolation from "./AddViolation"
 import PrivateRoute from "./PrivateRoute"
+import Settings from "./Settings"
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
       <Route path="/login" element={<LoginForm />} />
       <Route path="/adduser" element={<PrivateRoute><InternetUserAddForm /></PrivateRoute>} />
       <Route path="/addviolation" element={<PrivateRoute><AddViolation /></PrivateRoute>} />
+      <Route path="/settings" element={<PrivateRoute><Settings /></PrivateRoute>} />
       <Route
         path="/"
         element={
