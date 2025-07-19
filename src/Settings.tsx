@@ -4,6 +4,7 @@ import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import Spinner from "./components/Spinner";
 import AnimatedSubmitButton from "./components/AnimatedButton";
+import Sidebar from "./components/Sidebar";
 
 export default function SettingsPage() {
   const [form, setForm] = useState({
@@ -13,48 +14,45 @@ export default function SettingsPage() {
   });
 
 
-  
-
   const [loading, setLoading] = useState(false);
   const [userId, setUserId] = useState("");
 
         // Load user data on mount
-                useEffect(() => {
-                        const storedUser = localStorage.getItem("loggedInUser");
+        useEffect(() => {
+        const storedUser = localStorage.getItem("loggedInUser");
 
-                        if (!storedUser) {
-                            console.error("User not logged in");
-                            return;
-                        }
+        if (!storedUser) {
+            console.error("User not logged in");
+            return;
+        }
 
-                        try {
-                            const userData = JSON.parse(storedUser);
-                            const userId = userData.id;
+        try {
+            const userData = JSON.parse(storedUser);
+            const userId = userData.id;
 
-                            if (!userId) {
-                            console.error("User ID not found in localStorage data");
-                            return;
-                            }
+            if (!userId) {
+            console.error("User ID not found in localStorage data");
+            return;
+            }
 
-                            setUserId(userId);
+            setUserId(userId);
 
-                            axios.get(`http://localhost:3000/users/${userId}`)
-                            .then((response) => {
-                                const user = response.data;
-                                setForm({
-                                name: user.name || "",
-                                email: user.email || "",
-                                password: "", // blank on purpose
-                                });
-                            })
-                            .catch((error) => {
-                                console.error("User fetch failed:", error);
-                            });
-                        } catch (e) {
-                            console.error("Failed to parse user from localStorage", e);
-                        }
-                        }, []);
-
+            axios.get(`http://localhost:3000/users/${userId}`)
+            .then((response) => {
+                const user = response.data;
+                setForm({
+                name: user.name || "",
+                email: user.email || "",
+                password: "", // blank on purpose
+                });
+            })
+            .catch((error) => {
+                console.error("User fetch failed:", error);
+            });
+        } catch (e) {
+            console.error("Failed to parse user from localStorage", e);
+        }
+        }, []);
 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -97,7 +95,7 @@ export default function SettingsPage() {
           </motion.div>
         )}
       </AnimatePresence>
-
+            
       <motion.div
         className="min-h-screen bg-gradient-to-br from-indigo-100 via-white to-blue-50 
         flex items-center justify-center px-4 py-12"
