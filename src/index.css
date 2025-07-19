@@ -12,5 +12,9 @@
   #no-print {
     display: none !important;
   }
+  #printable-content {
+    margin: 20mm;
+    /* or */
+  }
 }
 

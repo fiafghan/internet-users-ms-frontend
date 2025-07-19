@@ -85,7 +85,7 @@ export default function AddViolation() {
           فورم تخطی استفاده کنندگان انترنت وزارت صحت عامه
         </h1>
         {/* Form */}
-        <form dir="rtl" className="w-full " style={{ fontFamily: 'BNazanin, sans-serif' }}>
+        <form dir="rtl" className="w-full" style={{ fontFamily: 'BNazanin, sans-serif' }}>
           {/* Search Box */}
           <div className="mb-4 max-w-lg relative">
             <label htmlFor="username" className="block mb-1 text-sm font-medium text-gray-700">
@@ -126,7 +126,8 @@ export default function AddViolation() {
               bg-white table-auto border-collapse">
                 <thead className="bg-gray-100">
                   <tr>
-                    <th className="px-3 py-2 border border-gray-300 text-center">نام</th>
+                    <th className="px-3 py-2 border 
+                    border-gray-300 text-center">نام</th>
                     <th className="px-3 py-2 border border-gray-300 text-center">وظیفه</th>
                     <th className="px-3 py-2 border border-gray-300 text-center">معینیت</th>
                     <th className="px-3 py-2 border border-gray-300 text-center">ریاست</th>
