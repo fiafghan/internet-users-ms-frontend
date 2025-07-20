@@ -5,6 +5,9 @@ import type { JSX } from "react";
 
 export default function GradientSidebar(): JSX.Element {
   const navigate = useNavigate();
+  const currentUser = JSON.parse(localStorage.getItem("loggedInUser") || "{}");
+  const isAdmin = currentUser?.isAdmin === true;
+
 
   const logout = () => {
     localStorage.removeItem("loggedInUser");
@@ -12,11 +15,16 @@ export default function GradientSidebar(): JSX.Element {
   };
 
   const items = [
-    { id: 1, label: "All Users", icon: <Users className="w-5 h-5" />, path: "/" },
-    { id: 2, label: "Add User", icon: <User className="w-5 h-5" />, path: "/adduser" },
-    { id: 4, label: "Violation Form", icon: <AlertOctagon className="w-5 h-5" />, path: "/addviolation" },
-    { id: 5, label: "Settings", icon: <Settings className="w-5 h-5" />, path: "/settings" },
-    // We’ll handle logout differently below — no path
+      { id: 1, label: "All Users", icon: <Users className="w-5 h-5" />, path: "/" },
+      { id: 2, label: "Add User", icon: <User className="w-5 h-5" />, path: "/adduser" },
+      { id: 3, label: "Violation Form", icon: <AlertOctagon className="w-5 h-5" />, path: "/addviolation" },
+      ...(isAdmin ? [{
+        id: 4,
+        label: "Add System User",
+        icon: <User className="w-5 h-5" />,
+        path: "/register",
+      }] : []),
+      { id: 5, label: "Settings", icon: <Settings className="w-5 h-5" />, path: "/settings" },
   ];
 
   return (

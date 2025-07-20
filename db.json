@@ -37,53 +37,6 @@
   ],
   "users": [
     {
-      "id": "a772",
-      "name": "fardin",
-      "email": "fardin@gmail.com",
-      "password": "123"
-    },
-    {
-      "name": "Samira Jan",
-      "email": "samira@gmail.com",
-      "id": "20f0"
-    },
-    {
-      "id": "2b37",
-      "name": "emran",
-      "email": "em@gmail.com",
-      "password": "1234"
-    },
-    {
-      "id": "189a",
-      "name": "trump",
-      "email": "trump@gmail.com",
-      "password": "123"
-    },
-    {
-      "id": "2b6c",
-      "name": "mm",
-      "email": "mm@gmail.com",
-      "password": "234"
-    },
-    {
-      "id": "f265",
-      "name": "mullah",
-      "email": "mullah@gmail.com",
-      "password": "123"
-    },
-    {
-      "id": "8c15",
-      "name": "ghafoor",
-      "email": "gh@gh.com",
-      "password": "123"
-    },
-    {
-      "id": "d06e",
-      "name": "manan",
-      "email": "manan@gmail.com",
-      "password": "123"
-    },
-    {
       "id": "aceb",
       "name": "fardin ibrahimi",
       "email": "fardin@gmail.com",

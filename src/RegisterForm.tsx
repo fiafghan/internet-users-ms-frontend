@@ -46,7 +46,6 @@ export default function RegisterForm(): JSX.Element {
       });
 
       alert("✅ Registration successful!");
-      navigate('/');
       console.log("Registered:", response.data);
 
       setForm({
@@ -56,6 +55,7 @@ export default function RegisterForm(): JSX.Element {
         confirmPassword: "",
         isAdmin: false,
       });
+      navigate('/');
     } catch (error) {
       console.error("Error registering user:", error);
       alert("❌ Something went wrong. Please try again.");
