@@ -4,7 +4,7 @@ import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import Spinner from "./components/Spinner";
 import AnimatedSubmitButton from "./components/AnimatedButton";
-import Sidebar from "./components/Sidebar";
+
 
 export default function SettingsPage() {
   const [form, setForm] = useState({
@@ -95,6 +95,8 @@ export default function SettingsPage() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      
             
       <motion.div
         className="min-h-screen bg-gradient-to-br from-indigo-100 via-white to-blue-50 
@@ -110,7 +112,9 @@ export default function SettingsPage() {
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
+          
         >
+
           <motion.h2
             className="text-3xl font-bold text-center text-gray-800 mb-8"
             initial={{ opacity: 0, y: 15 }}

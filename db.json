@@ -43,8 +43,8 @@
       "password": "123"
     },
     {
-      "name": "Naweed",
-      "email": "Naweed@microsoft.com",
+      "name": "Samira Jan",
+      "email": "samira@gmail.com",
       "id": "20f0"
     },
     {
@@ -122,15 +122,15 @@
   ],
   "employment_type": [
     {
-      "id": 1,
+      "id": "1",
       "type": "Permanent"
     },
     {
-      "id": 2,
+      "id": "2",
       "type": "Part-Timer"
     },
     {
-      "id": 3,
+      "id": "3",
       "type": "NTA"
     }
   ]
