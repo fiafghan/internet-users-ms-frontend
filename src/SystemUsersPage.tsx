@@ -7,6 +7,7 @@ interface User {
   name: string;
   email: string;
   isAdmin: boolean;
+  password?: string;
 }
 
 export default function SystemUsersPage() {
@@ -20,17 +21,25 @@ export default function SystemUsersPage() {
     setShowEditModal(true);
   };
 
-  const handleSaveEdit = () => {
-    if (!editUser) return;
+        const handleSaveEdit = () => {
+        if (!editUser) return;
 
-    axios.put(`http://localhost:3000/users/${editUser.id}`, editUser)
-        .then(() => {
-        setUsers((prev) =>
-            prev.map((u) => (u.id === editUser.id ? editUser : u))
-        );
-        setShowEditModal(false);
-        });
-    };
+        // Create a copy to conditionally remove password if it's empty
+        const payload = { ...editUser };
+
+        // If password is blank, don't send it (keep current)
+        if (!payload.password || payload.password.trim() === "") {
+            delete payload.password;
+        }
+
+        axios.put(`http://localhost:3000/users/${editUser.id}`, payload)
+            .then(() => {
+            setUsers((prev) =>
+                prev.map((u) => (u.id === editUser.id ? editUser : u))
+            );
+            setShowEditModal(false);
+            });
+        };
 
     const handleDelete = (id: number) => {
         if (confirm("Are you sure you want to delete this user?")) {
@@ -108,6 +117,18 @@ export default function SystemUsersPage() {
                         }
                         className="w-full border px-3 py-1.5 rounded"
                     />
+                    </label>
+                    <label className="block">
+                    Password:
+                    <input
+                        type="text"
+                        value={editUser.password || ""}
+                        onChange={(e) =>
+                        setEditUser({ ...editUser, password: e.target.value })
+                        }
+                        className="w-full border px-3 py-1.5 rounded"
+                    />
+                    <span className="text-sm text-gray-500">Leave empty to keep current password</span>
                     </label>
                     <label className="flex items-center space-x-2">
                     <input
