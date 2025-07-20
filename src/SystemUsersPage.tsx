@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Pencil, Trash2 } from "lucide-react";
+import GradientSidebar from "./components/Sidebar";
 
 interface User {
   id: number;
@@ -56,6 +57,11 @@ export default function SystemUsersPage() {
   }, []);
 
   return (
+    <div className="flex">
+      {/* Sidebar */}
+      <div className="w-64">
+        <GradientSidebar />
+      </div>
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-6 text-gray-800">All System Users</h1>
 
@@ -160,6 +166,7 @@ export default function SystemUsersPage() {
             )}
 
       </div>
+    </div>
     </div>
   );
 }

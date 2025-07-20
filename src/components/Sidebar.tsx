@@ -32,7 +32,7 @@ const items = [
     id: 5,
     label: "All System Users",
     icon: <Users className="w-5 h-5" />,
-    path: "/system-users",
+    path: "/all-system-users",
   }] : []),
 
   { id: 6, label: "Settings", icon: <Settings className="w-5 h-5" />, path: "/settings" },
