@@ -82,6 +82,13 @@
       "name": "manan",
       "email": "manan@gmail.com",
       "password": "123"
+    },
+    {
+      "id": "aceb",
+      "name": "fardin ibrahimi",
+      "email": "fardin@gmail.com",
+      "password": "123",
+      "isAdmin": true
     }
   ],
   "internet_users": [

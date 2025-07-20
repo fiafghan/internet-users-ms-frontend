@@ -11,13 +11,19 @@ export default function RegisterForm(): JSX.Element {
     email: "",
     password: "",
     confirmPassword: "",
+    isAdmin: false,
   });
 
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+      const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, type, checked, value } = e.target;
+      setForm({
+        ...form,
+        [name]: type === "checkbox" ? checked : value,
+        });
+      };
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,6 +40,7 @@ export default function RegisterForm(): JSX.Element {
         name: form.name,
         email: form.email,
         password: form.password,
+        isAdmin: form.isAdmin,
       });
 
       alert("✅ Registration successful!");
@@ -44,6 +51,7 @@ export default function RegisterForm(): JSX.Element {
         email: "",
         password: "",
         confirmPassword: "",
+        isAdmin: false,
       });
     } catch (error) {
       console.error("Error registering user:", error);
@@ -154,6 +162,26 @@ export default function RegisterForm(): JSX.Element {
             animation={{ y: 40, opacity: 0 }}
             delay={0.7}
           />
+
+              <motion.div
+              className="mb-6 flex items-center gap-2"
+              initial={{ x: 0, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.8, duration: 0.5 }}
+            >
+              <input
+                id="isAdmin"
+                name="isAdmin"
+                type="checkbox"
+                checked={form.isAdmin}
+                onChange={handleChange}
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
+              />
+              <label htmlFor="isAdmin" className="text-sm text-gray-700">
+                Is Admin?
+              </label>
+            </motion.div>
+
 
           {/* Submit Button */}
           <AnimatedSubmitButton disabled={loading}>
