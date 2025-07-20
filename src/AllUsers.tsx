@@ -58,8 +58,10 @@ export default function InternetUsersList(): JSX.Element {
   const [employmentTypes, setEmploymentTypes] = useState<{ id: number; type: string }[]>([]);
   const [selectedDirectorateEdit, setSelectedDirectorateEdit] = useState<{ id: number; name: string } | null>(null);
   const [queryDirectorate, setQueryDirectorate] = useState("");
+  const [selectedDeputyMinistryEdit, setSelectedDeputyMinistryEdit] = useState<{ id: number; name: string } | null>(null);
+  const [queryDeputyMinistryEdit, setQueryDeputyMinistryEdit] = useState("");
 
-
+  
   const filteredDirectorates =
           queryDirectorate === ""
           ? directorateOptions
@@ -67,6 +69,14 @@ export default function InternetUsersList(): JSX.Element {
                   dir.name.toLowerCase().includes(queryDirectorate.toLowerCase())
         );
 
+
+
+  const filteredDeputyMinistriesEdit =
+      queryDeputyMinistryEdit === ""
+        ? deputyMinistryOptions
+        : deputyMinistryOptions.filter((dm) =>
+            dm.name.toLowerCase().includes(queryDeputyMinistryEdit.toLowerCase())
+      );
 
   const totalUsers = users.length;
 
@@ -126,8 +136,8 @@ export default function InternetUsersList(): JSX.Element {
         });
 
         // Preselect directorate object
-          const matchingDirectorate = directorateOptions.find((d) => d.name === user.directorate);
-          setSelectedDirectorateEdit(matchingDirectorate || null);
+         const matchingDepMinistry = deputyMinistryOptions.find((d) => d.name === user.deputyMinistry);
+            setSelectedDeputyMinistryEdit(matchingDepMinistry || null);
             setIsEditOpen(true);
 
   };
@@ -536,7 +546,7 @@ export default function InternetUsersList(): JSX.Element {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {Object.keys(editForm).map((key) =>
             key !== "status" && key !== "violations" && key !== "comment" && key !== "employment_type"
-                && key !== "directorate" ? (
+                && key !== "directorate" && key !== "deputyMinistry" ? (
               <div key={key}>
                 <label className="block text-sm font-medium text-gray-700 capitalize">{key.replace("_", " ")}</label>
                 <input
@@ -591,6 +601,45 @@ export default function InternetUsersList(): JSX.Element {
               </Combobox>
             </div>
 
+            {/* deputy ministry  */}
+                  <div>
+        <label className="block text-sm font-medium text-gray-700">Deputy Ministry</label>
+        <Combobox
+          value={selectedDeputyMinistryEdit}
+          onChange={(value) => {
+            setSelectedDeputyMinistryEdit(value);
+            setEditForm((prev) => ({ ...prev, deputyMinistry: value?.name || "" }));
+          }}
+        >
+          <div className="relative mt-1">
+            <Combobox.Input
+              className="w-full border border-gray-300 rounded-md py-2 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+              displayValue={(dm: { name: string }) => dm?.name || ""}
+              onChange={(e) => setQueryDeputyMinistryEdit(e.target.value)}
+              placeholder="🔍 Search..."
+            />
+            <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg border border-gray-200 z-50">
+              {filteredDeputyMinistriesEdit.length === 0 ? (
+                <div className="px-4 py-2 text-gray-500">No results found.</div>
+              ) : (
+                filteredDeputyMinistriesEdit.map((dm) => (
+                  <Combobox.Option
+                    key={dm.id}
+                    value={dm}
+                    className={({ active }) =>
+                      `cursor-pointer select-none px-4 py-2 ${
+                        active ? "bg-blue-500 text-white" : "text-gray-800"
+                      }`
+                    }
+                  >
+                    {dm.name}
+                  </Combobox.Option>
+                ))
+              )}
+            </Combobox.Options>
+          </div>
+        </Combobox>
+      </div>
 
           {/* Employment Type */}
               <div>
