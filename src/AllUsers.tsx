@@ -2,7 +2,7 @@ import { useEffect, useState, type JSX, type SetStateAction } from "react";
 import axios from "axios";
 import {
   User, Eye, Edit, Trash,
-  Search
+  Search, Users, Briefcase, Building2
 } from "lucide-react";
 import GradientSidebar from "./components/Sidebar";
 import { Combobox } from "@headlessui/react";
@@ -54,14 +54,26 @@ export default function InternetUsersList(): JSX.Element {
   const totalUsers = users.length;
   const activeUsers = users.filter((user) => user.status === "active").length;
   const deactiveUsers = users.filter((user) => user.status === "deactive").length;
-  
+    
+  const employmentTypeCounts: Record<string, number> = users.reduce((acc, user) => {
+  const type = user.employment_type || "Unknown";
+      acc[type] = (acc[type] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+
+
   const filteredDirectorates =
           queryDirectorate === ""
           ? directorateOptions
           : directorateOptions.filter((dir) => 
                   dir.name.toLowerCase().includes(queryDirectorate.toLowerCase())
         );
-
+  
+  const deputyMinistryCounts: Record<string, number> = users.reduce((acc, user) => {
+      const ministry = user.deputyMinistry || "Unknown";
+      acc[ministry] = (acc[ministry] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
 
 
   const filteredDeputyMinistriesEdit =
@@ -171,28 +183,83 @@ export default function InternetUsersList(): JSX.Element {
       </div>
       
       <main className="flex-1 ml-64 p-8 overflow-auto">
-                <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-  {/* Total Users Card */}
-  <div className="bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-lg rounded-xl p-6 flex items-center justify-between">
-    <div>
-      <div className="text-sm font-medium">Total Users</div>
-      <div className="text-2xl font-bold">{totalUsers}</div>
-    </div>
-    <User className="w-8 h-8 opacity-80" />
-  </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* 🔵 Total Users */}
+        <div className="relative overflow-hidden rounded-2xl p-6 shadow-xl bg-white border border-blue-100 group">
+          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-blue-100 to-transparent opacity-0 group-hover:opacity-100 transition duration-1000 animate-pulse pointer-events-none"></div>
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <User className="w-6 h-6 text-blue-500" />
+              <span className="text-blue-800 font-semibold text-sm">Total Users</span>
+            </div>
+            <div className="text-blue-400 text-xs uppercase tracking-wider">Summary</div>
+          </div>
+          <div className="text-3xl font-bold text-blue-800">{totalUsers}</div>
+        </div>
 
-  {/* Active/Deactive Users Card */}
-  <div className="bg-gradient-to-br from-indigo-500 to-indigo-600 text-white shadow-lg rounded-xl p-6 flex flex-col justify-between">
-    <div>
-      <div className="text-sm font-medium mb-1">✓ Active Users</div>
-      <div className="text-xl font-bold">{activeUsers}</div>
-    </div>
-    <div className="mt-4">
-      <div className="text-sm font-medium mb-1">X Deactive Users</div>
-      <div className="text-xl font-bold">{deactiveUsers}</div>
-    </div>
-  </div>
-</div>
+        {/* 🟦 Active / Deactive */}
+        <div className="relative overflow-hidden rounded-2xl p-6 shadow-xl bg-white border border-blue-100 group">
+          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-blue-100 to-transparent opacity-0 group-hover:opacity-100 transition duration-1000 animate-pulse pointer-events-none"></div>
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <Users className="w-6 h-6 text-blue-500" />
+              <span className="text-blue-800 font-semibold text-sm">Active / Deactive</span>
+            </div>
+            <div className="text-blue-400 text-xs uppercase tracking-wider">Status</div>
+          </div>
+          <div className="space-y-1 text-blue-800">
+            <div className="flex justify-between text-sm">
+              <span>Active</span>
+              <span className="font-bold">{activeUsers}</span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span>Deactive</span>
+              <span className="font-bold">{deactiveUsers}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* 👔 Employment Type */}
+        <div className="relative overflow-hidden rounded-2xl p-6 shadow-xl bg-white border border-blue-100 group">
+          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-blue-100 to-transparent opacity-0 group-hover:opacity-100 transition duration-1000 animate-pulse pointer-events-none"></div>
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <Briefcase className="w-6 h-6 text-blue-500" />
+              <span className="text-blue-800 font-semibold text-sm">Employment Types</span>
+            </div>
+            <div className="text-blue-400 text-xs uppercase tracking-wider">Type</div>
+          </div>
+          <ul className="space-y-1 text-sm text-blue-800 max-h-32 overflow-auto pr-1">
+            {Object.entries(employmentTypeCounts).map(([type, count]) => (
+              <li key={type} className="flex justify-between">
+                <span>{type}</span>
+                <span className="font-bold">{count}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* 🏛️ Deputy Ministry */}
+        <div className="relative overflow-hidden rounded-2xl p-6 shadow-xl bg-white border border-blue-100 group">
+          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-blue-100 to-transparent opacity-0 group-hover:opacity-100 transition duration-1000 animate-pulse pointer-events-none"></div>
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <Building2 className="w-6 h-6 text-blue-500" />
+              <span className="text-blue-800 font-semibold text-sm">Deputy Ministries</span>
+            </div>
+            <div className="text-blue-400 text-xs uppercase tracking-wider">Groups</div>
+          </div>
+          <ul className="space-y-1 text-sm text-blue-800 max-h-32 overflow-auto pr-1">
+            {Object.entries(deputyMinistryCounts).map(([name, count]) => (
+              <li key={name} className="flex justify-between">
+                <span>{name}</span>
+                <span className="font-bold">{count}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
 
        <div className="grid grid-cols-1 sm:grid-cols-2 
        md:grid-cols-3 gap-6 mb-10">
