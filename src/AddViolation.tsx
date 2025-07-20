@@ -178,10 +178,10 @@ export default function AddViolation() {
         {/* Footer Notes */}
         <div className="mt-0 space-y-4 text-right text-sm sm:text-base" dir="rtl">
           <p className="text-gray-700 text-center" style={{ fontFamily: 'BNazanin, sans-serif' }}>
-            کاربران انترنت در وزارت صحت عامه در صورتیکه دو مرتبه از انترنت استفاده نادرست نمایند یوزر شان برای همیشه مسدود می‌گردد!
+            کاربران انترنت در وزارت صحت عامه در صورتیکه دو مرتبه از انترنت استفاده نادرست نمایند یوزر شان برای همیشه مسدود می‌گردد.
           </p>
           <p className="text-gray-700 text-center font-bold" style={{ fontFamily: 'BNazanin, sans-serif' }}>
-            برای همیشه مسدود می‌گردد
+            برای همیشه مسدود می‌گردد!
             </p>
           <p className="text-gray-700 text-center font-bold" style={{ fontFamily: 'BNazanin, sans-serif' }}>
             امضا رییس تکنالوژی معلوماتی

@@ -224,7 +224,7 @@ export default function InternetUsersList(): JSX.Element {
           <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-blue-100 to-transparent opacity-0 group-hover:opacity-100 transition duration-1000 animate-pulse pointer-events-none"></div>
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
-              <Briefcase className="w-6 h-6 text-blue-500" />
+              <Briefcase className="w-6 h-6 text-blue-500" /> 
               <span className="text-blue-800 font-semibold text-sm">Employment Types</span>
             </div>
             <div className="text-blue-400 text-xs uppercase tracking-wider">Type</div>
