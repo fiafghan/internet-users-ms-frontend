@@ -139,22 +139,6 @@ export default function LoginForm(): JSX.Element {
           </AnimatedSubmitButton>
         </motion.form>
 
-        {/* "Don't have an account?" Section */}
-        <motion.div
-          className="mt-6 text-center text-gray-700"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.5 }}
-        >
-          Don&apos;t have an account?{" "}
-          <button
-            type="button"
-            className="font-semibold text-blue-400 hover:text-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 rounded"
-            onClick={() => navigate("/register")}
-          >
-            Register
-          </button>
-        </motion.div>
       </motion.div>
     </>
   );
