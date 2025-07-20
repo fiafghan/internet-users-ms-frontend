@@ -5,16 +5,8 @@ import {
   Search
 } from "lucide-react";
 import GradientSidebar from "./components/Sidebar";
-import {
-  Chart as ChartJS,
-  ArcElement,
-  Tooltip,
-  Legend
-} from "chart.js";
 import { Combobox } from "@headlessui/react";
 
-
-ChartJS.register(ArcElement, Tooltip, Legend);
 
 type InternetUser = {
   id: string;
@@ -59,7 +51,9 @@ export default function InternetUsersList(): JSX.Element {
   const [queryDeputyMinistryEdit, setQueryDeputyMinistryEdit] = useState("");
   const [selectedStatus, setSelectedStatus] = useState<string>("");
 
-
+  const totalUsers = users.length;
+  const activeUsers = users.filter((user) => user.status === "active").length;
+  const deactiveUsers = users.filter((user) => user.status === "deactive").length;
   
   const filteredDirectorates =
           queryDirectorate === ""
@@ -175,9 +169,31 @@ export default function InternetUsersList(): JSX.Element {
       border-gray-200 bg-white shadow-sm z-20">
         <GradientSidebar />
       </div>
-        
+      
       <main className="flex-1 ml-64 p-8 overflow-auto">
-       {/* 🧊 Summary Cards */}
+                <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+  {/* Total Users Card */}
+  <div className="bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-lg rounded-xl p-6 flex items-center justify-between">
+    <div>
+      <div className="text-sm font-medium">Total Users</div>
+      <div className="text-2xl font-bold">{totalUsers}</div>
+    </div>
+    <User className="w-8 h-8 opacity-80" />
+  </div>
+
+  {/* Active/Deactive Users Card */}
+  <div className="bg-gradient-to-br from-indigo-500 to-indigo-600 text-white shadow-lg rounded-xl p-6 flex flex-col justify-between">
+    <div>
+      <div className="text-sm font-medium mb-1">✓ Active Users</div>
+      <div className="text-xl font-bold">{activeUsers}</div>
+    </div>
+    <div className="mt-4">
+      <div className="text-sm font-medium mb-1">X Deactive Users</div>
+      <div className="text-xl font-bold">{deactiveUsers}</div>
+    </div>
+  </div>
+</div>
+
        <div className="grid grid-cols-1 sm:grid-cols-2 
        md:grid-cols-3 gap-6 mb-10">
       </div>
