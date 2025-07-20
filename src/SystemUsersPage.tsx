@@ -62,30 +62,30 @@ export default function SystemUsersPage() {
       <div className="w-64">
         <GradientSidebar />
       </div>
-    <div className="p-6">
+    <div className="p-6 w-full">
       <h1 className="text-2xl font-bold mb-6 text-gray-800">All System Users</h1>
 
-      <div className="overflow-x-auto rounded-lg shadow border border-blue-400">
+      <div className="overflow-x-auto rounded-sm shadow">
         <table className="w-full text-left border-collapse">
           <thead className="bg-blue-100">
             <tr>
-              <th className="px-4 py-2 border-b border-blue-400 bg-blue-300 text-white">ID</th>
-              <th className="px-4 py-2 border-b border-blue-400 bg-blue-300 text-white">Name</th>
-              <th className="px-4 py-2 border-b border-blue-400 bg-blue-300 text-white">Email</th>
-              <th className="px-4 py-2 border-b border-blue-400 bg-blue-300 text-white">Is Admin</th>
-              <th className="px-4 py-2 border-b border-blue-400 bg-blue-300 text-white">Actions</th>
+              <th className="px-4 py-2 border-b border-blue-300 bg-blue-300 text-white">ID</th>
+              <th className="px-4 py-2 border-b border-blue-300 bg-blue-300 text-white">Name</th>
+              <th className="px-4 py-2 border-b border-blue-300 bg-blue-300 text-white">Email</th>
+              <th className="px-4 py-2 border-b border-blue-300 bg-blue-300 text-white">Is Admin</th>
+              <th className="px-4 py-2 border-b border-blue-300 bg-blue-300 text-white">Actions</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user) => (
               <tr key={user.id} className="hover:bg-gray-50">
-                <td className="px-4 py-2 border-b border-r border-blue-400">{user.id}</td>
-                <td className="px-4 py-2 border-b border-r border-blue-400">{user.name}</td>
-                <td className="px-4 py-2 border-b border-blue-400">{user.email}</td>
-                <td className="px-4 py-2 border-b border-blue-400 bg-blue-300 text-white">
+                <td className="px-4 py-2 border-b border-r border-blue-300">{user.id}</td>
+                <td className="px-4 py-2 border-b border-r border-blue-300">{user.name}</td>
+                <td className="px-4 py-2 border-b border-blue-300">{user.email}</td>
+                <td className="px-4 py-2 border-b border-blue-300 bg-blue-300 text-white">
                   {user.isAdmin ? "✅ Yes" : "❌ No"}
                 </td>
-                <td className="px-4 py-2 border-b space-x-2 border-blue-400 bg-blue-300">
+                <td className="px-4 py-2 border-b space-x-2 border-blue-300 bg-blue-300">
                 <button onClick={() => handleEditClick(user)} className="text-green-500">
                     <Pencil className="w-4 h-4 inline text-white hover:text-blue-300" />
                 </button>
