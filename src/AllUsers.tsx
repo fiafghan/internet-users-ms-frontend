@@ -2,18 +2,15 @@ import { useEffect, useState, type JSX, type SetStateAction } from "react";
 import axios from "axios";
 import {
   User, Eye, Edit, Trash,
-  Search,
-  Users
+  Search
 } from "lucide-react";
 import GradientSidebar from "./components/Sidebar";
-import {motion} from "framer-motion";
 import {
   Chart as ChartJS,
   ArcElement,
   Tooltip,
   Legend
 } from "chart.js";
-import { Doughnut, Pie } from "react-chartjs-2";
 import { Combobox } from "@headlessui/react";
 
 
@@ -79,14 +76,6 @@ export default function InternetUsersList(): JSX.Element {
         : deputyMinistryOptions.filter((dm) =>
             dm.name.toLowerCase().includes(queryDeputyMinistryEdit.toLowerCase())
       );
-
-  const totalUsers = users.length;
-
-  const deputyMinistryCounts: Record<string, number> = users.reduce((acc, user) => {
-    const deputy = user.deputyMinistry || "Unknown";
-    acc[deputy] = (acc[deputy] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
 
 
   useEffect(() => {
@@ -191,126 +180,7 @@ export default function InternetUsersList(): JSX.Element {
        {/* 🧊 Summary Cards */}
        <div className="grid grid-cols-1 sm:grid-cols-2 
        md:grid-cols-3 gap-6 mb-10">
-        {/* Total Users Card */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="bg-white shadow-md border border-gray-200 rounded-xl p-6"
-        >
-  <h3 className="text-lg font-semibold text-gray-700 mb-4 flex items-center gap-2">
-    <Users className="w-5 h-5 text-blue-400" />
-    Total Users
-  </h3>
-
-  <div className="w-48 mx-auto">
-    <Doughnut
-      data={{
-        labels: ["Users"],
-        datasets: [
-          {
-            data: [totalUsers, Math.max(100 - totalUsers, 0)], // fills rest as empty
-            backgroundColor: ["#60A5FA", "#E5E7EB"], // blue-400 and gray-200
-            borderWidth: 0,
-          },
-        ],
-      }}
-      options={{
-        cutout: "70%",
-        plugins: {
-          legend: { display: false },
-          tooltip: { enabled: false },
-        },
-      }}
-    />
-    <div className="absolute top-[50%] transform -translate-x-1/2 -translate-y-[50%] text-center">
-      <p className="text-3xl font-bold text-blue-500 ml-50">{totalUsers}</p>
-      <p className="text-xs text-gray-500 ml-50">Users</p>
-    </div>
-  </div>
-</motion.div>
-
-          
-        {/* Users Per Deputy Ministry */}
-        <div className="bg-white rounded-md shadow-md border border-gray-200 p-6">
-      <h2 className="text-lg font-bold text-gray-700 mb-4">Users Per Deputy Ministry</h2>
-      <div className="space-y-4">
-        {Object.entries(deputyMinistryCounts).map(([depMinistry, count], index) => {
-      const max = Math.max(...Object.values(deputyMinistryCounts)); // for proportional width
-      const widthPercent = (count / max) * 100;
-
-      return (
-        <motion.div
-          key={depMinistry}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 + index * 0.1, duration: 0.4 }}
-        >
-          <div className="text-sm text-gray-700 mb-1 font-medium">
-            {depMinistry} ({count} user{count > 1 ? "s" : ""})
-          </div>
-          <div className="bg-blue-100 rounded-lg h-6 overflow-hidden">
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: `${widthPercent}%` }}
-              transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 + index * 0.1 }}
-              className="h-full bg-blue-300 text-white text-xs flex items-center px-3 font-semibold"
-            >
-              {count}
-            </motion.div>
-          </div>
-          
-        </motion.div>
-        
-      );
-    })}
-    
-  </div>
-  
-</div>
-
-            {/* Users Per Deputy Ministry - Pie Chart */}
-<div className="bg-white rounded-md shadow-md border border-gray-200 p-6">
-  <h2 className="text-lg font-bold text-gray-700 mb-4">Users Distribution</h2>
-  <div className="w-full max-w-md mx-auto">
-    <Pie
-      data={{
-        labels: Object.keys(deputyMinistryCounts),
-        datasets: [
-          {
-            label: "Users",
-            data: Object.values(deputyMinistryCounts),
-            backgroundColor: [
-              "#60A5FA", // blue-400
-              "#3B82F6", // blue-500
-              "#1D4ED8", // blue-700
-              "#DBEAFE", // blue-100
-              "#BFDBFE", // blue-200
-              "#93C5FD"  // blue-300
-            ],
-            borderColor: "#ffffff",
-            borderWidth: 2,
-          }
-        ],
-      }}
-      options={{
-        responsive: true,
-        plugins: {
-          legend: {
-            position: "bottom" as const,
-            labels: {
-              color: "#1F2937", // gray-800
-              font: { size: 12 },
-            },
-          },
-        },
-      }}
-    />
-  </div>
-</div>
-
       </div>
-
         <div className="flex gap-4 mb-4">
           
           <div>
