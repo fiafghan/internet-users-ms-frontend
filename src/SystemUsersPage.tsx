@@ -63,17 +63,17 @@ export default function SystemUsersPage() {
         <GradientSidebar />
       </div>
     <div className="p-6 w-full">
-      <h1 className="text-2xl font-bold mb-6 text-gray-800">All System Users</h1>
+      <h1 className="text-xl font-bold mb-6 text-gray-800">All System Users</h1>
 
       <div className="overflow-x-auto rounded-sm shadow">
         <table className="w-full text-left border-collapse">
           <thead className="bg-blue-100">
             <tr>
-              <th className="px-4 py-2 border-b border-blue-300 bg-blue-300 text-white">ID</th>
-              <th className="px-4 py-2 border-b border-blue-300 bg-blue-300 text-white">Name</th>
-              <th className="px-4 py-2 border-b border-blue-300 bg-blue-300 text-white">Email</th>
-              <th className="px-4 py-2 border-b border-blue-300 bg-blue-300 text-white">Is Admin</th>
-              <th className="px-4 py-2 border-b border-blue-300 bg-blue-300 text-white">Actions</th>
+              <th className="px-4 py-2 border-b border-blue-300 bg-blue-300 text-white text-sm">ID</th>
+              <th className="px-4 py-2 border-b border-blue-300 bg-blue-300 text-white text-sm">Name</th>
+              <th className="px-4 py-2 border-b border-blue-300 bg-blue-300 text-white text-sm">Email</th>
+              <th className="px-4 py-2 border-b border-blue-300 bg-blue-300 text-white text-sm">Admin</th>
+              <th className="px-4 py-2 border-b border-blue-300 bg-blue-300 text-white text-sm">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -82,15 +82,15 @@ export default function SystemUsersPage() {
                 <td className="px-4 py-2 border-b border-r border-blue-300">{user.id}</td>
                 <td className="px-4 py-2 border-b border-r border-blue-300">{user.name}</td>
                 <td className="px-4 py-2 border-b border-blue-300">{user.email}</td>
-                <td className="px-4 py-2 border-b border-blue-300 bg-blue-300 text-white">
-                  {user.isAdmin ? "✅ Yes" : "❌ No"}
+                <td className="px-4 py-2 border-b border-blue-300 bg-blue-300 text-white w-30">
+                  {user.isAdmin ? "✓" : "✗"}
                 </td>
                 <td className="px-4 py-2 border-b space-x-2 border-blue-300 bg-blue-300">
-                <button onClick={() => handleEditClick(user)} className="text-green-500">
-                    <Pencil className="w-4 h-4 inline text-white hover:text-blue-300" />
+                <button onClick={() => handleEditClick(user)} className="">
+                    <Pencil className="w-4 h-4 inline text-white hover:text-gray-200" />
                 </button>
-                <button onClick={() => handleDelete(user.id)} className="text-red-500 text-white">
-                    <Trash2 className="w-4 h-4 inline" />
+                <button onClick={() => handleDelete(user.id)} className="text-white">
+                    <Trash2 className="w-4 h-4 inline hover:text-gray-200" />
                 </button>
                 </td>
               </tr>

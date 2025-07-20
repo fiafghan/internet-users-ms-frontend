@@ -48,7 +48,7 @@
       "name": "jameela",
       "email": "jameela@gmail.com",
       "password": "123",
-      "isAdmin": false
+      "isAdmin": true
     },
     {
       "id": "4820",
