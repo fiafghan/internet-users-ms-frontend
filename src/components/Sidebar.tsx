@@ -14,18 +14,30 @@ export default function GradientSidebar(): JSX.Element {
     navigate("/login");
   };
 
-  const items = [
-      { id: 1, label: "All Users", icon: <Users className="w-5 h-5" />, path: "/" },
-      { id: 2, label: "Add User", icon: <User className="w-5 h-5" />, path: "/adduser" },
-      { id: 3, label: "Violation Form", icon: <AlertOctagon className="w-5 h-5" />, path: "/addviolation" },
-      ...(isAdmin ? [{
-        id: 4,
-        label: "Add System User",
-        icon: <User className="w-5 h-5" />,
-        path: "/register",
-      }] : []),
-      { id: 5, label: "Settings", icon: <Settings className="w-5 h-5" />, path: "/settings" },
-  ];
+const items = [
+  { id: 1, label: "All Users", icon: <Users className="w-5 h-5" />, path: "/" },
+  { id: 2, label: "Add User", icon: <User className="w-5 h-5" />, path: "/adduser" },
+  { id: 3, label: "Violation Form", icon: <AlertOctagon className="w-5 h-5" />, path: "/addviolation" },
+
+  // ✅ Add System User (admin only)
+  ...(isAdmin ? [{
+    id: 4,
+    label: "Add System User",
+    icon: <User className="w-5 h-5" />,
+    path: "/register",
+  }] : []),
+
+  // ✅ All System Users (admin only)
+  ...(isAdmin ? [{
+    id: 5,
+    label: "All System Users",
+    icon: <Users className="w-5 h-5" />,
+    path: "/system-users",
+  }] : []),
+
+  { id: 6, label: "Settings", icon: <Settings className="w-5 h-5" />, path: "/settings" },
+];
+
 
   return (
     <aside className="w-64 min-h-screen bg-blue-400 text-white flex flex-col">
