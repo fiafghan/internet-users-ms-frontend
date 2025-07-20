@@ -60,6 +60,8 @@ export default function InternetUsersList(): JSX.Element {
   const [queryDirectorate, setQueryDirectorate] = useState("");
   const [selectedDeputyMinistryEdit, setSelectedDeputyMinistryEdit] = useState<{ id: number; name: string } | null>(null);
   const [queryDeputyMinistryEdit, setQueryDeputyMinistryEdit] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState<string>("");
+
 
   
   const filteredDirectorates =
@@ -355,6 +357,25 @@ export default function InternetUsersList(): JSX.Element {
               })}
             </select>
           </div>
+          {/* status filter */}
+                      <div>
+              <label htmlFor="statusFilter" className="block text-sm font-medium text-gray-700">
+                Status
+              </label>
+              <select
+                id="statusFilter"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm 
+                  focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm 
+                  h-7 shadow-md shadow-gray-400 p-2 text-gray-700"
+                value={selectedStatus}
+                onChange={(e) => setSelectedStatus(e.target.value)}
+              >
+                <option value="">All</option>
+                <option value="active">Active</option>
+                <option value="deactive">Deactive</option>
+              </select>
+            </div>
+
                  <div className="relative w-full sm:w-[900px] mt-5">
                   <input
                     id="searchInput"
@@ -402,6 +423,7 @@ export default function InternetUsersList(): JSX.Element {
               .filter((user) => 
                 (selectedDeputyMinistry === "" || user.deputyMinistry === selectedDeputyMinistry) &&
                 (selectedDirectorate === "" || user.directorate === selectedDirectorate) &&
+                 (selectedStatus === "" || user.status === selectedStatus) &&
                 (user.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
                     user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
                     user.phone.toLowerCase().includes(searchTerm.toLowerCase())
