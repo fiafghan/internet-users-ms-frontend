@@ -89,6 +89,13 @@
       "email": "fardin@gmail.com",
       "password": "123",
       "isAdmin": true
+    },
+    {
+      "id": "4811",
+      "name": "jameela",
+      "email": "jameela@gmail.com",
+      "password": "123",
+      "isAdmin": false
     }
   ],
   "internet_users": [

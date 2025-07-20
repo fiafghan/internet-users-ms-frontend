@@ -4,6 +4,7 @@ import axios from "axios";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedSubmitButton from "./components/AnimatedButton";
 import Spinner from "./components/Spinner";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterForm(): JSX.Element {
   const [form, setForm] = useState({
@@ -15,6 +16,7 @@ export default function RegisterForm(): JSX.Element {
   });
 
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
       const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const { name, type, checked, value } = e.target;
@@ -44,6 +46,7 @@ export default function RegisterForm(): JSX.Element {
       });
 
       alert("✅ Registration successful!");
+      navigate('/');
       console.log("Registered:", response.data);
 
       setForm({
