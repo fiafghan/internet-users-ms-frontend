@@ -26,8 +26,8 @@ type InternetUser = {
 };
 
 const headers = [
-  "Name", "Username", "Phone","Position", "Employment Type",
-  "Directorate", "Deputy Ministry","Status", "Violations", "Comment", "Actions"
+  "Name", "Username","Phone", "Directorate", "Deputy Ministry","Status", 
+  "Violations", "Comment", "Actions"
 ];
 
 export default function InternetUsersList(): JSX.Element {
@@ -256,7 +256,6 @@ export default function InternetUsersList(): JSX.Element {
        md:grid-cols-3 gap-6 mb-10">
       </div>
         <div className="flex gap-4 mb-4">
-          
           <div>
              <label htmlFor="deputyMinistryFilter" className="block text-sm font-medium 
             text-gray-700">
@@ -348,119 +347,112 @@ export default function InternetUsersList(): JSX.Element {
           <div className="overflow-x-auto rounded-sm 
           shadow-lg bg-white border 
           border-gray-200 max-w-full">
-            <div className="grid grid-cols-[200px_150px_150px_150px_150px_150px_200px_200px_200px_200px_200px] 
-            bg-blue-400 text-white font-semibold text-sm 
-            select-none rounded-t-lg shadow-inner">
-              {headers.map((header) => (
-                <div
-                  key={header}
-                  className="px-3 py-2 border-r  last:border-r-0 flex items-center 
-                  bg-blue-300 text-[10px]"
-                  style={{ textShadow: "0 1px 1px rgba(0,0,0,0.15)" }}
-                >
-                  {header}
-                </div>
-              ))}
-            </div>
+        <div className="overflow-x-auto rounded-sm shadow-lg bg-white border border-gray-200 max-w-full">
+          <table className="table-auto w-full text-left text-sm">
+            {/* Table Head */}
+            <thead>
+              <tr className="bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xs uppercase tracking-wider select-none rounded-t-xl">
+                {headers.map((header) => (
+                  <th
+                    key={header}
+                    className="px-3 py-2 border-r last:border-r-0 bg-blue-300 text-[10px] font-semibold"
+                    style={{ textShadow: "0 1px 1px rgba(0,0,0,0.15)" }}
+                  >
+                    {header}
+                  </th>
+                ))}
+              </tr>
+            </thead>
 
-            {users
-              .filter((user) => 
-                (selectedDeputyMinistry === "" || user.deputyMinistry === selectedDeputyMinistry) &&
-                (selectedDirectorate === "" || user.directorate === selectedDirectorate) &&
-                 (selectedStatus === "" || user.status === selectedStatus) &&
-                (user.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+            {/* Table Body */}
+            <tbody>
+              {users
+                .filter((user) =>
+                  (selectedDeputyMinistry === "" || user.deputyMinistry === selectedDeputyMinistry) &&
+                  (selectedDirectorate === "" || user.directorate === selectedDirectorate) &&
+                  (selectedStatus === "" || user.status === selectedStatus) &&
+                  (user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                     user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    user.phone.toLowerCase().includes(searchTerm.toLowerCase())
-              )
-              ).map((user, idx) => {
-    const isRedCard = user.violations === "2";
-    const isYellowCard = user.violations === "1";
+                    user.phone.toLowerCase().includes(searchTerm.toLowerCase()))
+                )
+                .map((user, idx) => {
+                  const isRedCard = user.violations === "2";
+                  const isYellowCard = user.violations === "1";
 
-    return (
-      <div
-        key={user.id}
-        className={`grid grid-cols-[200px_150px_150px_150px_150px_150px_200px_200px_200px_200px_200px] 
-          border-b border-gray-200 transition-colors duration-200 ${
-          isRedCard
-            ? "bg-red-100"
-            : idx % 2 === 0
-            ? "bg-gray-100"
-            : "bg-white"
-        } hover:bg-blue-100 cursor-default`}
-      >
-        <div className="px-3 py-2 flex items-center gap-2 font-medium 
-          text-gray-700 whitespace-nowrap border-r border-gray-200">
-          <User className="w-4 h-4 shrink-0" />
-          <span className="text-[10px]">
-            {user.name}
-            {isYellowCard && <span className="ml-1">🟨</span>}
-            {isRedCard && <span className="ml-1">🟥</span>}
-          </span>
-        </div>
+                  return (
+                    <tr
+                      key={user.id}
+                      className={`transition-colors duration-200 ${
+                        isRedCard
+                          ? "bg-red-100"
+                          : idx % 2 === 0
+                          ? "bg-gray-100"
+                          : "bg-white"
+                      } hover:bg-blue-100`}
+                    >
+                      {/* Name */}
+                      <td className="px-3 py-2 border-r text-gray-700 text-[10px] whitespace-nowrap flex items-center gap-1 font-medium">
+                        <User className="w-4 h-4 shrink-0" />
+                        {user.name}
+                        {isYellowCard && <span className="ml-1">🟨</span>}
+                        {isRedCard && <span className="ml-1">🟥</span>}
+                      </td>
 
-        <div className="px-3 py-2 text-gray-700 whitespace-nowrap border-r border-gray-200 text-[10px]">
-          {user.username}
-        </div>
+                      {/* Username */}
+                      <td className="px-3 py-2 border-r text-gray-700 text-[10px]">{user.username}</td>
 
-        <div className="px-3 py-2 flex items-center gap-1 text-gray-700 whitespace-nowrap border-r border-gray-200">
-          <span className="text-[10px]">{user.phone}</span>
-        </div>
+                      {/* Phone */}
+                      <td className="px-3 py-2 border-r text-gray-700 text-[10px]">{user.phone}</td>
 
-        <div className="px-3 py-2 text-gray-700 max-w-xs break-words border-r border-gray-200 text-[8px]">
-          {user.position || "-"}
-        </div>
+                      {/* Directorate */}
+                      <td className="px-3 py-2 border-r text-gray-700 text-[8px]">{user.directorate}</td>
 
-        <div className="px-3 py-2 flex items-center gap-1 text-gray-700 whitespace-nowrap border-r border-gray-200">
-          <span className="text-[10px]">{user.employment_type}</span>
-        </div>
+                      {/* Deputy Ministry */}
+                      <td className="px-3 py-2 border-r text-gray-700 text-[8px]">{user.deputyMinistry}</td>
 
-        <div className="px-3 py-2 text-gray-700 whitespace-nowrap border-r border-gray-200 text-[8px]">
-          {user.directorate}
-        </div>
+                      {/* Status */}
+                      <td className="px-3 py-2 border-r text-gray-700 text-[10px]">{user.status || "-"}</td>
 
-        <div className="px-3 py-2 text-gray-700 whitespace-nowrap border-r border-gray-200 text-[8px]">
-          {user.deputyMinistry}
-        </div>
+                      {/* Violations */}
+                      <td className="px-3 py-2 border-r text-gray-700 text-[10px]">{user.violations || "0"}</td>
 
-        <div className="px-3 py-2 text-gray-700 border-r border-gray-200 text-[10px]">
-          {user.status || "-"}
-        </div>
+                      {/* Comment */}
+                      <td className="px-3 py-2 border-r text-gray-700 text-[10px] truncate max-w-[120px]">
+                        {user.comment || "-"}
+                      </td>
 
-        <div className="px-3 py-2 text-gray-700 border-r border-gray-200 text-[10px]">
-          {user.violations || "0"}
+                      {/* Actions */}
+                      <td className="px-3 py-2 border-r text-white bg-blue-300 text-center">
+                        <div className="flex justify-center gap-2">
+                          <button
+                            onClick={() => handleView(user)}
+                            className="hover:text-blue-100"
+                            title="View"
+                          >
+                            <Eye className="w-5 h-5" />
+                          </button>
+                          <button
+                            onClick={() => handleEdit(user)}
+                            className="hover:text-blue-100"
+                            title="Edit"
+                          >
+                            <Edit className="w-5 h-5" />
+                          </button>
+                          <button
+                            onClick={() => handleDelete(user.id)}
+                            className="hover:text-blue-100"
+                            title="Delete"
+                          >
+                            <Trash className="w-5 h-5" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+            </tbody>
+          </table>
         </div>
-
-        <div className="px-3 py-2 text-gray-700 border-r border-gray-200 text-[10px] truncate max-w-[120px]">
-          {user.comment || "-"}
-        </div>
-
-        {/* Actions */}
-        <div className="px-3 py-2 flex items-center justify-center gap-2 bg-blue-300">
-          <button
-            onClick={() => handleView(user)}
-            className="text-white hover:text-blue-100 transition-colors"
-            title="View"
-          >
-            <Eye className="w-5 h-5" />
-          </button>
-          <button
-            onClick={() => handleEdit(user)}
-            className="text-white hover:text-blue-100 transition-colors"
-            title="Edit"
-          >
-            <Edit className="w-5 h-5" />
-          </button>
-          <button
-            onClick={() => handleDelete(user.id)}
-            className="text-white hover:text-blue-100 transition-colors"
-            title="Delete"
-          >
-            <Trash className="w-5 h-5" />
-          </button>
-        </div>
-      </div>
-    );
-  })}
           </div>
         )}
       </main>
