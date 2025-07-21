@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import GradientSidebar from "./components/Sidebar";
 import { Combobox } from "@headlessui/react";
+import UserFilters from "./components/UserFilters";
 
 type InternetUser = {
   id: string;
@@ -252,116 +253,26 @@ export default function InternetUsersList(): JSX.Element {
           </ul>
         </div>
       </div>
-       <div className="grid grid-cols-1 sm:grid-cols-2 
-       md:grid-cols-3 gap-6 mb-10">
-      </div>
-        <div className="flex gap-4 mb-4">
-          <div>
-             <label htmlFor="deputyMinistryFilter" className="block text-sm font-medium 
-            text-gray-700">
-              Deputy Ministry
-            </label>
-            <select
-              id="deputyMinistryFilter"
-              className="mt-1 block w-full rounded-md border-1 border-blue-300 shadow-sm f
-              ocus:border-indigo-500 focus:ring-indigo-500 sm:text-sm h-7 
-              shadow-md shadow-gray-400 p-2 text-gray-700"
-              value={selectedDeputyMinistry}
-              onChange={(e) => setSelectedDeputyMinistry(e.target.value)}
-            >
-              <option value="">All</option>
-              {deputyMinistryOptions.map((dep) => (
-                <option key={dep.id} value={dep.name}>{dep.name}</option>
-              ))}
-            </select>
-          </div>
-
-          {/* Directorate Filter */}
-          <div>
-            <label htmlFor="directorateFilter" className="block text-sm font-medium 
-            text-gray-700 text-gray-700">
-              Directorate
-            </label>
-          <Combobox
-            value={selectedDirectorate}
-            onChange={(value: string | null) => setSelectedDirectorate(value ?? "")}
-          >
-            <div className="relative w-64">
-              <Combobox.Input
-                className="w-full rounded-lg border border-blue-300 bg-white p-2 text-sm shadow-md
-                  focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="🔍 Filter by Directorate..."
-                onChange={(e) => setQueryDirectorate(e.target.value)}
-                displayValue={(dir: string) => dir}
+       
+        <div className="flex gap-4 mb-4 mt-5 justify-center items-center">
+              <UserFilters
+                  deputyMinistryOptions={deputyMinistryOptions.map(dm => ({ ...dm, id: String(dm.id) }))}
+                  directorateOptions={directorateOptions.map(dir => ({ ...dir, id: String(dir.id) }))}
+                  selectedDeputyMinistry={selectedDeputyMinistry}
+                  setSelectedDeputyMinistry={setSelectedDeputyMinistry}
+                  selectedDirectorate={selectedDirectorate}
+                  setSelectedDirectorate={setSelectedDirectorate}
+                  selectedStatus={selectedStatus}
+                  setSelectedStatus={setSelectedStatus}
               />
-              
-              {queryDirectorate && filteredDirectorates.length === 0 && (
-                <div className="absolute z-50 mt-1 w-full rounded-lg border border-gray-200 bg-white py-2 px-4 text-sm text-red-500 shadow-md">
-                  Directorate was not found!
-                </div>
-              )}
-
-              {filteredDirectorates.length > 0 && (
-                <Combobox.Options className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-lg 
-                    border border-gray-200 bg-white py-1 text-sm shadow-lg">
-                  <Combobox.Option
-                    value=""
-                    className={({ active }) =>
-                      `cursor-pointer select-none px-4 py-2 ${
-                        active ? "bg-blue-600 text-white" : "text-gray-900"
-                      }`
-                    }
-                  >
-                    All Directorates
-                  </Combobox.Option>
-
-                  {filteredDirectorates.map((dir) => (
-                    <Combobox.Option
-                      key={dir.id}
-                      value={dir.name}
-                      className={({ active }) =>
-                        `cursor-pointer select-none px-4 py-2 ${
-                          active ? "bg-blue-600 text-white" : "text-gray-900"
-                        }`
-                      }
-                    >
-                      {dir.name}
-                    </Combobox.Option>
-                  ))}
-                </Combobox.Options>
-              )}
-            </div>
-          </Combobox>
-
-          </div>
-
-          {/* status filter */}
-                      <div>
-              <label htmlFor="statusFilter" className="block text-sm font-medium text-gray-700">
-                Status
-              </label>
-              <select
-                id="statusFilter"
-                className="mt-1 block w-full rounded-md border-1 border-blue-300 shadow-sm 
-                  focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm 
-                  h-7 shadow-md shadow-gray-400 p-2 text-gray-700"
-                value={selectedStatus}
-                onChange={(e) => setSelectedStatus(e.target.value)}
-              >
-                <option value="">All</option>
-                <option value="active">Active</option>
-                <option value="deactive">Deactive</option>
-              </select>
-            </div>
-
-                 <div className="relative w-full sm:w-[900px] mt-5">
+                    <div className="relative w-full sm:w-[900px] mt-5">
                   <input
                     id="searchInput"
                     type="text"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     placeholder="Search users..."
-                    className="w-full px-4 py-2 pl-10 rounded-lg shadow-md border border-blue-200 
+                    className="w-100 px-4 py-2 pl-10 rounded-lg shadow-md border border-blue-200 
                     focus:ring-2 focus:ring-blue-400 focus:outline-none text-sm 
                     placeholder:text-blue-300 text-gray-700 
                     bg-white"
