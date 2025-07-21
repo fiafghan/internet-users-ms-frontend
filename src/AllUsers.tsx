@@ -7,7 +7,6 @@ import {
 import GradientSidebar from "./components/Sidebar";
 import { Combobox } from "@headlessui/react";
 
-
 type InternetUser = {
   id: string;
   name: string;
@@ -50,7 +49,6 @@ export default function InternetUsersList(): JSX.Element {
   const [selectedDeputyMinistryEdit, setSelectedDeputyMinistryEdit] = useState<{ id: number; name: string } | null>(null);
   const [queryDeputyMinistryEdit, setQueryDeputyMinistryEdit] = useState("");
   const [selectedStatus, setSelectedStatus] = useState<string>("");
-
   const totalUsers = users.length;
   const activeUsers = users.filter((user) => user.status === "active").length;
   const deactiveUsers = users.filter((user) => user.status === "deactive").length;
@@ -185,8 +183,10 @@ export default function InternetUsersList(): JSX.Element {
       <main className="flex-1 ml-64 p-8 overflow-auto">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* 🔵 Total Users */}
-        <div className="relative overflow-hidden rounded-2xl p-6 shadow-xl bg-white border border-blue-100 group">
-          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-blue-100 to-transparent opacity-0 group-hover:opacity-100 transition duration-1000 animate-pulse pointer-events-none"></div>
+        <div className="relative overflow-hidden rounded-2xl p-6 shadow-xl bg-white 
+        border border-blue-100 group">
+          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-blue-100 
+          to-transparent opacity-0 group-hover:opacity-100 transition duration-1000 animate-pulse pointer-events-none"></div>
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <User className="w-6 h-6 text-blue-500" />
@@ -199,7 +199,8 @@ export default function InternetUsersList(): JSX.Element {
 
         {/* 🟦 Active / Deactive */}
         <div className="relative overflow-hidden rounded-2xl p-6 shadow-xl bg-white border border-blue-100 group">
-          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-blue-100 to-transparent opacity-0 group-hover:opacity-100 transition duration-1000 animate-pulse pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-blue-100 
+          to-transparent opacity-0 group-hover:opacity-100 transition duration-1000 animate-pulse pointer-events-none"></div>
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <Users className="w-6 h-6 text-blue-500" />
@@ -218,10 +219,10 @@ export default function InternetUsersList(): JSX.Element {
             </div>
           </div>
         </div>
-
         {/* 👔 Employment Type */}
         <div className="relative overflow-hidden rounded-2xl p-6 shadow-xl bg-white border border-blue-100 group">
-          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-blue-100 to-transparent opacity-0 group-hover:opacity-100 transition duration-1000 animate-pulse pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-blue-100 
+          to-transparent opacity-0 group-hover:opacity-100 transition duration-1000 animate-pulse pointer-events-none"></div>
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <Briefcase className="w-6 h-6 text-blue-500" /> 
@@ -238,10 +239,10 @@ export default function InternetUsersList(): JSX.Element {
             ))}
           </ul>
         </div>
-
         {/* 🏛️ Deputy Ministry */}
         <div className="relative overflow-hidden rounded-2xl p-6 shadow-xl bg-white border border-blue-100 group">
-          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-blue-100 to-transparent opacity-0 group-hover:opacity-100 transition duration-1000 animate-pulse pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-blue-100 to-transparent 
+          opacity-0 group-hover:opacity-100 transition duration-1000 animate-pulse pointer-events-none"></div>
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <Building2 className="w-6 h-6 text-blue-500" />
@@ -259,8 +260,6 @@ export default function InternetUsersList(): JSX.Element {
           </ul>
         </div>
       </div>
-
-
        <div className="grid grid-cols-1 sm:grid-cols-2 
        md:grid-cols-3 gap-6 mb-10">
       </div>
