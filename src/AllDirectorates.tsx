@@ -78,8 +78,8 @@ export default function AllDirectorates() {
       {/* Main */}
       <div className="flex-1 p-6 overflow-auto">
         <div className="flex items-center justify-between mb-6">
-          <h1 className="text-2xl font-bold text-blue-700 flex items-center gap-2">
-            <Building2 className="text-blue-500" /> All Directorates
+          <h1 className="text-2xl font-bold text-blue-400 flex items-center gap-2">
+            <Building2 className="text-blue-400" /> All Directorates
           </h1>
           <div className="relative">
             <input
@@ -149,7 +149,7 @@ export default function AllDirectorates() {
                       ) : (
                         <button
                           onClick={() => handleEditClick(dir)}
-                          className="text-blue-500 hover:text-blue-700"
+                          className="text-blue-400 hover:text-blue-300"
                         >
                           <Pencil className="w-5 h-5" />
                         </button>
@@ -158,7 +158,7 @@ export default function AllDirectorates() {
                         onClick={() => handleDelete(dir.id)}
                         className="text-red-500 hover:text-red-700"
                       >
-                        <Trash className="w-5 h-5" />
+                        <Trash className="w-5 h-5 text-blue-400 hover:text-blue-300" />
                       </button>
                     </td>
                   </tr>
