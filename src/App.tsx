@@ -8,6 +8,7 @@ import PrivateRoute from "./PrivateRoute"
 import Settings from "./Settings"
 import SystemUsersPage from "./SystemUsersPage"
 import DeputyMinistryForm from "./DeputyMinistryForm"
+import AllMinistries from "./AllMinistries"
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
       <Route path="/register" element={<RegisterForm />} />
       <Route path="/login" element={<LoginForm />} />
       <Route path="/deputyministryform" element={<DeputyMinistryForm />} />
+      <Route path="/allministries" element={<AllMinistries />} />
       <Route path="/adduser" element={<PrivateRoute><InternetUserAddForm /></PrivateRoute>} />
       <Route path="/all-system-users" element={<SystemUsersPage />} />
       <Route path="/addviolation" element={<PrivateRoute><AddViolation /></PrivateRoute>} />
