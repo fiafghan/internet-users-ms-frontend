@@ -19,8 +19,8 @@ function App() {
       <Routes>
       <Route path="/register" element={<RegisterForm />} />
       <Route path="/login" element={<LoginForm />} />
-      <Route path="/deputyministryform" element={<DeputyMinistryForm />} />
-      <Route path="/allministries" element={<AllMinistries />} />
+      <Route path="/newdeputyministry" element={<DeputyMinistryForm />} />
+      <Route path="/alldeputyministries" element={<AllMinistries />} />
       <Route path="/newdirectorate" element={<NewDirectorate />} />
       <Route path="/alldirectorates" element={<AllDirectorates />} />
       <Route path="/adduser" element={<PrivateRoute><InternetUserAddForm /></PrivateRoute>} />

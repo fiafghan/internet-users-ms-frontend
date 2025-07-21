@@ -44,8 +44,8 @@ export default function DeputyMinistryForm() {
       <div className="flex-1 flex items-center justify-center px-4 py-8">
         <div className="max-w-md w-full bg-white p-6 rounded-xl shadow-md border border-gray-200">
           <div className="flex items-center gap-2 mb-4">
-            <Building2 className="text-blue-500 w-6 h-6" />
-            <h1 className="text-xl font-semibold text-blue-700">Add Deputy Ministry</h1>
+            <Building2 className="text-blue-400 w-6 h-6" />
+            <h1 className="text-xl font-semibold text-blue-400">Add Deputy Ministry</h1>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -69,7 +69,7 @@ export default function DeputyMinistryForm() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition"
+              className="w-full flex items-center justify-center gap-2 bg-blue-400 hover:bg-blue-300 text-white px-4 py-2 rounded-md transition"
             >
               {loading && <Loader2 className="animate-spin w-4 h-4" />}
               Submit

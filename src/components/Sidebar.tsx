@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { User, Settings, AlertOctagon, Users, LogOut } from "lucide-react";
+import { User, Settings, AlertOctagon, Users, LogOut, Building2 } from "lucide-react";
 import { motion } from "framer-motion";
 import type { JSX } from "react";
 
@@ -18,6 +18,11 @@ const items = [
   { id: 1, label: "All Users", icon: <Users className="w-5 h-5" />, path: "/" },
   { id: 2, label: "Add User", icon: <User className="w-5 h-5" />, path: "/adduser" },
   { id: 3, label: "Violation Form", icon: <AlertOctagon className="w-5 h-5" />, path: "/addviolation" },
+  { id: 7, label: "All Deputy Ministries", icon: <Building2 className="w-5 h-5" />, path: "/alldeputyministries" },
+  { id: 8, label: "New Deputy Ministry", icon: <Building2 className="w-5 h-5" />, path: "/newdeputyministry" },
+  { id: 9, label: "All Directorates", icon: <Building2 className="w-5 h-5" />, path: "/alldirectorates" },
+  { id: 10, label: "New Directorate", icon: <Building2 className="w-5 h-5" />, path: "/newdirectorate" },
+
 
   // ✅ Add System User (admin only)
   ...(isAdmin ? [{
