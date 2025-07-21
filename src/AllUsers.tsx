@@ -330,7 +330,7 @@ export default function InternetUsersList(): JSX.Element {
                     className="w-full px-4 py-2 pl-10 rounded-lg shadow-md border border-blue-400 
                     focus:ring-2 focus:ring-blue-400 focus:outline-none text-sm 
                     placeholder:text-blue-300 text-gray-700 
-                    bg-white shadow-md shadow-blue-400"
+                    bg-white"
                     autoComplete="on"
                     autoCorrect="on"
                   />
