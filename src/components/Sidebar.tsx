@@ -42,7 +42,7 @@ const items = [
   return (
     <aside className="w-64 min-h-screen bg-blue-400 text-white flex flex-col">
       <div className="flex items-center justify-center flex-col py-6 px-4">
-        <img src="moph.jpeg" className="rounded-full w-30 shadow-xl shadow-white border-1" />
+        <img src="moph.jpeg" className="rounded-full w-30 border-1" />
         <h1 className="text-center mt-5">IUMS</h1>
       </div>
 

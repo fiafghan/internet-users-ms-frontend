@@ -113,9 +113,9 @@
       "device_limit": "2",
       "device_type": "mobile and comfuter",
       "mac_address": "",
-      "status": "deactive",
+      "status": "active",
       "violations": "0",
-      "comment": "He used torrent twice despite warning!"
+      "comment": ""
     },
     {
       "id": "4535",
@@ -130,7 +130,7 @@
       "device_limit": "2",
       "device_type": "computer and mobile",
       "mac_address": "",
-      "status": "Active",
+      "status": "active",
       "violations": "1",
       "comment": "he used tor browser"
     }
