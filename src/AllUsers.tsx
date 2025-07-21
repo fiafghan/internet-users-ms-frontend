@@ -1,4 +1,4 @@
-import { useEffect, useState, type JSX, type SetStateAction } from "react";
+import { useEffect, useState, type JSX} from "react";
 import axios from "axios";
 import {
   User, Eye, Edit, Trash,
@@ -263,7 +263,7 @@ export default function InternetUsersList(): JSX.Element {
             </label>
             <select
               id="deputyMinistryFilter"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm f
+              className="mt-1 block w-full rounded-md border-1 border-blue-300 shadow-sm f
               ocus:border-indigo-500 focus:ring-indigo-500 sm:text-sm h-7 
               shadow-md shadow-gray-400 p-2 text-gray-700"
               value={selectedDeputyMinistry}
@@ -282,24 +282,59 @@ export default function InternetUsersList(): JSX.Element {
             text-gray-700 text-gray-700">
               Directorate
             </label>
-            <select
-              id="directorateFilter"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm 
-              focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm 
-              h-7 shadow-md shadow-gray-400 p-2 text-gray-700"
-              value={selectedDirectorate}
-              onChange={(e: { target: { value: SetStateAction<string>; }; }) => setSelectedDirectorate(e.target.value)}
-            >
-              <option value="">All</option>
-              {directorateOptions.map((dir) => {
-                return (
-                  <option key={dir.id} value={dir.name}>
-                    {dir.name}
-                  </option>
-                );
-              })}
-            </select>
+          <Combobox
+            value={selectedDirectorate}
+            onChange={(value: string | null) => setSelectedDirectorate(value ?? "")}
+          >
+            <div className="relative w-64">
+              <Combobox.Input
+                className="w-full rounded-lg border border-blue-300 bg-white p-2 text-sm shadow-md
+                  focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="🔍 Filter by Directorate..."
+                onChange={(e) => setQueryDirectorate(e.target.value)}
+                displayValue={(dir: string) => dir}
+              />
+              
+              {queryDirectorate && filteredDirectorates.length === 0 && (
+                <div className="absolute z-50 mt-1 w-full rounded-lg border border-gray-200 bg-white py-2 px-4 text-sm text-red-500 shadow-md">
+                  Directorate was not found!
+                </div>
+              )}
+
+              {filteredDirectorates.length > 0 && (
+                <Combobox.Options className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-lg 
+                    border border-gray-200 bg-white py-1 text-sm shadow-lg">
+                  <Combobox.Option
+                    value=""
+                    className={({ active }) =>
+                      `cursor-pointer select-none px-4 py-2 ${
+                        active ? "bg-blue-600 text-white" : "text-gray-900"
+                      }`
+                    }
+                  >
+                    All Directorates
+                  </Combobox.Option>
+
+                  {filteredDirectorates.map((dir) => (
+                    <Combobox.Option
+                      key={dir.id}
+                      value={dir.name}
+                      className={({ active }) =>
+                        `cursor-pointer select-none px-4 py-2 ${
+                          active ? "bg-blue-600 text-white" : "text-gray-900"
+                        }`
+                      }
+                    >
+                      {dir.name}
+                    </Combobox.Option>
+                  ))}
+                </Combobox.Options>
+              )}
+            </div>
+          </Combobox>
+
           </div>
+
           {/* status filter */}
                       <div>
               <label htmlFor="statusFilter" className="block text-sm font-medium text-gray-700">
@@ -307,7 +342,7 @@ export default function InternetUsersList(): JSX.Element {
               </label>
               <select
                 id="statusFilter"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm 
+                className="mt-1 block w-full rounded-md border-1 border-blue-300 shadow-sm 
                   focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm 
                   h-7 shadow-md shadow-gray-400 p-2 text-gray-700"
                 value={selectedStatus}
@@ -326,7 +361,7 @@ export default function InternetUsersList(): JSX.Element {
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     placeholder="Search users..."
-                    className="w-full px-4 py-2 pl-10 rounded-lg shadow-md border border-blue-400 
+                    className="w-full px-4 py-2 pl-10 rounded-lg shadow-md border border-blue-200 
                     focus:ring-2 focus:ring-blue-400 focus:outline-none text-sm 
                     placeholder:text-blue-300 text-gray-700 
                     bg-white"
