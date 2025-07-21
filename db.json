@@ -11,9 +11,9 @@
   ],
   "directorates": [
     {
-      "id": "3f77",
       "name": "Information Technology",
-      "deputyMinistryId": "14d8"
+      "deputyMinistryId": "14d8",
+      "id": "3f77"
     }
   ],
   "users": [

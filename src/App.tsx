@@ -10,6 +10,7 @@ import SystemUsersPage from "./SystemUsersPage"
 import DeputyMinistryForm from "./DeputyMinistryForm"
 import AllMinistries from "./AllMinistries"
 import NewDirectorate from "./NewDirectorate"
+import AllDirectorates from "./AllDirectorates"
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
       <Route path="/deputyministryform" element={<DeputyMinistryForm />} />
       <Route path="/allministries" element={<AllMinistries />} />
       <Route path="/newdirectorate" element={<NewDirectorate />} />
+      <Route path="/alldirectorates" element={<AllDirectorates />} />
       <Route path="/adduser" element={<PrivateRoute><InternetUserAddForm /></PrivateRoute>} />
       <Route path="/all-system-users" element={<SystemUsersPage />} />
       <Route path="/addviolation" element={<PrivateRoute><AddViolation /></PrivateRoute>} />
