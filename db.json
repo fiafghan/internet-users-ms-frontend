@@ -1,20 +1,8 @@
 {
   "deputy_ministries": [
     {
-      "id": "1",
-      "name": "administrative and financial"
-    },
-    {
-      "id": "2",
-      "name": "health services providing"
-    },
-    {
-      "id": "3",
-      "name": "drug and food"
-    },
-    {
-      "id": "4",
-      "name": "plan and policy"
+      "id": "f517",
+      "name": "administrative and finance"
     }
   ],
   "directorates": [
