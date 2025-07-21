@@ -3,24 +3,17 @@
     {
       "name": "Administrative and Financial",
       "id": "14d8"
+    },
+    {
+      "id": "d111",
+      "name": "Service Providing"
     }
   ],
   "directorates": [
     {
-      "id": "1",
-      "name": "IT"
-    },
-    {
-      "id": "2",
-      "name": "finance"
-    },
-    {
-      "id": "3",
-      "name": "maternity health"
-    },
-    {
-      "id": "4",
-      "name": "policy directorate"
+      "id": "3f77",
+      "name": "Information Technology",
+      "deputyMinistryId": "14d8"
     }
   ],
   "users": [
