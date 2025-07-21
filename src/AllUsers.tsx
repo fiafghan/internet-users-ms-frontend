@@ -347,11 +347,12 @@ export default function InternetUsersList(): JSX.Element {
           <div className="overflow-x-auto rounded-sm 
           shadow-lg bg-white border 
           border-gray-200 max-w-full">
-        <div className="overflow-x-auto rounded-sm shadow-lg bg-white border border-gray-200 max-w-full">
+        <div className="overflow-x-auto rounded-sm shadow-lg bg-white border border-white max-w-full">
           <table className="table-auto w-full text-left text-sm">
             {/* Table Head */}
             <thead>
-              <tr className="bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xs uppercase tracking-wider select-none rounded-t-xl">
+              <tr className="bg-gradient-to-r from-blue-500 to-blue-600 text-white text-xs uppercase 
+              tracking-wider select-none rounded-t-xl">
                 {headers.map((header) => (
                   <th
                     key={header}
@@ -391,7 +392,8 @@ export default function InternetUsersList(): JSX.Element {
                       } hover:bg-blue-100`}
                     >
                       {/* Name */}
-                      <td className="px-3 py-2 border-r text-gray-700 text-[10px] whitespace-nowrap flex items-center gap-1 font-medium">
+                      <td className="px-3 py-2 text-gray-700 text-[10px] whitespace-nowrap 
+                      flex items-center gap-1 font-medium">
                         <User className="w-4 h-4 shrink-0" />
                         {user.name}
                         {isYellowCard && <span className="ml-1">🟨</span>}
@@ -399,51 +401,51 @@ export default function InternetUsersList(): JSX.Element {
                       </td>
 
                       {/* Username */}
-                      <td className="px-3 py-2 border-r text-gray-700 text-[10px]">{user.username}</td>
+                      <td className="px-3 py-2 text-gray-700 text-[10px]">{user.username}</td>
 
                       {/* Phone */}
-                      <td className="px-3 py-2 border-r text-gray-700 text-[10px]">{user.phone}</td>
+                      <td className="px-3 py-2 text-gray-700 text-[10px]">{user.phone}</td>
 
                       {/* Directorate */}
-                      <td className="px-3 py-2 border-r text-gray-700 text-[8px]">{user.directorate}</td>
+                      <td className="px-3 py-2  text-gray-700 text-[8px]">{user.directorate}</td>
 
                       {/* Deputy Ministry */}
-                      <td className="px-3 py-2 border-r text-gray-700 text-[8px]">{user.deputyMinistry}</td>
+                      <td className="px-3 py-2 text-gray-700 text-[8px]">{user.deputyMinistry}</td>
 
                       {/* Status */}
-                      <td className="px-3 py-2 border-r text-gray-700 text-[10px]">{user.status || "-"}</td>
+                      <td className="px-3 py-2 text-gray-700 text-[10px]">{user.status || "-"}</td>
 
                       {/* Violations */}
-                      <td className="px-3 py-2 border-r text-gray-700 text-[10px]">{user.violations || "0"}</td>
+                      <td className="px-3 py-2 text-gray-700 text-[10px]">{user.violations || "0"}</td>
 
                       {/* Comment */}
-                      <td className="px-3 py-2 border-r text-gray-700 text-[10px] truncate max-w-[120px]">
+                      <td className="px-3 py-2 text-gray-700 text-[10px] truncate max-w-[120px]">
                         {user.comment || "-"}
                       </td>
 
                       {/* Actions */}
-                      <td className="px-3 py-2 border-r text-white bg-blue-300 text-center">
+                      <td className="px-3 py-2 text-blue-400 text-center">
                         <div className="flex justify-center gap-2">
                           <button
                             onClick={() => handleView(user)}
                             className="hover:text-blue-100"
                             title="View"
                           >
-                            <Eye className="w-5 h-5" />
+                            <Eye className="w-5 h-5 hover:text-blue-300" />
                           </button>
                           <button
                             onClick={() => handleEdit(user)}
                             className="hover:text-blue-100"
                             title="Edit"
                           >
-                            <Edit className="w-5 h-5" />
+                            <Edit className="w-5 h-5 hover:text-blue-300" />
                           </button>
                           <button
                             onClick={() => handleDelete(user.id)}
                             className="hover:text-blue-100"
                             title="Delete"
                           >
-                            <Trash className="w-5 h-5" />
+                            <Trash className="w-5 h-5 hover:text-blue-300" />
                           </button>
                         </div>
                       </td>
