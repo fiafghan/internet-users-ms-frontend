@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Pencil, Trash2, Building2 } from "lucide-react";
-import GradientSidebar from "./components/Sidebar"; // adjust path if needed
+import GradientSidebar from "./components/Sidebar";
 
 interface Ministry {
   id: string;
@@ -12,6 +12,10 @@ export default function AllMinistries() {
   const [ministries, setMinistries] = useState<Ministry[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [editMinistry, setEditMinistry] = useState<Ministry | null>(null);
+  const [newName, setNewName] = useState("");
 
   const fetchMinistries = async () => {
     try {
@@ -34,18 +38,41 @@ export default function AllMinistries() {
     }
   };
 
+  const handleEdit = (ministry: Ministry) => {
+    setEditMinistry(ministry);
+    setNewName(ministry.name);
+    setIsEditing(true);
+  };
+
+  const submitEdit = async () => {
+    if (!editMinistry) return;
+    try {
+      await axios.put(`http://localhost:3000/deputy_ministries/${editMinistry.id}`, {
+        name: newName,
+      });
+      setMinistries((prev) =>
+        prev.map((m) =>
+          m.id === editMinistry.id ? { ...m, name: newName } : m
+        )
+      );
+      setIsEditing(false);
+      setEditMinistry(null);
+      setNewName("");
+    } catch (err) {
+      alert("Failed to update.");
+    }
+  };
+
   useEffect(() => {
     fetchMinistries();
   }, []);
 
   return (
     <div className="flex min-h-screen bg-gray-100">
-      {/* Sidebar */}
       <div className="w-64">
         <GradientSidebar />
       </div>
 
-      {/* Content */}
       <div className="flex-1 p-6">
         <div className="flex items-center gap-2 mb-6">
           <Building2 className="text-blue-500 w-6 h-6" />
@@ -73,7 +100,7 @@ export default function AllMinistries() {
                     <td className="py-3 px-4 text-center space-x-2">
                       <button
                         className="text-blue-600 hover:text-blue-800"
-                        onClick={() => alert("Implement edit logic")}
+                        onClick={() => handleEdit(ministry)}
                       >
                         <Pencil className="w-4 h-4" />
                       </button>
@@ -95,6 +122,38 @@ export default function AllMinistries() {
                 )}
               </tbody>
             </table>
+          </div>
+        )}
+
+        {/* Edit Modal */}
+        {isEditing && (
+          <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg p-6 shadow-xl w-full max-w-md">
+              <h2 className="text-lg font-semibold mb-4 text-blue-700">Edit Ministry</h2>
+              <input
+                value={newName}
+                onChange={(e) => setNewName(e.target.value)}
+                className="w-full border rounded px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter new name"
+              />
+              <div className="flex justify-end space-x-2">
+                <button
+                  className="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400"
+                  onClick={() => {
+                    setIsEditing(false);
+                    setEditMinistry(null);
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                  onClick={submitEdit}
+                >
+                  Save
+                </button>
+              </div>
+            </div>
           </div>
         )}
       </div>
