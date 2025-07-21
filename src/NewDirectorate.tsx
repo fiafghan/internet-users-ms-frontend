@@ -53,8 +53,8 @@ export default function NewDirectorate() {
 
       <div className="flex-1 p-6 ml-80 mt-30">
         <div className="flex items-center gap-2 mb-6">
-          <PlusCircle className="text-blue-600 w-6 h-6" />
-          <h1 className="text-2xl font-bold text-blue-700">Add New Directorate</h1>
+          <PlusCircle className="text-blue-400 w-6 h-6" />
+          <h1 className="text-2xl font-bold text-blue-400">Add New Directorate</h1>
         </div>
 
         {success && (
@@ -105,9 +105,9 @@ export default function NewDirectorate() {
 
           <button
             type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-2 rounded transition"
+            className="bg-blue-400 hover:bg-blue-300 text-white font-medium px-5 py-2 rounded transition"
           >
-            Save Directorate
+            Save
           </button>
         </form>
       </div>
