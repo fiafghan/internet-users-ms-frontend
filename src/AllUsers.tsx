@@ -187,24 +187,24 @@ export default function InternetUsersList(): JSX.Element {
         border border-blue-100 group">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
-              <User className="w-6 h-6 text-blue-500" />
-              <span className="text-blue-800 font-semibold text-sm">Total Users</span>
+              <User className="w-6 h-6 text-blue-400" />
+              <span className="text-blue-400 font-semibold text-sm">Total Users</span>
             </div>
             <div className="text-blue-400 text-xs uppercase tracking-wider">Summary</div>
           </div>
-          <div className="text-3xl font-bold text-blue-800">{totalUsers}</div>
+          <div className="text-3xl font-bold text-blue-400 text-center">{totalUsers}</div>
         </div>
 
         {/* 🟦 Active / Deactive */}
         <div className="relative overflow-hidden rounded-2xl p-6 shadow-xl bg-white border border-blue-100 group">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
-              <Users className="w-6 h-6 text-blue-500" />
-              <span className="text-blue-800 font-semibold text-sm">Active / Deactive</span>
+              <Users className="w-6 h-6 text-blue-400" />
+              <span className="text-blue-400 font-semibold text-sm">Active / Deactive</span>
             </div>
             <div className="text-blue-400 text-xs uppercase tracking-wider">Status</div>
           </div>
-          <div className="space-y-1 text-blue-800">
+          <div className="space-y-1 text-blue-400">
             <div className="flex justify-between text-sm">
               <span>Active</span>
               <span className="font-bold">{activeUsers}</span>
@@ -219,12 +219,12 @@ export default function InternetUsersList(): JSX.Element {
         <div className="relative overflow-hidden rounded-2xl p-6 shadow-xl bg-white border border-blue-100 group">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
-              <Briefcase className="w-6 h-6 text-blue-500" /> 
-              <span className="text-blue-800 font-semibold text-sm">Employment Types</span>
+              <Briefcase className="w-6 h-6 text-blue-400" /> 
+              <span className="text-blue-400 font-semibold text-sm">Employment Types</span>
             </div>
             <div className="text-blue-400 text-xs uppercase tracking-wider">Type</div>
           </div>
-          <ul className="space-y-1 text-sm text-blue-800 max-h-32 overflow-auto pr-1">
+          <ul className="space-y-1 text-sm text-blue-400 max-h-32 overflow-auto pr-1">
             {Object.entries(employmentTypeCounts).map(([type, count]) => (
               <li key={type} className="flex justify-between">
                 <span>{type}</span>
@@ -237,12 +237,12 @@ export default function InternetUsersList(): JSX.Element {
         <div className="relative overflow-hidden rounded-2xl p-6 shadow-xl bg-white border border-blue-100 group">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
-              <Building2 className="w-6 h-6 text-blue-500" />
-              <span className="text-blue-800 font-semibold text-sm">Deputy Ministries</span>
+              <Building2 className="w-6 h-6 text-blue-400" />
+              <span className="text-blue-400 font-semibold text-sm">Deputy Ministries</span>
             </div>
             <div className="text-blue-400 text-xs uppercase tracking-wider">Groups</div>
           </div>
-          <ul className="space-y-1 text-sm text-blue-800 max-h-32 overflow-auto pr-1">
+          <ul className="space-y-1 text-sm text-blue-400 max-h-32 overflow-auto pr-1">
             {Object.entries(deputyMinistryCounts).map(([name, count]) => (
               <li key={name} className="flex justify-between">
                 <span>{name}</span>
