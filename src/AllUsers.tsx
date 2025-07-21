@@ -272,7 +272,7 @@ export default function InternetUsersList(): JSX.Element {
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     placeholder="Search users..."
-                    className="w-100 px-4 py-2 pl-10 rounded-lg shadow-md border border-blue-200 
+                    className="w-100 px-4 py-2 pl-10 rounded-sm shadow-sm border border-blue-200 
                     focus:ring-2 focus:ring-blue-400 focus:outline-none text-sm 
                     placeholder:text-blue-300 text-gray-700 
                     bg-white"

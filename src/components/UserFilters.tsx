@@ -43,7 +43,7 @@ export default function UserFilters({
         {() => (
           <>
             <Popover.Button className="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium 
-            text-white bg-blue-300 rounded-md hover:bg-blue-200 shadow focus:outline-none">
+            text-white bg-blue-300 rounded-sm hover:bg-blue-200 shadow focus:outline-none">
               <Filter className="w-4 h-4" />
               Filters
             </Popover.Button>
@@ -55,7 +55,7 @@ export default function UserFilters({
                 Filter Users
               </h3>
 
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-row gap-1">
 
                 {/* Deputy Ministry */}
                 <div>
