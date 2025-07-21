@@ -185,8 +185,6 @@ export default function InternetUsersList(): JSX.Element {
         {/* 🔵 Total Users */}
         <div className="relative overflow-hidden rounded-2xl p-6 shadow-xl bg-white 
         border border-blue-100 group">
-          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-blue-100 
-          to-transparent opacity-0 group-hover:opacity-100 transition duration-1000 animate-pulse pointer-events-none"></div>
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <User className="w-6 h-6 text-blue-500" />
@@ -199,8 +197,6 @@ export default function InternetUsersList(): JSX.Element {
 
         {/* 🟦 Active / Deactive */}
         <div className="relative overflow-hidden rounded-2xl p-6 shadow-xl bg-white border border-blue-100 group">
-          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-blue-100 
-          to-transparent opacity-0 group-hover:opacity-100 transition duration-1000 animate-pulse pointer-events-none"></div>
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <Users className="w-6 h-6 text-blue-500" />
@@ -221,8 +217,6 @@ export default function InternetUsersList(): JSX.Element {
         </div>
         {/* 👔 Employment Type */}
         <div className="relative overflow-hidden rounded-2xl p-6 shadow-xl bg-white border border-blue-100 group">
-          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-blue-100 
-          to-transparent opacity-0 group-hover:opacity-100 transition duration-1000 animate-pulse pointer-events-none"></div>
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <Briefcase className="w-6 h-6 text-blue-500" /> 
@@ -241,8 +235,6 @@ export default function InternetUsersList(): JSX.Element {
         </div>
         {/* 🏛️ Deputy Ministry */}
         <div className="relative overflow-hidden rounded-2xl p-6 shadow-xl bg-white border border-blue-100 group">
-          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-blue-100 to-transparent 
-          opacity-0 group-hover:opacity-100 transition duration-1000 animate-pulse pointer-events-none"></div>
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <Building2 className="w-6 h-6 text-blue-500" />
