@@ -180,11 +180,10 @@ export default function InternetUsersList(): JSX.Element {
       border-gray-200 bg-white shadow-sm z-20">
         <GradientSidebar />
       </div>
-      
       <main className="flex-1 ml-64 p-8 overflow-auto">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* 🔵 Total Users */}
-        <div className="relative overflow-hidden rounded-2xl p-6 shadow-xl bg-white 
+        <div className="relative overflow-hidden rounded-md p-6 shadow-sm bg-white 
         border border-blue-100 group">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
@@ -195,9 +194,8 @@ export default function InternetUsersList(): JSX.Element {
           </div>
           <div className="text-3xl font-bold text-blue-400 text-center">{totalUsers}</div>
         </div>
-
         {/* 🟦 Active / Deactive */}
-        <div className="relative overflow-hidden rounded-2xl p-6 shadow-xl bg-white border border-blue-100 group">
+        <div className="relative overflow-hidden rounded-md p-6 shadow-sm bg-white border border-blue-100 group">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <Users className="w-6 h-6 text-blue-400" />
@@ -217,7 +215,7 @@ export default function InternetUsersList(): JSX.Element {
           </div>
         </div>
         {/* 👔 Employment Type */}
-        <div className="relative overflow-hidden rounded-2xl p-6 shadow-xl bg-white border border-blue-100 group">
+        <div className="relative overflow-hidden rounded-md p-6 shadow-sm bg-white border border-blue-100 group">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <Briefcase className="w-6 h-6 text-blue-400" /> 
@@ -235,7 +233,7 @@ export default function InternetUsersList(): JSX.Element {
           </ul>
         </div>
         {/* 🏛️ Deputy Ministry */}
-        <div className="relative overflow-hidden rounded-2xl p-6 shadow-xl bg-white border border-blue-100 group">
+        <div className="relative overflow-hidden rounded-md p-6 shadow-sm bg-white border border-blue-100 group">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <Building2 className="w-6 h-6 text-blue-400" />
