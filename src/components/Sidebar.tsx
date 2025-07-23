@@ -9,7 +9,7 @@ import axios from "axios";
 export default function GradientSidebar(): JSX.Element {
   const navigate = useNavigate();
   const currentUser = JSON.parse(localStorage.getItem("loggedInUser") || "{}");
-  const isAdmin = currentUser?.isAdmin === true;
+  const isAdmin = currentUser.user?.role === "Admin";
 
 const logout = async () => {
   const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser") || "{}");
@@ -54,7 +54,6 @@ const logout = async () => {
         <img src="moph.jpeg" className="rounded-full w-30 border-1" />
         <h1 className="text-center mt-5">IUMS</h1>
       </div>
-
       <nav className="flex flex-col mt-4 gap-1 px-4 text-sm font-medium">
         {/* 🔹 All Users section */}
         <motion.button
